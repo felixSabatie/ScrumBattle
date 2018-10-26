@@ -30,6 +30,11 @@ class User extends Authenticatable
 
     public function cards()
     {
-        $this->belongsToMany('App\Models\Card');
+        return $this->belongsToMany('App\Models\Card');
+    }
+
+    public function projects()
+    {
+        return $this->belongsToMany('App\Models\Project');
     }
 }

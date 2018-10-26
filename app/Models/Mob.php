@@ -9,6 +9,6 @@ class Mob extends Model
     //
     public function project()
     {
-        return $this->belongsTo('App\Models\Project');
+        return $this->hasMany('App\Models\Project');
     }
 }

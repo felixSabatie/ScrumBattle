@@ -8,11 +8,16 @@ class Project extends Model
 {
     public function columns()
     {
-        return $this->hasMany('App\Models\Columns');
+        return $this->hasMany('App\Models\Column');
     }
 
-    public function project()
+    public function mob()
     {
-        return $this->hasMany('App\Models\Mob');
+        return $this->belongsTo('App\Models\Mob');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\Models\User');
     }
 }
