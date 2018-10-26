@@ -1,13 +1,37 @@
 <template>
-  <div>Hello ! qsdjkqhsd</div>
+  <div class="home">
+    <div v-for="column in columns">
+      <column :column="column"/>
+    </div>
+  </div>
 </template>
 
 <script>
-  export default {
-    name: "Home"
+import Column from "./Column";
+export default {
+  name: "Home",
+  components: {
+    Column
+  },
+  data() {
+    return {
+      columns: [
+        {
+          name: "First column",
+          cards: [
+            {
+              name: "First Card"
+            },
+            {
+              name: "Second Card"
+            }
+          ]
+        }
+      ]
+    };
   }
+};
 </script>
 
 <style scoped>
-
 </style>
