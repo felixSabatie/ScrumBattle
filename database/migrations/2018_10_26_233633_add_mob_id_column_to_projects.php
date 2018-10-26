@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProjectsTable extends Migration
+class AddMobIdColumnToProjects extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateProjectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('slug');
-            $table->timestamps();
+        Schema::table('projects', function(Blueprint $table) {
+            $table->foreign('mob_id')->references('id')->on('mobs');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('projects');
+        Schema::table('projects_users', function(Blueprint $table) {
+            $table->dropForeign(['project_id', 'user_id']);
+        });
     }
 }

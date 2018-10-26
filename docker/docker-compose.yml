@@ -22,7 +22,7 @@ services:
     - ./php.ini:/usr/local/etc/php/php.ini
 
   db:
-    image: mysql
+    image: mysql:5.7
     volumes:
     - ./mysql:/var/lib/mysql
     ports:
