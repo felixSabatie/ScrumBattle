@@ -30,6 +30,9 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
+        Schema::table('card', function(Blueprint $table){
+            $table->dropForeign(['column_id']);
+        });
         Schema::dropIfExists('cards');
     }
 }
