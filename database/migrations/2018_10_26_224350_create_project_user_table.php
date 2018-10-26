@@ -13,7 +13,7 @@ class CreateProjectsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('projects_users', function (Blueprint $table) {
+        Schema::create('project_user', function (Blueprint $table) {
             $table->increments('id');
             $table->foreign('project_id')->references('id')->on('projects');
             $table->foreign('user_id')->references('id')->on('users');
@@ -28,9 +28,9 @@ class CreateProjectsUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('projects_users', function(Blueprint $table) {
+        Schema::table('project_user', function(Blueprint $table) {
             $table->dropForeign(['project_id', 'user_id']);
         });
-        Schema::dropIfExists('projects_users');
+        Schema::dropIfExists('project_user');
     }
 }

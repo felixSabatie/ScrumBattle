@@ -14,7 +14,7 @@ class CardUsers extends Migration
     public function up()
     {
         //
-        Schema::create('card_users', function (Blueprint $table) {
+        Schema::create('card_user', function (Blueprint $table) {
             $table->increments('id');
             $table->foreign('card_id')
                 ->references('id')
@@ -32,10 +32,10 @@ class CardUsers extends Migration
      */
     public function down()
     {
-        Schema::table('card_users', function (Blueprint $table) {
+        Schema::table('card_user', function (Blueprint $table) {
             $table->dropForeign(['card_id', 'user_id']);
         });
-        Schema::dropIfExists('card_users');
+        Schema::dropIfExists('card_user');
         //
     }
 }
