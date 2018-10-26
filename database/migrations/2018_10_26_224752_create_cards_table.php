@@ -15,11 +15,11 @@ class CreateCardsTable extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->increments('id');
-            $table->foreign('column_id')
-                ->references('id')
-                ->on('columns');
+            $table->unsignedInteger('column_id')->index();
             $table->string("name");
             $table->timestamps();
+
+            $table->foreign('column_id')->references('id')->on('columns');
         });
     }
 

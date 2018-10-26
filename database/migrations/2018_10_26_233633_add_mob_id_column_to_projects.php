@@ -14,6 +14,7 @@ class AddMobIdColumnToProjects extends Migration
     public function up()
     {
         Schema::table('projects', function(Blueprint $table) {
+            $table->unsignedInteger('mob_id')->index();
             $table->foreign('mob_id')->references('id')->on('mobs');
         });
     }
