@@ -33,7 +33,7 @@ class CardUsers extends Migration
     public function down()
     {
         Schema::table('card_users', function (Blueprint $table) {
-            $table->dropForeign('card_id', 'user_id');
+            $table->dropForeign(['card_id', 'user_id']);
         });
         Schema::dropIfExists('card_users');
         //
