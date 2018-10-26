@@ -16,9 +16,11 @@ class CardUsers extends Migration
         //
         Schema::create('card_user', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('card_id');
             $table->foreign('card_id')
                 ->references('id')
                 ->on('cards');
+            $table->unsignedInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
