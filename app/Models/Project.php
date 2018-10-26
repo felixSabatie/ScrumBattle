@@ -10,4 +10,9 @@ class Project extends Model
     {
         return $this->hasMany('App\Models\Columns');
     }
+
+    public function project()
+    {
+        return $this->hasMany('App\Models\Mob');
+    }
 }
