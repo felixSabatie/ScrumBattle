@@ -15,6 +15,9 @@ class CreateColumnsTable extends Migration
     {
         Schema::create('columns', function (Blueprint $table) {
             $table->increments('id');
+            $table->foreign('project_id')
+                ->references('id')
+                ->on('projects');
             $table->string('name');
             $table->timestamps();
         });
