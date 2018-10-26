@@ -14,8 +14,8 @@ export default {
     Column
   },
   data() {
-    return {
-      columns: [
+    return { 
+      columns: [ //TODO : change with backend call
         {
           name: "First column",
           cards: [

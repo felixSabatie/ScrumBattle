@@ -39286,7 +39286,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   data: function data() {
     return {
-      columns: [{
+      columns: [//TODO : change with backend call
+      {
         name: "First column",
         cards: [{
           name: "First Card"
