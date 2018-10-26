@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('slug');
+            $table->foreign('mob_id')->references('id')->on('mobs');
             $table->timestamps();
         });
     }
@@ -28,6 +29,9 @@ class CreateProjectsTable extends Migration
      */
     public function down()
     {
+        Schema::table('projects_users', function(Blueprint $table) {
+            $table->dropForeign(['project_id', 'user_id']);
+        });
         Schema::dropIfExists('projects');
     }
 }
