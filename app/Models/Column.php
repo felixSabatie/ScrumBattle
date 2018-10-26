@@ -10,4 +10,9 @@ class Column extends Model
     {
         return $this->hasMany('App\Models\Card');
     }
+
+    public function project()
+    {
+        return $this->belongsTo('App\Models\Project');
+    }
 }
