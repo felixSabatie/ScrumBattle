@@ -30,7 +30,7 @@ class CreateColumnsTable extends Migration
      */
     public function down()
     {
-        Schema::table('column', function (Blueprint $table) {
+        Schema::table('columns', function (Blueprint $table) {
             $table->dropForeign('project-id');
         });
         Schema::dropIfExists('columns');
