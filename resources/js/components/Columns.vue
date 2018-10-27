@@ -1,8 +1,6 @@
 <template>
   <div class="columns">
-    <div v-for="column in columns">
-      <column :column="column"/>
-    </div>
+    <column v-for="column in columns" :column="column" :key="column.id"/>
   </div>
 </template>
 
@@ -13,15 +11,14 @@ export default {
   components: {
     Column
   },
+  // props: ['columns'],
   data() {
     return {
       columns: []
     };
   },
   mounted() {
-    this.columns = [
-      //TODO : change with backend call
-      {
+    this.columns = [{
         id: 1,
         name: "First column",
         group: "test",
@@ -56,5 +53,12 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss">
+
+.columns {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 </style>

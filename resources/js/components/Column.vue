@@ -1,32 +1,32 @@
 <template>
-    <div class="column" >
-      <div class="infos">
-        <h1>
-          {{column.name}}
-        </h1>
-      </div>
-
-        <div class="cards">
-          <draggable :list=column.cards 
-                     :options="{group:'columns'}"
-                     @end="onDragEnd"
-                     :id="`column-${column.id}`"
-                     >
-            <div v-for="card in column.cards" :id="`card-${card.id}`">
-              <card :card="card" @remove-card="removeCard"/>
-            </div> 
-          </draggable>
-        </div>
-
-        <div class="new-card">
-          <input type="text" 
-                 placeholder="Add a new card..."
-                 @keydown.enter="addNewCard"
-                 @keydown.esc="clearNewCardName"
-                 v-model="newCardName">
-        </div>
+  <div class="column" >
+    <div class="infos">
+      <h1>
+        {{column.name}}
+      </h1>
     </div>
-    
+
+    <div class="cards">
+      <draggable :list=column.cards
+                 :options="{group:'columns'}"
+                 @end="onDragEnd"
+                 :id="`column-${column.id}`"
+                 >
+        <div v-for="card in column.cards" :id="`card-${card.id}`">
+          <card :card="card" @remove-card="removeCard"/>
+        </div>
+      </draggable>
+    </div>
+
+    <div class="new-card">
+      <input type="text"
+             placeholder="Add a new card..."
+             @keydown.enter="addNewCard"
+             @keydown.esc="clearNewCardName"
+             v-model="newCardName">
+    </div>
+  </div>
+
 </template>
 
 <script>
@@ -85,34 +85,40 @@ export default {
 <style lang="scss">
 @import "../../sass/app";
 .column {
-  width: 150px;
+  width: 300px;
+  min-height: 100px;
   border-radius: $borderRadius;
   background: $columns;
   padding: 5px;
-  margin: 5px;
-  //todo center properly
+
   .infos {
     display: inline-block;
     text-align: center;
+    width: 100%;
 
     h1 {
       font-size: 16px;
       font-weight: 600;
       text-align: center;
+      width: 100%;
     }
   }
+
   .cards {
-    margin: 5px;
+    padding: 10px;
   }
 
   .new-card {
-    margin: 5px;
+    padding: 10px;
+
     input {
+      width: 100%;
       border-style: none;
       padding: 5px;
 
       border-radius: $borderRadius;
       outline-width: 0;
+      box-sizing: border-box;
 
       &:focus {
         box-shadow: 0 0 1px 1px $accentColor;

@@ -6,9 +6,9 @@
 
     <div class="close">
       <!-- Change with icon -->
-      <span @click='onRemoveClicked'>x</span> 
+      <span @click='onRemoveClicked'>x</span>
     </div>
-      
+
   </div>
 </template>
 
@@ -34,7 +34,7 @@ export default {
   background: $card;
   border-radius: $borderRadius;
   padding: 10px;
-  margin: 10px;
+  margin: 10px 0;
   position: relative;
 
   .content {
@@ -43,7 +43,7 @@ export default {
   .close {
     position: absolute;
     top: 3px;
-    right: 3px;
+    right: 5px;
     color: $lightGrey;
     &:hover {
       cursor: pointer;
