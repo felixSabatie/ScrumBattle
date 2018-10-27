@@ -2,7 +2,7 @@
 require('./bootstrap');
 import VueRouter from 'vue-router';
 import App from './components/App';
-import Home from './components/Home';
+import Project from './components/Project';
 
 window.Vue = require('vue');
 
@@ -11,9 +11,9 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     mode: 'history',
     routes: [{
-        path: '/',
-        name: 'home',
-        component: Home
+        path: '/projects/:slug',
+        name: 'project',
+        component: Project
     }],
 });
 
