@@ -1887,6 +1887,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__("./node_modules/axios/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -1914,19 +1918,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      name: '',
-      email: '',
-      password: '',
-      avatar: ''
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        avatar: ''
+      }
     };
   },
 
   methods: {
-    sendForm: function sendForm() {}
+    sendForm: function sendForm() {
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/register', _extends({}, this.user)).then(function (response) {
+        console.log(response.data);
+      }).catch(function (err) {
+        // TODO handle
+        console.error(err);
+      });
+    }
   }
 });
 
@@ -38507,18 +38522,18 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.name,
-                expression: "name"
+                value: _vm.user.name,
+                expression: "user.name"
               }
             ],
             attrs: { type: "text", id: "name-input" },
-            domProps: { value: _vm.name },
+            domProps: { value: _vm.user.name },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.name = $event.target.value
+                _vm.$set(_vm.user, "name", $event.target.value)
               }
             }
           })
@@ -38532,18 +38547,18 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.email,
-                expression: "email"
+                value: _vm.user.email,
+                expression: "user.email"
               }
             ],
             attrs: { type: "email", id: "email-input" },
-            domProps: { value: _vm.email },
+            domProps: { value: _vm.user.email },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.email = $event.target.value
+                _vm.$set(_vm.user, "email", $event.target.value)
               }
             }
           })
@@ -38557,18 +38572,18 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.avatar,
-                expression: "avatar"
+                value: _vm.user.avatar,
+                expression: "user.avatar"
               }
             ],
             attrs: { type: "text", id: "avatar-input" },
-            domProps: { value: _vm.avatar },
+            domProps: { value: _vm.user.avatar },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.avatar = $event.target.value
+                _vm.$set(_vm.user, "avatar", $event.target.value)
               }
             }
           })
@@ -38584,24 +38599,24 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.password,
-                expression: "password"
+                value: _vm.user.password,
+                expression: "user.password"
               }
             ],
             attrs: { type: "password", id: "password-input" },
-            domProps: { value: _vm.password },
+            domProps: { value: _vm.user.password },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.password = $event.target.value
+                _vm.$set(_vm.user, "password", $event.target.value)
               }
             }
           })
         ]),
         _vm._v(" "),
-        _c("button", { staticClass: "btn", attrs: { type: "button" } }, [
+        _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
           _vm._v("S'inscrire")
         ])
       ]

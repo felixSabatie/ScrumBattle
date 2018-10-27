@@ -11,22 +11,18 @@ use Illuminate\Support\Facades\Validator;
 class AuthController extends Controller
 {
 
-    protected function validator(array $data)
+    protected function register(Request $request)
     {
-        return Validator::make($data, [
+        $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6'],
             'avatar' => ['required', 'string']
         ]);
-    }
-
-    protected function register(Request $request)
-    {
-        $validator = $this->validator($request->all());
-        if(!$validator->fails()) {
-            return response()->json(['status' => 422]);
+        if($validator->fails()) {
+            return response()->json('Unprocessable', 422);
         }
+
         User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -34,6 +30,6 @@ class AuthController extends Controller
             'avatar' => $request['avatar']
         ]);
 
-        return response()->json(['status' => 201]);
+        return response()->json('success', 200);
     }
 }

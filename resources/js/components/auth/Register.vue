@@ -4,40 +4,49 @@
       <h2>S'inscrire</h2>
       <div class="input">
         <label for="name-input">Nom</label>
-        <input type="text" id="name-input" v-model="name">
+        <input type="text" id="name-input" v-model="user.name">
       </div>
       <div class="input">
         <label for="email-input">Email</label>
-        <input type="email" id="email-input" v-model="email">
+        <input type="email" id="email-input" v-model="user.email">
       </div>
       <div class="input">
         <label for="avatar-input">Avatar</label>
-        <input type="text" v-model="avatar" id="avatar-input">
+        <input type="text" v-model="user.avatar" id="avatar-input">
       </div>
       <div class="input">
         <label for="password-input">Mot de passe</label>
-        <input type="password" v-model="password" id="password-input"/>
+        <input type="password" v-model="user.password" id="password-input"/>
       </div>
 
-      <button type="button" class="btn">S'inscrire</button>
+      <button type="submit" class="btn">S'inscrire</button>
 
     </form>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   data() {
     return {
-      name: '',
-      email: '',
-      password: '',
-      avatar: ''
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        avatar: ''
+      }
     }
   },
   methods: {
     sendForm() {
-
+      axios.post('/api/register', {...this.user}).then(response => {
+        console.log(response.data);
+      }).catch(err => {
+        // TODO handle
+        console.error(err);
+      });
     }
   }
 }
