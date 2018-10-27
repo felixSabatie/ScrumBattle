@@ -2024,10 +2024,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Columns__ = __webpack_require__("./resources/js/components/Columns.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Columns___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Columns__);
+<<<<<<< Updated upstream
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound__ = __webpack_require__("./resources/js/components/NotFound.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotFound__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
 //
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Progression__ = __webpack_require__("./resources/js/components/Progression.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Progression___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Progression__);
+>>>>>>> Stashed changes
 //
 //
 //
@@ -2036,6 +2041,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+<<<<<<< Updated upstream
 
 
 
@@ -2061,6 +2067,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.error(err);
         });
     }
+=======
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Home",
+  components: {
+    Progression: __WEBPACK_IMPORTED_MODULE_1__Progression___default.a,
+    Columns: __WEBPACK_IMPORTED_MODULE_0__Columns___default.a
+  },
+  data: function data() {
+    return {};
+  }
+>>>>>>> Stashed changes
 });
 
 /***/ }),
@@ -6282,6 +6301,8 @@ exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padd
 /***/ }),
 
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b270ea7c\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Columns.vue":
+=======
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
@@ -6319,7 +6340,11 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
+<<<<<<< Updated upstream
 exports.push([module.i, "\n.project {\n  height: 100vh;\n  width: 100vw;\n  overflow: hidden;\n}\n", ""]);
+=======
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+>>>>>>> Stashed changes
 
 // exports
 
@@ -39143,6 +39168,81 @@ if (false) {
 /***/ }),
 
 /***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-b270ea7c\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Columns.vue":
+=======
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-87299fc0\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Progression.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm._m(0)
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "row",
+        staticStyle: { "margin-top": "30px", "margin-bottom": "10px" }
+      },
+      [
+        _c("div", { staticClass: "col-xs-12" }, [
+          _c("div", { staticClass: "flex-well-container" }, [
+            _c(
+              "div",
+              { staticClass: "well well-lg", staticStyle: { width: "100%" } },
+              [
+                _c("div", { staticClass: "progress" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "progress-bar",
+                      staticStyle: { width: "60%" },
+                      attrs: {
+                        role: "progressbar",
+                        "aria-valuenow": "60",
+                        "aria-valuemin": "0",
+                        "aria-valuemax": "100"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                        60%\n                    "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("img", { attrs: { src: "http://placehold.it/100" } })
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn btn-default btn-lg btn-play" }, [
+              _c("strong", [_vm._v("Play Now")])
+            ])
+          ])
+        ])
+      ]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-87299fc0", module.exports)
+  }
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-b270ea7c\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Columns.vue":
+>>>>>>> Stashed changes
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -39253,6 +39353,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+<<<<<<< Updated upstream
     { staticClass: "project" },
     [
       _vm.notFound
@@ -39261,6 +39362,10 @@ var render = function() {
           ? _c("columns", { attrs: { columns: _vm.project.columns } })
           : _c("p", [_vm._v("Chargement...")])
     ],
+=======
+    { staticClass: "home" },
+    [_c("columns"), _vm._v(" "), _c("progression")],
+>>>>>>> Stashed changes
     1
   )
 }
@@ -42199,6 +42304,36 @@ if(false) {
 /***/ }),
 
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b270ea7c\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Columns.vue":
+=======
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue":
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("dfae15fa", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Progression.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Progression.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b270ea7c\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Columns.vue":
+>>>>>>> Stashed changes
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
