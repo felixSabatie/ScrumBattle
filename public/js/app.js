@@ -1812,6 +1812,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuedraggable__ = __webpack_require__("./node_modules/vuedraggable/dist/vuedraggable.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuedraggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuedraggable__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -1895,9 +1897,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       card.users = card.users.filter(function (usr) {
         return usr.id !== user.id;
       });
+      __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].delete("/api/cards/" + card.id + "/users/" + user.id).then(function (response) {
+        //Yeah deleted
+      });
     },
     addUserToCard: function addUserToCard(card, user) {
       card.users.push(user);
+      __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post("/api/cards/" + card.id + "/users", _extends({}, user)).then(function (response) {
+        //Yeah added
+      });
     },
     onDragEnd: function onDragEnd(event) {
       var cardId = this.trim(event.clone.id);

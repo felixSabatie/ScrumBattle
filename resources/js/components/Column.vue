@@ -78,9 +78,19 @@ export default {
     },
     removeUserFromCard(card, user) {
       card.users = card.users.filter(usr => usr.id !== user.id);
+      axios.delete(`/api/cards/${card.id}/users/${user.id}`,)
+      .then(response => {
+        //Yeah deleted
+      })
+      
     },
     addUserToCard(card, user) {
       card.users.push(user);
+      axios.post(`/api/cards/${card.id}/users`, {
+        ...user,
+      }).then((response) => {
+        //Yeah added
+      })
     },
     onDragEnd(event) {
       const cardId = this.trim(event.clone.id);
