@@ -14,8 +14,8 @@ export default {
   name: "Home",
   components: {
       Progression,
-    Columns
-    Game
+      Columns,
+      Game
   },
   data() {
     return {
