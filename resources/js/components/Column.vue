@@ -36,7 +36,7 @@
 <script>
 import Card from "./Card";
 import draggable from "vuedraggable";
-import axios from '../axios-wrapper';
+import axios from "../axios-wrapper";
 export default {
   name: "Column",
   components: {
@@ -58,17 +58,19 @@ export default {
       this.newCardName = "";
     },
     addNewCard() {
-      const card = {
-        column_id: this.column.id,
-        name: this.newCardName,
-        users: [],
-      };
-      this.column.cards.push(card);
-      this.newCardName = "";
-      axios.post('/api/cards/', card).then((response) => {
-        const id = response.data.id;
-        card.id = id;
-      });
+      if (this.newCardName !== "") {
+        const card = {
+          column_id: this.column.id,
+          name: this.newCardName,
+          users: []
+        };
+        this.column.cards.push(card);
+        this.newCardName = "";
+        axios.post("/api/cards/", card).then(response => {
+          const id = response.data.id;
+          card.id = id;
+        });
+      }
     },
     removeCard(cardToRemove) {
       this.column.cards = this.column.cards.filter(
@@ -78,29 +80,30 @@ export default {
     },
     removeUserFromCard(card, user) {
       card.users = card.users.filter(usr => usr.id !== user.id);
-      axios.delete(`/api/cards/${card.id}/users/${user.id}`,)
-      .then(response => {
+      axios.delete(`/api/cards/${card.id}/users/${user.id}`).then(response => {
         //Yeah deleted
-      })
-      
+      });
     },
     addUserToCard(card, user) {
       card.users.push(user);
-      axios.post(`/api/cards/${card.id}/users`, {
-        ...user,
-      }).then((response) => {
-        //Yeah added
-      })
+      axios
+        .post(`/api/cards/${card.id}/users`, {
+          ...user
+        })
+        .then(response => {
+          //Yeah added
+        });
     },
     onDragEnd(event) {
       const cardId = this.trim(event.clone.id);
       const fromColumnId = this.trim(event.from.id); //Not useful right now but if we ever need it, this is how you access it
       const toColumnId = this.trim(event.to.id);
 
-      axios.put(`/api/cards/${cardId}`, {column_id: toColumnId})
-      .then(response => {
-        //Maybe do something if needed
-      })
+      axios
+        .put(`/api/cards/${cardId}`, { column_id: toColumnId })
+        .then(response => {
+          //Maybe do something if needed
+        });
     },
     trim(divId) {
       return divId.split("-")[1];
@@ -168,7 +171,6 @@ export default {
   .sortable-ghost {
     opacity: 0.6;
   }
-
 
   //Moving item
   .sortable-chosen {

@@ -8,7 +8,7 @@ class Card extends Model
 {
 
     protected $fillable = [
-        'name', 'column_id',
+        'name', 'column_id', 'points',
     ];
 
     public function column()
