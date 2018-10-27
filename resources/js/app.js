@@ -4,6 +4,7 @@ import VueRouter from 'vue-router';
 import App from './components/App';
 import Project from './components/Project';
 import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 
 window.Vue = require('vue');
 
@@ -21,6 +22,11 @@ const router = new VueRouter({
       path: '/register',
       name: 'register',
       component: Register
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     }
   ],
 });
