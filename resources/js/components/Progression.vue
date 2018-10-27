@@ -1,7 +1,7 @@
 <template>
-    <div class="progression">
-        <div class="myProgress">
-            <div class="myBar" ref="myBar"></div>
+    <div class="progression" :style="{height: progression.height}">
+        <div class="progress-wrapper">
+            <div class="progress" ref="progress"></div>
             <img class="user_icon" ref="user_icon" :src="progression.image"/>
         </div>
     </div>
@@ -17,16 +17,22 @@
         },
         data() {
             return {
-                percent: this.progression.percent
+                percent: this.progression.percent,
             }
         },
         mounted: function () {
-            console.log(this);
             this.move();
+        },
+        watch: {
+            percent: {
+                handler() {
+                    this.move();
+                }
+            }
         },
         methods: {
             move() {
-                var elem = this.$refs.myBar;
+                var elem = this.$refs.progress;
                 var icon = this.$refs.user_icon;
                 var width = elem.clientWidth /elem.offsetParent.clientWidth;
                 console.log(this.percent);
@@ -48,26 +54,24 @@
 
 <style scoped>
     .progression{
-        width: 100%;
-        height: 100px;
+        width: 80%;
         position: relative;
     }
-    .myProgress {
+    .progress-wrapper {
         width: 100%;
-        background-color: #ddd;
+        height: 100%;
+        background-color: #a0ebef;
         position: absolute;
-        top: 60%;
-        height: 30%;
     }
 
-    .myBar {
+    .progress {
         width: 1%;
         height: 100%;
-        background-color: #4CAF50;
+        background-color: #2abb9b;
         position: absolute;
     }
 
-    .myProgress img {
+    .progress-wrapper img {
         display: block;
         position: absolute;
         top: 50%;
