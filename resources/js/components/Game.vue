@@ -1,8 +1,6 @@
 <template>
     <div class="game">
-        <div>
-            <mob></mob>
-        </div>
+        <mob></mob>
     </div>
 </template>
 
@@ -10,16 +8,26 @@
     import Mob from "./Mob";
     export default {
         name: "Game",
-        components: {
-            Mob
-        },
         props: {
             column: {
                 type: Object
             }
+        },
+        components: {
+            Mob
+        },
+        getBackground() {
+            return "";
         }
     };
 </script>
 
-<style scoped>
+<style lang="scss">
+    @import "../../sass/app";
+    .game {
+        height: 20%;
+        width: 100%;
+        background-image: url("/assets/background/jungle.png");
+        position: absolute;
+    }
 </style>
