@@ -25,9 +25,11 @@
 <style lang="scss">
     @import "../../sass/app";
     .game {
-        height: 20%;
+        height: 200px;
         width: 100%;
         background-image: url("/assets/background/jungle.png");
-        position: absolute;
+        background-size: auto 100%;
+        background-position: left bottom;
+        position: relative;
     }
 </style>

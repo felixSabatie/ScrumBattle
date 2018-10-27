@@ -10540,7 +10540,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n.game {\n  height: 20%;\n  width: 100%;\n  background-image: url(\"/assets/background/jungle.png\");\n  position: absolute;\n}\n", ""]);
+exports.push([module.i, "\n.game {\n  height: 200px;\n  width: 100%;\n  background-image: url(\"/assets/background/jungle.png\");\n  background-size: auto 100%;\n  background-position: left bottom;\n  position: relative;\n}\n", ""]);
 
 <<<<<<< develop
 <<<<<<< develop
@@ -10665,7 +10665,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n.mob {\n  height: 30%;\n  width: 30%;\n  position: absolute;\n  z-index: 0;\n}\n", ""]);
+exports.push([module.i, "\n.mob {\n  height: 30%;\n  width: 30%;\n  position: absolute;\n}\n", ""]);
 
 // exports
 

@@ -35,6 +35,5 @@
         height: 30%;
         width: 30%;
         position: absolute;
-        z-index: 0;
     }
 </style>
