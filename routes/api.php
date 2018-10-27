@@ -17,6 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
     Route::namespace('Api')->group(function() {
         Route::resource('projects', 'ProjectsController')->except(['create', 'update']);
+        Route::resource('cards', 'CardsController');
     });
 
     return $request->user();
