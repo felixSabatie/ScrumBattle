@@ -1701,9 +1701,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Modal__ = __webpack_require__("./resources/js/components/Modal.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Modal__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Modal__ = __webpack_require__("./resources/js/components/Modal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Modal__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -1742,6 +1745,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -1749,7 +1766,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
   components: {
-    Modal: __WEBPACK_IMPORTED_MODULE_1__Modal___default.a
+    Modal: __WEBPACK_IMPORTED_MODULE_2__Modal___default.a
   },
   props: {
     card: {
@@ -1759,16 +1776,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       showModal: false,
-      toRemove: []
+      toRemove: [],
+      pointList: [1, 2, 3, 5, 8, 13, 21],
+      selectedPoint: 0
     };
   },
 
-  computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapState */])({
     users: function users(state) {
       return state.projects.currentProject.users;
     }
   }),
   methods: {
+    selectPoint: function selectPoint(points) {
+      this.card.points = points;
+      __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].put('/api/cards/' + this.card.id, _extends({}, this.card)).then(function (response) {
+        //Yeah 
+      });
+    },
+    isSelectedPoint: function isSelectedPoint(points) {
+      return this.card.points === points ? "selected" : "";
+    },
     onRemoveClicked: function onRemoveClicked() {
       this.$emit("remove-card", this.card);
     },
@@ -1875,17 +1903,19 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.newCardName = "";
     },
     addNewCard: function addNewCard() {
-      var card = {
-        column_id: this.column.id,
-        name: this.newCardName,
-        users: []
-      };
-      this.column.cards.push(card);
-      this.newCardName = "";
-      __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post('/api/cards/', card).then(function (response) {
-        var id = response.data.id;
-        card.id = id;
-      });
+      if (this.newCardName !== "") {
+        var card = {
+          column_id: this.column.id,
+          name: this.newCardName,
+          users: []
+        };
+        this.column.cards.push(card);
+        this.newCardName = "";
+        __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post("/api/cards/", card).then(function (response) {
+          var id = response.data.id;
+          card.id = id;
+        });
+      }
     },
     removeCard: function removeCard(cardToRemove) {
       this.column.cards = this.column.cards.filter(function (card) {
@@ -6304,7 +6334,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user .user-image {\n    border-radius: 50%;\n    height: 20px;\n    width: 20px;\n}\n.card .modal-header h1 {\n    font-size: 18px;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user .user-image {\n    border-radius: 50%;\n    height: 20px;\n    width: 20px;\n}\n.card .modal-header h1 {\n    font-size: 18px;\n}\n.card .modal-header .points-list {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.card .modal-header .points-list .point {\n      text-align: center;\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      border-radius: 50%;\n      background: #D0D0D0;\n}\n.card .modal-header .points-list .point.selected {\n        background: #009999;\n}\n", ""]);
 
 // exports
 
@@ -39184,8 +39214,8 @@ var render = function() {
         _vm._v("\n    " + _vm._s(_vm.card.name) + "\n  ")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "close" }, [
-        _c("span", { on: { click: _vm.onRemoveClicked } }, [_vm._v("x")])
+      _c("div", { staticClass: "points" }, [
+        _vm._v("\n    " + _vm._s(_vm.card.points) + "\n  ")
       ]),
       _vm._v(" "),
       _c(
@@ -39204,7 +39234,28 @@ var render = function() {
       _vm.showModal
         ? _c("modal", { on: { close: _vm.closeModal } }, [
             _c("div", { attrs: { slot: "header" }, slot: "header" }, [
-              _c("h1", [_vm._v(_vm._s(_vm.card.name))])
+              _c("h1", [_vm._v(_vm._s(_vm.card.name))]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "points-list" },
+                _vm._l(_vm.pointList, function(point) {
+                  return _c(
+                    "div",
+                    {
+                      staticClass: "point",
+                      class: _vm.isSelectedPoint(point),
+                      on: {
+                        click: function($event) {
+                          $event.stopPropagation()
+                          _vm.selectPoint(point)
+                        }
+                      }
+                    },
+                    [_vm._v("\n          " + _vm._s(point) + "\n        ")]
+                  )
+                })
+              )
             ]),
             _vm._v(" "),
             _c(
@@ -39227,7 +39278,11 @@ var render = function() {
               })
             )
           ])
-        : _vm._e()
+        : _vm._e(),
+      _vm._v(" "),
+      _c("div", { staticClass: "close" }, [
+        _c("span", { on: { click: _vm.onRemoveClicked } }, [_vm._v("x")])
+      ])
     ],
     1
   )
