@@ -1659,6 +1659,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    onTokenReceived: function onTokenReceived(token) {
+      this.storeTokenAndUser(token, false);
+      this.redirect('/projects/my-project');
+    },
     storeTokenAndUser: function storeTokenAndUser(token, hasUser) {
       var _this = this;
 
@@ -1680,10 +1684,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     storeUser: function storeUser(user) {
       this.$store.commit("auth/setUser", user);
       this.$cookies.set("user", user);
-    },
-    onTokenReceived: function onTokenReceived(token) {
-      this.storeTokenAndUser(token, false);
-      this.redirect('/projects/my-project');
     },
     redirect: function redirect(path) {
       this.$router.push(path);
@@ -6180,7 +6180,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 

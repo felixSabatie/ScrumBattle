@@ -17,6 +17,10 @@ export default {
     }
   },
   methods: {
+    onTokenReceived(token) {
+      this.storeTokenAndUser(token, false);
+      this.redirect('/projects/my-project');
+    },
     storeTokenAndUser(token, hasUser) {
       this.$cookies.set("user-token", token);
       this.$store.commit("auth/setToken", token);
@@ -40,10 +44,7 @@ export default {
       this.$store.commit("auth/setUser", user);
       this.$cookies.set("user", user);
     },
-    onTokenReceived(token) {
-      this.storeTokenAndUser(token, false);
-      this.redirect('/projects/my-project');
-    },
+    
     redirect(path) {
       this.$router.push(path);
     }
