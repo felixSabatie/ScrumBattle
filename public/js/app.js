@@ -50818,7 +50818,7 @@ exports = module.exports = __webpack_require__(34)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n.column {\n  width: 150px;\n  border-radius: 5px;\n  background: #9561e2;\n  padding: 5px;\n  margin: 5px;\n}\n.column .infos {\n    display: inline-block;\n    text-align: center;\n}\n.column .infos h1 {\n      font-size: 16px;\n      font-weight: 600;\n      text-align: center;\n}\n.column .cards {\n    margin: 5px;\n}\n.column .new-card {\n    margin: 5px;\n}\n.column .new-card input {\n      border-style: none;\n      padding: 5px;\n      border-radius: 5px;\n      outline-width: 0;\n}\n.column .new-card input:focus {\n        -webkit-box-shadow: 0 0 1px 1px #6574cd;\n                box-shadow: 0 0 1px 1px #6574cd;\n}\n.column .sortable-ghost {\n    opacity: 0.6;\n}\n.column .sortable-chosen {\n    color: red;\n    border-radius: 5px;\n}\n", ""]);
+exports.push([module.i, "\n.column {\n  width: 150px;\n  border-radius: 5px;\n  background: #9561e2;\n  padding: 5px;\n  margin: 5px;\n}\n.column .infos {\n    display: inline-block;\n    text-align: center;\n}\n.column .infos h1 {\n      font-size: 16px;\n      font-weight: 600;\n      text-align: center;\n}\n.column .cards {\n    margin: 5px;\n}\n.column .new-card {\n    margin: 5px;\n}\n.column .new-card input {\n      border-style: none;\n      padding: 5px;\n      border-radius: 5px;\n      outline-width: 0;\n}\n.column .new-card input:focus {\n        -webkit-box-shadow: 0 0 1px 1px #6574cd;\n                box-shadow: 0 0 1px 1px #6574cd;\n}\n.column .sortable-ghost {\n    opacity: 0.6;\n}\n", ""]);
 
 // exports
 

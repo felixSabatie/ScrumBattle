@@ -120,13 +120,15 @@ export default {
     }
   }
 
+  //Placeholder for draggable
   .sortable-ghost {
     opacity: 0.6;
   }
 
+
+  //Moving item
   .sortable-chosen {
-    color: red;
-    border-radius: $borderRadius;
+    //background: red;
   }
 }
 </style>
