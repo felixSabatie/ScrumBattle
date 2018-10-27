@@ -14,5 +14,10 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+
+    Route::namespace('Api')->group(function() {
+        Route::resource('projects', 'ProjectsController')->except(['create', 'update']);
+    });
+
     return $request->user();
 });
