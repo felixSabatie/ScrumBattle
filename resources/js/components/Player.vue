@@ -1,5 +1,6 @@
 <template>
-    <div class="player">
+    <div class="player back-and-forth">
+        <!--TODO : Insert back-and-forth on action-->
         <img class="player-image" :src="player.image" >
     </div>
 </template>
@@ -20,8 +21,11 @@
     @import "../../sass/app";
     .player {
         position: absolute;
+    }
+
+    .back-and-forth{
         animation: backAndForth linear 2s;
-        animation-iteration-count: infinite;
+        animation-iteration-count: 1;
     }
 
     .player:nth-of-type(1) {
