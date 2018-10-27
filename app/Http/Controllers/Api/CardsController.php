@@ -15,17 +15,29 @@ class CardsController extends Controller
      */
     public function index()
     {
-        //
+        $cards = Card::with(['columns', 'columns.cards', 'users', 'mob'])->get();
+        return response()->json($cards);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return void
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:255',
+            'column_id' => 'required|exists:column,id',
+            'column_id.exists' => 'No an existing ID'
+            ]);
+
+        $card = Card::Create([
+            'name' => $request->name,
+            'column_id' => $request->column_id
+        ]);
+        return $card;
     }
 
     /**
