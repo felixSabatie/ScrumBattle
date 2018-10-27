@@ -40,8 +40,8 @@ export default {
       	'grant_type': 'password',
         ...this.user
       }).then(response => {
-        this.$store.commit('auth/setToken', response.data.access_token)
-        this.$router.push('projects/my-project'); //todo change this with projects dashboard
+        const token = response.data.access_token;
+        this.$emit('token-received', token);
       }).catch(err => {
         // TODO handle
         console.error(err);
