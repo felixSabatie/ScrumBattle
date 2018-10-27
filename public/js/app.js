@@ -1670,6 +1670,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
@@ -1818,7 +1824,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       group: "test",
       cards: [{
         id: '1',
-        name: "First Card"
+        name: "First Card",
+        users: [{
+          name: 'Jonhy boy'
+        }]
       }, {
         id: 2,
         name: "Second Card"
@@ -5856,7 +5865,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -5871,7 +5880,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n.card {\n  background: #38c172;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 3px;\n    color: lightgrey;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.card {\n  background: #38c172;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 3px;\n    color: lightgrey;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user .user-image {\n    border-radius: 50%;\n    height: 20px;\n    width: 20px;\n}\n", ""]);
 
 // exports
 
@@ -38313,7 +38322,20 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "close" }, [
       _c("span", { on: { click: _vm.onRemoveClicked } }, [_vm._v("x")])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "users" },
+      _vm._l(_vm.card.users, function(user) {
+        return _c("div", { staticClass: "user" }, [
+          _c("img", {
+            staticClass: "user-image",
+            attrs: { src: "https://picsum.photos/20/20", alt: user.name }
+          })
+        ])
+      })
+    )
   ])
 }
 var staticRenderFns = []

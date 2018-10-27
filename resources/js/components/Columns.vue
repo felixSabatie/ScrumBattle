@@ -28,7 +28,12 @@ export default {
         cards: [
           {
             id: '1',
-            name: "First Card"
+            name: "First Card",
+            users: [
+              {
+                name: 'Jonhy boy',
+              }
+            ]
           },
           {
             id: 2,
