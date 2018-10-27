@@ -74,7 +74,7 @@ export default {
       this.column.cards = this.column.cards.filter(
         card => card.id !== cardToRemove.id
       );
-      //todo remove card from backend
+      axios.delete(`/api/cards/${cardToRemove.id}`);
     },
     removeUserFromCard(card, user) {
       card.users = card.users.filter(usr => usr.id !== user.id);

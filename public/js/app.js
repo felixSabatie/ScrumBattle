@@ -1889,7 +1889,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.column.cards = this.column.cards.filter(function (card) {
         return card.id !== cardToRemove.id;
       });
-      //todo remove card from backend
+      __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].delete("/api/cards/" + cardToRemove.id);
     },
     removeUserFromCard: function removeUserFromCard(card, user) {
       card.users = card.users.filter(function (usr) {
