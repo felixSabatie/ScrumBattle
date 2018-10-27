@@ -8,7 +8,7 @@ use App\Http\Controllers\Controller;
 
 class ProjectsController extends Controller
 {
-    private static $inclusions = ['columns', 'columns.cards', 'users', 'mob'];
+    private static $inclusions = ['columns', 'columns.cards', 'users', 'mob', 'columns.cards.users'];
 
     /**
      * Display a listing of the resource.

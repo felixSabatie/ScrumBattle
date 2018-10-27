@@ -36,6 +36,7 @@
 <script>
 import Card from "./Card";
 import draggable from "vuedraggable";
+import axios from '../axios-wrapper';
 export default {
   name: "Column",
   components: {
@@ -57,12 +58,17 @@ export default {
       this.newCardName = "";
     },
     addNewCard() {
-      //todo add card to backend
-      this.column.cards.push({
-        id: (this.column.cards[this.column.cards.length - 1].id || 0) + 1, //todo change id with the one gotten from backend
-        name: this.newCardName
-      });
+      const card = {
+        column_id: this.column.id,
+        name: this.newCardName,
+        users: [],
+      };
+      this.column.cards.push(card);
       this.newCardName = "";
+      axios.post('/api/cards/', card).then((response) => {
+        const id = response.data.id;
+        card.id = id;
+      });
     },
     removeCard(cardToRemove) {
       this.column.cards = this.column.cards.filter(
