@@ -2,34 +2,34 @@
     <div class="progression">
         <div class="myProgress">
             <div class="myBar" ref="myBar"></div>
-            <img class="user_icon" ref="user_icon" v-bind:src="imgSrc"/>
+            <img class="user_icon" ref="user_icon" :src="progression.image"/>
         </div>
-        <br>
-        <label> Percent
-            <input type="text" v-model="percent"/>
-        </label>
-        <button @click="move">go</button>
     </div>
 </template>
 
 <script>
     export default {
         name: "Progression",
-        data: function () {
+        props: {
+            progression: {
+                type: Object,
+            },
+        },
+        data() {
             return {
-                percent: 0,
+                percent: this.progression.percent
             }
         },
-        computed: {
-            imgSrc: function () {
-                return "/images/fsociety.png"
-            }
+        mounted: function () {
+            console.log(this);
+            this.move();
         },
         methods: {
             move() {
                 var elem = this.$refs.myBar;
                 var icon = this.$refs.user_icon;
                 var width = elem.clientWidth /elem.offsetParent.clientWidth;
+                console.log(this.percent);
                 var id = setInterval(frame, 10, this.percent);
                 function frame(percent) {
                     if (width >= percent) {
