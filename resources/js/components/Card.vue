@@ -9,6 +9,12 @@
       <span @click='onRemoveClicked'>x</span>
     </div>
 
+    <div class="users">
+      <div class="user" v-for="user in card.users"> 
+        <img class="user-image" src="https://picsum.photos/20/20" :alt="user.name">
+      </div>
+    </div>
+      
   </div>
 </template>
 
@@ -47,6 +53,17 @@ export default {
     color: $lightGrey;
     &:hover {
       cursor: pointer;
+    }
+  }
+
+  .users {
+    .user {
+      
+      .user-image {
+        border-radius: 50%;
+        height: 20px;
+        width: 20px;
+      }
     }
   }
 }

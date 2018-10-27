@@ -1670,6 +1670,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
@@ -1814,8 +1820,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       name: "First column",
       group: "test",
       cards: [{
-        id: 1,
-        name: "First Card"
+        id: '1',
+        name: "First Card",
+        users: [{
+          name: 'Jonhy boy'
+        }]
       }, {
         id: 2,
         name: "Second Card"
@@ -5871,7 +5880,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.columns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  height: 100%;\n  padding: 10px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -5886,7 +5895,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.card {\n  background: #38c172;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 3px;\n    color: lightgrey;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user .user-image {\n    border-radius: 50%;\n    height: 20px;\n    width: 20px;\n}\n", ""]);
 
 // exports
 
@@ -38365,7 +38374,20 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "close" }, [
       _c("span", { on: { click: _vm.onRemoveClicked } }, [_vm._v("x")])
-    ])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "users" },
+      _vm._l(_vm.card.users, function(user) {
+        return _c("div", { staticClass: "user" }, [
+          _c("img", {
+            staticClass: "user-image",
+            attrs: { src: "https://picsum.photos/20/20", alt: user.name }
+          })
+        ])
+      })
+    )
   ])
 }
 var staticRenderFns = []
