@@ -40,7 +40,8 @@ export default {
       	'grant_type': 'password',
         ...this.user
       }).then(response => {
-        console.log(response.data);
+        const token = response.data.access_token;
+        this.$emit('token-received', token);
       }).catch(err => {
         // TODO handle
         console.error(err);

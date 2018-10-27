@@ -1638,6 +1638,7 @@ module.exports = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
 //
 //
 //
@@ -1645,8 +1646,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "App"
+  name: "App",
+  mounted: function mounted() {
+    if (this.$cookies.get('user-token')) {
+      var token = this.$cookies.get('user-token');
+      this.onTokenReceived(token, false);
+    }
+  },
+
+  methods: {
+    onTokenReceived: function onTokenReceived(token, fetchUser) {
+      var _this = this;
+
+      this.$cookies.set('user-token', token);
+      this.$store.commit('auth/setToken', token);
+      this.$router.push('/projects/my-project');
+
+      __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get('/api/user').then(function (response) {
+        var user = response.data;
+        _this.$store.commit('auth/setUser', user);
+        _this.$cookies.set('user', user);
+      }).catch(function (error) {
+        console.error(error);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -1981,6 +2007,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Columns___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Columns__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound__ = __webpack_require__("./resources/js/components/NotFound.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__NotFound__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
 //
 //
 //
@@ -1989,6 +2016,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -2007,7 +2035,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     mounted: function mounted() {
         var _this = this;
 
-        axios.get("/api/projects/" + this.$route.params.slug).then(function (response) {
+        __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].get('/api/projects/' + this.$route.params.slug).then(function (response) {
             _this.project = response.data;
             _this.$store.commit('projects/setProject', _this.project);
         }).catch(function (err) {
@@ -2064,12 +2092,15 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
   methods: {
     sendForm: function sendForm() {
+      var _this = this;
+
       __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/oauth/token', _extends({
         'client_id': 2,
         'client_secret': 'bVoOL6EAf0301wQ27sTPuebsXNCysRRnMqGi6vRz',
         'grant_type': 'password'
       }, this.user)).then(function (response) {
-        console.log(response.data);
+        var token = response.data.access_token;
+        _this.$emit('token-received', token);
       }).catch(function (err) {
         // TODO handle
         console.error(err);
@@ -2126,18 +2157,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   data: function data() {
     return {
       user: {
-        name: '',
-        email: '',
-        password: '',
-        avatar: ''
+        name: "",
+        email: "",
+        password: "",
+        avatar: ""
       }
     };
   },
 
   methods: {
     sendForm: function sendForm() {
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/register', _extends({}, this.user)).then(function (response) {
-        console.log(response.data);
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/api/register", _extends({}, this.user)).then(function (response) {
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/oauth/token", {
+          client_id: 2,
+          client_secret: "bVoOL6EAf0301wQ27sTPuebsXNCysRRnMqGi6vRz",
+          grant_type: "password",
+          username: _this.user.email,
+          password: _this.user.password
+        }).then(function (response) {
+          var token = response.data.access_token;
+          _this.$emit("token-received", token);
+        });
       }).catch(function (err) {
         // TODO handle
         console.error(err);
@@ -6122,7 +6164,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -38367,6 +38409,135 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+/***/ "./node_modules/vue-cookies/vue-cookies.js":
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Vue Cookies v1.5.7
+ * https://github.com/cmp-cc/vue-cookies
+ *
+ * Copyright 2016, cmp-cc
+ * Released under the MIT license
+ */
+
+(function() {
+
+    var defaultConfig = {
+        expires : '1d',
+        path : '; path=/'
+    }
+
+    var VueCookies = {
+        // install of Vue
+        install: function(Vue) {
+            Vue.prototype.$cookies = this
+            Vue.cookies = this
+        },
+        config : function(expireTimes,path) {
+            if(expireTimes) {
+                defaultConfig.expires = expireTimes;
+            }
+            if(path === '') {
+                defaultConfig.path = '';
+            }else {
+                defaultConfig.path = '; path=' + path;
+            }
+        },
+        get: function(key) {
+            var value = decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null
+
+            if(value && value.startsWith("{") && value.endsWith("}")) {
+                try {
+                    value = JSON.parse(value)
+                }catch (e) {
+                    return value;
+                }
+            }
+            return value;
+        },
+        set: function(key, value, expireTimes, path, domain, secure) {
+            if (!key) {
+                throw new Error("cookie name is not find in first argument")
+            }else if(/^(?:expires|max\-age|path|domain|secure)$/i.test(key)){
+                throw new Error("cookie key name illegality ,Cannot be set to ['expires','max-age','path','domain','secure']\t","current key name: "+key);
+            }
+            // support json object
+            if(value && value.constructor === Object ) {
+                value = JSON.stringify(value);
+            }
+            var _expires = "; max-age=86400"; // temp value, default expire time for 1 day
+            expireTimes = expireTimes || defaultConfig.expires;
+            if (expireTimes) {
+                switch (expireTimes.constructor) {
+                    case Number:
+                        if(expireTimes === Infinity || expireTimes === -1) _expires = "; expires=Fri, 31 Dec 9999 23:59:59 GMT";
+                        else _expires = "; max-age=" + expireTimes;
+                        break;
+                    case String:
+                        if (/^(?:\d{1,}(y|m|d|h|min|s))$/i.test(expireTimes)) {
+                            // get capture number group
+                            var _expireTime = expireTimes.replace(/^(\d{1,})(?:y|m|d|h|min|s)$/i, "$1");
+                            // get capture type group , to lower case
+                            switch (expireTimes.replace(/^(?:\d{1,})(y|m|d|h|min|s)$/i, "$1").toLowerCase()) {
+                                // Frequency sorting
+                                case 'm':  _expires = "; max-age=" + +_expireTime * 2592000; break; // 60 * 60 * 24 * 30
+                                case 'd':  _expires = "; max-age=" + +_expireTime * 86400; break; // 60 * 60 * 24
+                                case 'h': _expires = "; max-age=" + +_expireTime * 3600; break; // 60 * 60
+                                case 'min':  _expires = "; max-age=" + +_expireTime * 60; break; // 60
+                                case 's': _expires = "; max-age=" + _expireTime; break;
+                                case 'y': _expires = "; max-age=" + +_expireTime * 31104000; break; // 60 * 60 * 24 * 30 * 12
+                                default: new Error("unknown exception of 'set operation'");
+                            }
+                        } else {
+                            _expires = "; expires=" + expireTimes;
+                        }
+                        break;
+                    case Date:
+                        _expires = "; expires=" + expireTimes.toUTCString();
+                        break;
+                }
+            }
+            document.cookie = encodeURIComponent(key) + "=" + encodeURIComponent(value) + _expires + (domain ? "; domain=" + domain : "") + (path ? "; path=" + path : defaultConfig.path) + (secure ? "; secure" : "");
+            return this;
+        },
+        remove: function(key, path, domain) {
+            if (!key || !this.isKey(key)) {
+                return false;
+            }
+            document.cookie = encodeURIComponent(key) + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + (domain ? "; domain=" + domain : "") + (path ? "; path=" + path : defaultConfig.path);
+            return this;
+        },
+        isKey: function(key) {
+            return (new RegExp("(?:^|;\\s*)" + encodeURIComponent(key).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=")).test(document.cookie);
+        },
+        keys:  function() {
+            if(!document.cookie) return [];
+            var _keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, "").split(/\s*(?:\=[^;]*)?;\s*/);
+            for (var _index = 0; _index < _keys.length; _index++) {
+                _keys[_index] = decodeURIComponent(_keys[_index]);
+            }
+            return _keys;
+        }
+    }
+
+    if (true) {
+        module.exports = VueCookies;
+    } else if (typeof define == "function" && define.amd) {
+        define([], function() {
+            return VueCookies;
+        })
+    } else if (window.Vue) {
+        Vue.use(VueCookies);
+    }
+    // vue-cookies can exist independently,no dependencies library
+    if(typeof window!=="undefined"){
+        window.$cookies = VueCookies;
+    }
+
+})()
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/component-normalizer.js":
 /***/ (function(module, exports) {
 
@@ -38625,7 +38796,12 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "app" } }, [_c("router-view")], 1)
+  return _c(
+    "div",
+    { attrs: { id: "app" } },
+    [_c("router-view", { on: { "token-received": _vm.onTokenReceived } })],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -54624,17 +54800,14 @@ module.exports = function(module) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__("./node_modules/vue-router/dist/vue-router.esm.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_App__ = __webpack_require__("./resources/js/components/App.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_App__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Project__ = __webpack_require__("./resources/js/components/Project.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_Project___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_Project__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_auth_Register__ = __webpack_require__("./resources/js/components/auth/Register.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_auth_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_auth_Register__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_auth_Login__ = __webpack_require__("./resources/js/components/auth/Login.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_auth_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_auth_Login__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__store__ = __webpack_require__("./resources/js/store/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_cookies__ = __webpack_require__("./node_modules/vue-cookies/vue-cookies.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_cookies___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_cookies__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_router__ = __webpack_require__("./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_App__ = __webpack_require__("./resources/js/components/App.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_App___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_App__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__store__ = __webpack_require__("./resources/js/store/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__router__ = __webpack_require__("./resources/js/router/index.js");
 
 __webpack_require__("./resources/js/bootstrap.js");
 
@@ -54647,32 +54820,76 @@ __webpack_require__("./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__("./node_modules/vue/dist/vue.common.js");
 
-Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]);
-Vue.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */]);
-
-var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
-  mode: 'history',
-  routes: [{
-    path: '/projects/:slug',
-    name: 'project',
-    component: __WEBPACK_IMPORTED_MODULE_3__components_Project___default.a
-  }, {
-    path: '/register',
-    name: 'register',
-    component: __WEBPACK_IMPORTED_MODULE_4__components_auth_Register___default.a
-  }, {
-    path: '/login',
-    name: 'login',
-    component: __WEBPACK_IMPORTED_MODULE_5__components_auth_Login___default.a
-  }]
-});
+Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_cookies___default.a);
+Vue.use(__WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]);
+Vue.use(__WEBPACK_IMPORTED_MODULE_2_vuex__["a" /* default */]);
 
 var app = new Vue({
-  el: '#app',
-  components: { App: __WEBPACK_IMPORTED_MODULE_2__components_App___default.a },
-  router: router,
-  store: __WEBPACK_IMPORTED_MODULE_6__store__["a" /* default */]
+    el: '#app',
+    components: { App: __WEBPACK_IMPORTED_MODULE_3__components_App___default.a },
+    router: __WEBPACK_IMPORTED_MODULE_5__router__["a" /* default */],
+    store: __WEBPACK_IMPORTED_MODULE_4__store__["a" /* default */]
 });
+
+/***/ }),
+
+/***/ "./resources/js/axios-wrapper.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios__ = __webpack_require__("./node_modules/axios/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__store__ = __webpack_require__("./resources/js/store/index.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__router__ = __webpack_require__("./resources/js/router/index.js");
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+
+
+
+
+var Wrapper = function () {
+  function Wrapper() {
+    _classCallCheck(this, Wrapper);
+
+    this.initService();
+  }
+
+  _createClass(Wrapper, [{
+    key: 'initService',
+    value: function initService() {
+      var service = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({});
+      service.interceptors.request.use(function (config) {
+
+        config.headers.Accept = 'application/json';
+        var token = __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].state.auth.token || '';
+        if (token !== '') {
+          config.headers.Authorization = 'Bearer ' + token;
+        }
+        return config;
+      }, function (error) {
+        return Promise.reject(error);
+      });
+      service.interceptors.response.use(null, this.handleError);
+      this.service = service;
+    }
+  }, {
+    key: 'handleError',
+    value: function handleError(error) {
+      if (error.response && error.response.status === 401) {
+        __WEBPACK_IMPORTED_MODULE_2__router__["a" /* default */].push('/login');
+      }
+      return Promise.reject(error);
+    }
+  }]);
+
+  return Wrapper;
+}();
+
+var wrapper = new Wrapper();
+
+/* harmony default export */ __webpack_exports__["a"] = (wrapper.service);
 
 /***/ }),
 
@@ -54694,47 +54911,6 @@ try {
 
   __webpack_require__("./node_modules/bootstrap/dist/js/bootstrap.js");
 } catch (e) {}
-
-/**
- * We'll load the axios HTTP library which allows us to easily issue requests
- * to our Laravel back-end. This library automatically handles sending the
- * CSRF token as a header based on the value of the "XSRF" token cookie.
- */
-
-window.axios = __webpack_require__("./node_modules/axios/index.js");
-
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
-/**
- * Next we will register the CSRF Token as a common header with Axios so that
- * all outgoing HTTP requests automatically have it attached. This is just
- * a simple convenience so we don't have to attach every token manually.
- */
-
-var token = document.head.querySelector('meta[name="csrf-token"]');
-
-if (token) {
-  window.axios.defaults.headers.common['X-CSRF-TOKEN'] = token.content;
-} else {
-  console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
-}
-
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-
-// import Echo from 'laravel-echo'
-
-// window.Pusher = require('pusher-js');
-
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     encrypted: true
-// });
 
 /***/ }),
 
@@ -55202,6 +55378,53 @@ module.exports = Component.exports
 
 /***/ }),
 
+/***/ "./resources/js/router/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_router__ = __webpack_require__("./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__routes__ = __webpack_require__("./resources/js/router/routes.js");
+
+
+var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
+    mode: 'history',
+    routes: __WEBPACK_IMPORTED_MODULE_1__routes__["a" /* default */]
+});
+
+/* harmony default export */ __webpack_exports__["a"] = (router);
+
+/***/ }),
+
+/***/ "./resources/js/router/routes.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Project__ = __webpack_require__("./resources/js/components/Project.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__components_Project___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__components_Project__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_auth_Register__ = __webpack_require__("./resources/js/components/auth/Register.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_auth_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_auth_Register__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_auth_Login__ = __webpack_require__("./resources/js/components/auth/Login.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_auth_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_auth_Login__);
+
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = ([{
+    path: "/projects/:slug",
+    name: "project",
+    component: __WEBPACK_IMPORTED_MODULE_0__components_Project___default.a
+}, {
+    path: "/register",
+    name: "register",
+    component: __WEBPACK_IMPORTED_MODULE_1__components_auth_Register___default.a
+}, {
+    path: "/login",
+    name: "login",
+    component: __WEBPACK_IMPORTED_MODULE_2__components_auth_Login___default.a
+}]);
+
+/***/ }),
+
 /***/ "./resources/js/store/index.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -55210,6 +55433,8 @@ module.exports = Component.exports
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_projects__ = __webpack_require__("./resources/js/store/modules/projects.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_auth__ = __webpack_require__("./resources/js/store/modules/auth.js");
+
 
 
 
@@ -55221,10 +55446,46 @@ var debug = "development" !== 'production';
 
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   modules: {
-    projects: __WEBPACK_IMPORTED_MODULE_2__modules_projects__["a" /* default */]
+    projects: __WEBPACK_IMPORTED_MODULE_2__modules_projects__["a" /* default */],
+    auth: __WEBPACK_IMPORTED_MODULE_3__modules_auth__["a" /* default */]
   },
   strict: debug
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/auth.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+var state = {
+  token: '',
+  user: {}
+
+  // getters
+};var getters = {};
+
+// actions
+var actions = {};
+
+// mutations
+var mutations = {
+  setToken: function setToken(state, token) {
+    state.token = token;
+  },
+  setUser: function setUser(state, user) {
+    state.user = user;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  namespaced: true,
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
 
 /***/ }),
 

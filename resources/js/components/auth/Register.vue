@@ -29,73 +29,82 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
   data() {
     return {
       user: {
-        name: '',
-        email: '',
-        password: '',
-        avatar: ''
+        name: "",
+        email: "",
+        password: "",
+        avatar: ""
       }
-    }
+    };
   },
   methods: {
     sendForm() {
-      axios.post('/api/register', {...this.user}).then(response => {
-        console.log(response.data);
-      }).catch(err => {
-        // TODO handle
-        console.error(err);
-      });
+      axios
+        .post("/api/register", { ...this.user })
+        .then(response => {
+          axios.post("/oauth/token", {
+              client_id: 2,
+              client_secret: "bVoOL6EAf0301wQ27sTPuebsXNCysRRnMqGi6vRz",
+              grant_type: "password",
+              username: this.user.email,
+              password: this.user.password
+            })
+            .then(response => {
+              const token = response.data.access_token;
+              this.$emit("token-received", token);
+            });
+        })
+        .catch(err => {
+          // TODO handle
+          console.error(err);
+        });
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  @import "../../../sass/app";
+@import "../../../sass/app";
 
-  .register {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: $lightGrey;
+.register {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $lightGrey;
 
-    .register-form {
-      display: inline-block;
-      margin: auto;
-      padding: 20px 40px;
-      background-color: $white;
-      border-radius: $borderRadius;
+  .register-form {
+    display: inline-block;
+    margin: auto;
+    padding: 20px 40px;
+    background-color: $white;
+    border-radius: $borderRadius;
 
-      .input {
-        margin: 10px 0;
-        display: grid;
+    .input {
+      margin: 10px 0;
+      display: grid;
 
-        label {
-
-        }
-        input {
-          min-width: 400px;
-        }
+      label {
       }
-
-      .buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-
-        .link {
-          background-color: $teal;
-        }
+      input {
+        min-width: 400px;
       }
-
     }
 
-  }
+    .buttons {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
 
+      .link {
+        background-color: $teal;
+      }
+    }
+  }
+}
 </style>
