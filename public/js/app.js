@@ -50632,6 +50632,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50651,6 +50652,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
 
   methods: {
+    clearNewCardName: function clearNewCardName() {
+      this.newCardName = '';
+    },
     addNewCard: function addNewCard() {
       //todo add card to backend
 
@@ -50842,15 +50846,26 @@ var render = function() {
         attrs: { type: "text", placeholder: "Add a new card..." },
         domProps: { value: _vm.newCardName },
         on: {
-          keydown: function($event) {
-            if (
-              !("button" in $event) &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
+          keydown: [
+            function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.addNewCard($event)
+            },
+            function($event) {
+              if (
+                !("button" in $event) &&
+                _vm._k($event.keyCode, "esc", 27, $event.key, "Escape")
+              ) {
+                return null
+              }
+              return _vm.clearNewCardName($event)
             }
-            return _vm.addNewCard($event)
-          },
+          ],
           input: function($event) {
             if ($event.target.composing) {
               return

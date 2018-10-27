@@ -8,14 +8,15 @@
 
         <div class="cards">
             <div v-for="card in column.cards">
-              <card :card="card" v-on:remove-card="removeCard"/>
+              <card :card="card" @remove-card="removeCard"/>
             </div> 
         </div>
 
         <div class="new-card">
           <input type="text" 
                  placeholder="Add a new card..."
-                 v-on:keydown.enter="addNewCard"
+                 @keydown.enter="addNewCard"
+                 @keydown.esc="clearNewCardName"
                  v-model="newCardName"
                  >
         </div>
@@ -42,6 +43,9 @@ export default {
    
   },
   methods: {
+    clearNewCardName() {
+      this.newCardName = '';
+    },
     addNewCard() {
       //todo add card to backend
 
