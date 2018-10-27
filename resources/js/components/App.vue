@@ -5,29 +5,47 @@
 </template>
 
 <script>
-import axios from '../axios-wrapper';
+import axios from "../axios-wrapper";
 export default {
   name: "App",
   mounted() {
-    if (this.$cookies.get('user-token')) {
-      let token = this.$cookies.get('user-token');
-      this.onTokenReceived(token, false);
+    if (this.$cookies.isKey("user-token")) {
+      let token = this.$cookies.get("user-token");
+      this.storeTokenAndUser(token, true);
+    } else {
+      this.redirect("/login");
     }
   },
   methods: {
-    onTokenReceived(token, fetchUser) {
-      this.$cookies.set('user-token', token);
-      this.$store.commit('auth/setToken', token);
-      this.$router.push('/projects/my-project');
-      
-      axios.get('/api/user').then(response => {
-        const user = response.data;
-        this.$store.commit('auth/setUser', user);
-        this.$cookies.set('user', user);
-      }).catch(error => {
-        console.error(error);
-      })
+    storeTokenAndUser(token, hasUser) {
+      this.$cookies.set("user-token", token);
+      this.$store.commit("auth/setToken", token);
 
+      if (hasUser) {
+        const user = this.$cookies.get("user");
+        this.storeUser(user);
+      } else {
+         axios
+        .get("/api/user")
+        .then(response => {
+          const user = response.data;
+          this.storeUser(user);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+      }
+    },
+    storeUser(user) {
+      this.$store.commit("auth/setUser", user);
+      this.$cookies.set("user", user);
+    },
+    onTokenReceived(token) {
+      this.storeTokenAndUser(token, false);
+      this.redirect('/projects/my-project');
+    },
+    redirect(path) {
+      this.$router.push(path);
     }
   }
 };
