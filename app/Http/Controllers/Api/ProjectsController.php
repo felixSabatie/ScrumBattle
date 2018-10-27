@@ -100,6 +100,11 @@ class ProjectsController extends Controller
      */
     public function destroy(Project $project)
     {
-        // TODO
+        // TODO cascade all
+        $project->users()->detach();
+        $project->columns()->delete();
+        $project->delete();
+
+        return response()->json('success', 200);
     }
 }
