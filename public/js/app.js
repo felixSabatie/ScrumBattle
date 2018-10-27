@@ -1668,10 +1668,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.$store.commit('auth/setToken', token);
 
       if (hasUser) {
-        var _user = this.$cookies.get('user');
-        this.storeUser(_user);
+        var user = this.$cookies.get('user');
+        this.storeUser(user);
       } else {
-        this.fetchAndStoreUser(user);
+        this.fetchAndStoreUser();
       }
     },
     storeUser: function storeUser(user) {

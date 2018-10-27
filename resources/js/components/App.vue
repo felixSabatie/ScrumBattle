@@ -29,7 +29,7 @@ export default {
         const user = this.$cookies.get('user');
         this.storeUser(user);
       } else {
-        this.fetchAndStoreUser(user);
+        this.fetchAndStoreUser();
       }
     },
     storeUser(user) {
