@@ -6,7 +6,7 @@ use App\Models\Project;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProjectController extends Controller
+class ProjectsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::with(['columns', 'columns.cards', 'users', 'mob'])->get();
+        return response()->json($projects);
     }
 
     /**
