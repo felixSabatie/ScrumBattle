@@ -1638,27 +1638,39 @@ module.exports = {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
 //
 //
 //
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "App",
   mounted: function mounted() {
     if (this.$cookies.get('user-token')) {
       var token = this.$cookies.get('user-token');
-      this.onTokenReceived(token);
+      this.onTokenReceived(token, false);
     }
   },
 
   methods: {
-    onTokenReceived: function onTokenReceived(token) {
+    onTokenReceived: function onTokenReceived(token, fetchUser) {
+      var _this = this;
+
       this.$cookies.set('user-token', token);
-      this.$store.commit("auth/setToken", token);
-      this.$router.push("/projects/my-project");
+      this.$store.commit('auth/setToken', token);
+      this.$router.push('/projects/my-project');
+
+      __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get('/api/user').then(function (response) {
+        var user = response.data;
+        _this.$store.commit('auth/setUser', user);
+        _this.$cookies.set('user', user);
+      }).catch(function (error) {
+        console.error(error);
+      });
     }
   }
 });
@@ -2145,18 +2157,29 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   data: function data() {
     return {
       user: {
-        name: '',
-        email: '',
-        password: '',
-        avatar: ''
+        name: "",
+        email: "",
+        password: "",
+        avatar: ""
       }
     };
   },
 
   methods: {
     sendForm: function sendForm() {
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/api/register', _extends({}, this.user)).then(function (response) {
-        console.log(response.data);
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/api/register", _extends({}, this.user)).then(function (response) {
+        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/oauth/token", {
+          client_id: 2,
+          client_secret: "bVoOL6EAf0301wQ27sTPuebsXNCysRRnMqGi6vRz",
+          grant_type: "password",
+          username: _this.user.email,
+          password: _this.user.password
+        }).then(function (response) {
+          var token = response.data.access_token;
+          _this.$emit("token-received", token);
+        });
       }).catch(function (err) {
         // TODO handle
         console.error(err);
@@ -6141,7 +6164,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -54838,9 +54861,10 @@ var Wrapper = function () {
     value: function initService() {
       var service = __WEBPACK_IMPORTED_MODULE_0_axios___default.a.create({});
       service.interceptors.request.use(function (config) {
+
+        config.headers.Accept = 'application/json';
         var token = __WEBPACK_IMPORTED_MODULE_1__store__["a" /* default */].state.auth.token || '';
         if (token !== '') {
-          console.log(token);
           config.headers.Authorization = 'Bearer ' + token;
         }
         return config;
@@ -55436,7 +55460,8 @@ var debug = "development" !== 'production';
 "use strict";
 
 var state = {
-  token: {}
+  token: '',
+  user: {}
 
   // getters
 };var getters = {};
@@ -55448,6 +55473,9 @@ var actions = {};
 var mutations = {
   setToken: function setToken(state, token) {
     state.token = token;
+  },
+  setUser: function setUser(state, user) {
+    state.user = user;
   }
 };
 

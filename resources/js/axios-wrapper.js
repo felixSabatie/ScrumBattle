@@ -10,9 +10,10 @@ class Wrapper {
     let service = axios.create({});
     service.interceptors.request.use(
         config => {
+
+          config.headers.Accept = 'application/json';
           const token = store.state.auth.token || '';
           if (token !== '') {
-            console.log(token);
             config.headers.Authorization = `Bearer ${token}`;
           }
           return config;

@@ -1,6 +1,7 @@
 
 const state = {
-    token: {}
+    token: '',
+    user: {}
   }
   
   // getters
@@ -14,7 +15,10 @@ const state = {
   // mutations
   const mutations = {
     setToken(state, token) {
-      state.token = token
+      state.token = token;
+    },
+    setUser(state, user) {
+      state.user = user;
     }
   }
   
