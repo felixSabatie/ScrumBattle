@@ -11,6 +11,7 @@
                  :options="{group:'columns'}"
                  @end="onDragEnd"
                  :id="`column-${column.id}`"
+                 class="cards-container"
                  >
         <div v-for="card in column.cards" :id="`card-${card.id}`">
           <card :card="card" @remove-card="removeCard"/>
@@ -54,9 +55,8 @@ export default {
     },
     addNewCard() {
       //todo add card to backend
-
       this.column.cards.push({
-        id: (this.column.cards[this.column.cards.length - 1] || 0) + 1, //todo change id with the one gotten from backend
+        id: (this.column.cards[this.column.cards.length - 1].id || 0) + 1, //todo change id with the one gotten from backend
         name: this.newCardName
       });
       this.newCardName = "";
@@ -86,10 +86,14 @@ export default {
 @import "../../sass/app";
 .column {
   width: 300px;
-  min-height: 100px;
   border-radius: $borderRadius;
   background: $columns;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  min-height: 130px;
+  max-height: 100%;
+  box-sizing: border-box;
 
   .infos {
     display: inline-block;
@@ -106,6 +110,13 @@ export default {
 
   .cards {
     padding: 10px;
+    flex: 1;
+    display: flex;
+    overflow: auto;
+
+    .cards-container {
+      flex: 1;
+    }
   }
 
   .new-card {

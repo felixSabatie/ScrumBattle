@@ -24,7 +24,7 @@ export default {
         group: "test",
         cards: [
           {
-            id: '1',
+            id: 1,
             name: "First Card"
           },
           {
@@ -59,6 +59,10 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
 </style>

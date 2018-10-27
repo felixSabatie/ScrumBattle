@@ -31,5 +31,10 @@
     }
 </script>
 
-<style scoped>
+<style lang="scss">
+.project {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
 </style>
