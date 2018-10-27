@@ -4,9 +4,9 @@
       {{card.name}}
     </div>
 
-    <div class="close">
-      <!-- Change with icon -->
-      <span @click='onRemoveClicked'>x</span>
+
+    <div class="points">
+      {{card.points}}
     </div>
 
     <div class="users">
@@ -18,6 +18,13 @@
     <modal v-if="showModal" @close="closeModal">
       <div slot="header">
         <h1>{{card.name}}</h1>
+        <div class="points-list">
+          <div class="point" v-for="point in pointList"
+               @click.stop='selectPoint(point)' 
+               :class='isSelectedPoint(point)'>
+            {{point}}
+          </div>
+        </div>
       </div>
 
       <div slot="body">
@@ -32,11 +39,18 @@
         </div>
       </div>  
     </modal>
+
+
+     <div class="close">
+      <!-- Change with icon -->
+      <span @click='onRemoveClicked'>x</span>
+    </div>
     
   </div>
 </template>
 
 <script>
+import axios from '../axios-wrapper';
 import { mapState } from 'vuex'
 import Modal from "./Modal";
 
@@ -54,12 +68,26 @@ export default {
     return {
       showModal: false,
       toRemove: [],
+      pointList: [1,2,3,5,8,13,21],
+      selectedPoint: 0,
     }
   },
   computed: mapState({
     users: state => state.projects.currentProject.users
   }),
   methods: {
+    selectPoint(points) {
+      this.card.points = points;
+      axios.put(`/api/cards/${this.card.id}`, {
+        ...this.card,
+      })
+      .then((response) => {
+        //Yeah 
+      })
+    },
+    isSelectedPoint(points) {
+      return this.card.points === points ? "selected" : "";
+    },
     onRemoveClicked() {
       this.$emit("remove-card", this.card);
       
@@ -126,6 +154,21 @@ export default {
   .modal-header {
     h1 {
       font-size: 18px;
+    }
+
+    .points-list {
+      display: flex;
+      
+      .point {
+        text-align: center;
+        flex: 1;
+        border-radius: 50%;
+        background: #D0D0D0;
+
+        &.selected {
+          background: #009999;
+        }
+      }
     }
   }
 }
