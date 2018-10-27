@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Project;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -32,14 +33,14 @@ class ProjectsController extends Controller
         try {
             $request->validate([
                 'name' => 'required|string|max:255',
-                'mob_id' => 'required|integer|exists:mobs,id'
+                'mob_id' => 'required|integer|exists:mobs,id',
+                'users.id' => 'integer'
             ]);
         } catch (\Throwable $e) {
             return response()->json('The data is unprocessable', 422);
         }
         try {
             // TODO handle users
-
             $project = new Project();
             $project->name = $request->name;
             $project->slug = str_slug($request->name);
@@ -52,6 +53,14 @@ class ProjectsController extends Controller
                 ['name' => 'doing'],
                 ['name' => 'done']
             ]);
+
+            $users = User::find(array_map(function($user) {
+                return $user['id'];
+            }, $request->users));
+
+            $project->users()->sync($users);
+
+            $project->load(['users', 'mob']);
 
             return response()->json($project);
         } catch (\Throwable $e) {
