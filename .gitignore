@@ -21,3 +21,5 @@ yarn-error.log
 docker/mysql
 
 composer\.phar
+
+*.DS_Store
