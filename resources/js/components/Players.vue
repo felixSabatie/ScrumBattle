@@ -48,5 +48,6 @@
 <style lang="scss">
     @import "../../sass/app";
     .players {
+        height: 100%;
     }
 </style>

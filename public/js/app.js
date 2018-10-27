@@ -7148,7 +7148,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n", ""]);
+exports.push([module.i, "\n.players {\n  height: 100%;\n}\n", ""]);
 
 // exports
 
@@ -7163,7 +7163,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n.player {\n  position: absolute;\n}\n.player:nth-of-type(1) {\n  left: 10%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(2) {\n  left: 15%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player:nth-of-type(3) {\n  left: 20%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(4) {\n  left: 25%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player-image {\n  height: 100%;\n  width: 100%;\n}\n", ""]);
+exports.push([module.i, "\n.player {\n  position: absolute;\n  -webkit-animation: backAndForth linear 2s;\n          animation: backAndForth linear 2s;\n  -webkit-animation-iteration-count: infinite;\n          animation-iteration-count: infinite;\n}\n.player:nth-of-type(1) {\n  left: 10%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(2) {\n  left: 15%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player:nth-of-type(3) {\n  left: 20%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(4) {\n  left: 25%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player-image {\n  height: 100%;\n  width: 100%;\n}\n@-webkit-keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n10% {\n    -webkit-transform: translate(200%, -25%) scaleX(1);\n            transform: translate(200%, -25%) scaleX(1);\n}\n12% {\n    -webkit-transform: translate(240%, -30%) scaleX(1);\n            transform: translate(240%, -30%) scaleX(1);\n}\n15% {\n    -webkit-transform: translate(280%, -25%) scaleX(1);\n            transform: translate(280%, -25%) scaleX(1);\n}\n22% {\n    -webkit-transform: translate(500%, 0%) scaleX(1);\n            transform: translate(500%, 0%) scaleX(1);\n}\n31% {\n    -webkit-transform: translate(500%, 0%) scaleX(-1);\n            transform: translate(500%, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n@keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n10% {\n    -webkit-transform: translate(200%, -25%) scaleX(1);\n            transform: translate(200%, -25%) scaleX(1);\n}\n12% {\n    -webkit-transform: translate(240%, -30%) scaleX(1);\n            transform: translate(240%, -30%) scaleX(1);\n}\n15% {\n    -webkit-transform: translate(280%, -25%) scaleX(1);\n            transform: translate(280%, -25%) scaleX(1);\n}\n22% {\n    -webkit-transform: translate(500%, 0%) scaleX(1);\n            transform: translate(500%, 0%) scaleX(1);\n}\n31% {\n    -webkit-transform: translate(500%, 0%) scaleX(-1);\n            transform: translate(500%, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n", ""]);
 
 // exports
 
