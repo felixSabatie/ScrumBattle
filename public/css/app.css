@@ -1,4 +1,25 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);body {
+@import url(https://fonts.googleapis.com/css?family=Nunito);.btn {
+  padding: 10px;
+  text-decoration: none;
+  background-color: #3490dc;
+  border: none;
+  border-radius: 5px;
+  color: #FFF;
+  cursor: pointer;
+}
+
+input[type=text],
+input[type=password],
+input[type=email] {
+  border: 1px solid #DDD;
+  padding: 10px;
+  border-radius: 5px;
+  outline-width: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
   margin: 0;
 }
 
