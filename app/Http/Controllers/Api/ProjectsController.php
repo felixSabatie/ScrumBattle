@@ -67,8 +67,8 @@ class ProjectsController extends Controller
      */
     public function show($slug)
     {
-        $projects = Project::where('slug', $slug)->firstOrFail()->with(ProjectsController::$inclusions)->get();
-        return response()->json($projects);
+        $project = Project::with(ProjectsController::$inclusions)->where('slug', $slug)->firstOrFail();
+        return response()->json($project);
     }
 
     /**
