@@ -1,58 +1,79 @@
 <template>
-    <div class="row" style="margin-top:30px; margin-bottom:10px;">
-        <div class="col-xs-12">
-            <div class="flex-well-container">
-                <div class="well well-lg" style="width:100%">
-                    <div class="progress">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
-                            60%
-                        </div>
-                        <img src="http://placehold.it/100">
-                    </div>
-
-                </div><!--end well-->
-
-            </div><!--end flex-well-container-->
-        </div><!--end col-xs-12-->
-    </div><!--end row-->
+    <div class="progression">
+        <div class="myProgress">
+            <div class="myBar" ref="myBar"></div>
+            <img class="user_icon" ref="user_icon" v-bind:src="imgSrc"/>
+        </div>
+        <br>
+        <label> Percent
+            <input type="text" v-model="percent"/>
+        </label>
+        <button @click="move">go</button>
+    </div>
 </template>
 
 <script>
     export default {
-        name: "Progression"
+        name: "Progression",
+        data: function () {
+            return {
+                percent: 0,
+            }
+        },
+        computed: {
+            imgSrc: function () {
+                return "/images/fsociety.png"
+            }
+        },
+        methods: {
+            move() {
+                var elem = this.$refs.myBar;
+                var icon = this.$refs.user_icon;
+                var width = elem.clientWidth /elem.offsetParent.clientWidth;
+                var id = setInterval(frame, 10, this.percent);
+                function frame(percent) {
+                    if (width >= percent) {
+                        clearInterval(id);
+                    } else {
+                        width++;
+                        elem.style.width = width + '%';
+                        icon.style.left = width + '%';
+                    }
+                }
+            }
+        }
+
     }
 </script>
 
 <style scoped>
-    /*to customize the play now button*/
-    .progress {
+    .progression{
+        width: 100%;
+        height: 100px;
         position: relative;
     }
-
-    .progress img {
+    .myProgress {
+        width: 100%;
+        background-color: #ddd;
         position: absolute;
-        left: calc(60% - 50px); /* percentage - 1.5 x width of image*/
+        top: 60%;
+        height: 30%;
     }
 
-    .btn-play{
-        height: 70px;
-        border-radius: 0px;
-        background-color: #359966;
-        border-color: #359966;
-        color: white;
+    .myBar {
+        width: 1%;
+        height: 100%;
+        background-color: #4CAF50;
+        position: absolute;
     }
 
-    .
-        /*reduce the bottom margin of progress bar to zero*/
-    .progress{
-        margin-bottom: 0px;
-    }
-    .flex-well-container{
-        display: flex;
-        width:100%;
-    }
-    /*set the radius of the well to zero*/
-    .well-lg{
-        border-radius: 0;
+    .myProgress img {
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 1%;
+        max-height: 100%;
+        max-width: 100%;
+        transform: translate(-50%, -50%);
     }
 </style>
