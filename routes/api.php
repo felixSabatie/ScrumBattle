@@ -24,5 +24,7 @@ Route::group(['middleware' => ['api']], function() {
         Route::resource('projects', 'ProjectsController')->except(['create', 'update', 'show']);
         Route::get('projects/{slug}', 'ProjectsController@show')->middleware('auth:api');
         Route::resource('cards', 'CardsController')->only(['store','update', 'destroy']);
+        Route::post('cards/{id}/users', 'CardsController@addUser');
+        Route::delete('cards/{cardId}/users/{userId}', 'CardsController@removeUser');
     });
 });
