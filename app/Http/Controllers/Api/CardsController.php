@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Card;
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -86,5 +87,26 @@ class CardsController extends Controller
 
         $deleted = $card->delete();
         return response()->json($deleted);
+    }
+
+    public function addUser($id, Request $request)
+    {
+        $card = Card::findOrFail($id);
+        $request->validate([
+            'id' => 'required'
+        ]);
+        $user = User::findOrFail($request->id);
+        $card->users()->syncWithoutDetaching($user);
+
+        return response()->json('success', 200);
+    }
+
+    public function removeUser($cardId, $userId, Request $request)
+    {
+        $card = Card::findOrFail($cardId);
+        $user = User::findOrFail($userId);
+        $card->users()->detach($user);
+
+        return response()->json('success', 200);
     }
 }
