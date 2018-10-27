@@ -1,36 +1,22 @@
 <template>
   <div class="home">
-    <div v-for="column in columns">
-      <column :column="column"/>
-    </div>
+    <columns/>
   </div>
 </template>
 
 <script>
-import Column from "./Column";
+import Columns from "./Columns";
 export default {
   name: "Home",
   components: {
-    Column
+    Columns
   },
   data() {
-    return { 
-      columns: [ //TODO : change with backend call
-        {
-          name: "First column",
-          cards: [
-            {
-              name: "First Card"
-            },
-            {
-              name: "Second Card"
-            }
-          ]
-        }
-      ]
-    };
+    return {
+
+    }
   }
-};
+}
 </script>
 
 <style scoped>

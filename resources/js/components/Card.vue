@@ -20,6 +20,13 @@
   }
 </script>
 
-<style scoped>
-
+<style lang='scss'>
+@import "../../sass/app";
+.card {
+  background: $card;
+  border-radius: $borderRadius;
+  color: $textColor;
+  padding: 10px;
+  margin: 10px;
+}
 </style>
