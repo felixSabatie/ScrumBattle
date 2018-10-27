@@ -1797,11 +1797,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-<<<<<<< develop
+//
+//
+//
 //
 
-=======
->>>>>>> Better modal style
 
 
 
@@ -1834,7 +1834,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     selectPoint: function selectPoint(points) {
       this.card.points = points;
       __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].put('/api/cards/' + this.card.id, _extends({}, this.card)).then(function (response) {
-        //Yeah 
+        //Yeah
       });
     },
     isSelectedPoint: function isSelectedPoint(points) {
@@ -6543,11 +6543,15 @@ exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padd
 =======
 // module
 <<<<<<< develop
+<<<<<<< develop
 exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user .user-image {\n    border-radius: 50%;\n    height: 20px;\n    width: 20px;\n}\n.card .modal-header h1 {\n    font-size: 18px;\n}\n.card .modal-header .points-list {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.card .modal-header .points-list .point {\n      text-align: center;\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      border-radius: 50%;\n      background: #D0D0D0;\n}\n.card .modal-header .points-list .point.selected {\n        background: #009999;\n}\n", ""]);
 =======
 exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user {\n    display: inline-block;\n    padding: 5px;\n}\n.card .users .user .user-image {\n      border-radius: 50%;\n      height: 20px;\n      width: 20px;\n}\n.card .modal .modal-header h1 {\n    font-size: 18px;\n}\n.card .modal .users .modal-user {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    padding: 10px 0;\n}\n.card .modal .users .modal-user .modal-user-image img {\n      max-height: 40px;\n      width: auto;\n      border-radius: 50%;\n}\n.card .modal .users .modal-user .modal-user-info {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n}\n.card .modal .users .modal-user .modal-user-check {\n      -webkit-transform: scale(1.3);\n              transform: scale(1.3);\n}\n", ""]);
 >>>>>>> Better modal style
 >>>>>>> Better modal style
+=======
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .points {\n    display: block;\n    width: 23px;\n    height: 23px;\n    font-size: 13px;\n    background-color: #DDD;\n    border-radius: 50%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    cursor: pointer;\n}\n.card .points.selected {\n      background: #3490dc;\n      color: white;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user {\n    display: inline-block;\n    padding: 5px;\n}\n.card .users .user .user-image {\n      border-radius: 50%;\n      height: 20px;\n      width: 20px;\n}\n.card .modal .modal-header h1 {\n    font-size: 18px;\n}\n.card .modal .modal-header .points-list {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n}\n.card .modal .users .modal-user {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    padding: 10px 0;\n}\n.card .modal .users .modal-user .modal-user-image img {\n      max-height: 40px;\n      width: auto;\n      border-radius: 50%;\n}\n.card .modal .users .modal-user .modal-user-info {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n}\n.card .modal .users .modal-user .modal-user-check {\n      -webkit-transform: scale(1.3);\n              transform: scale(1.3);\n}\n", ""]);
+>>>>>>> Better points
 
           var action = typeof config === 'string' ? config : _config.slide;
 
@@ -73308,33 +73312,16 @@ var render = function() {
     "div",
     { staticClass: "card" },
     [
-<<<<<<< develop
-      _c("div", { staticClass: "content", on: { click: _vm.openModal } }, [
-        _vm._v("\n    " + _vm._s(_vm.card.name) + "\n  ")
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "points" }, [
-        _vm._v("\n    " + _vm._s(_vm.card.points) + "\n  ")
-=======
       _c("div", { staticClass: "card-wrapper", on: { click: _vm.openModal } }, [
         _c("div", { staticClass: "content" }, [
           _vm._v("\n      " + _vm._s(_vm.card.name) + "\n    ")
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "close" }, [
-          _c(
-            "span",
-            {
-              on: {
-                click: function($event) {
-                  $event.stopPropagation()
-                  return _vm.onRemoveClicked($event)
-                }
-              }
-            },
-            [_vm._v("x")]
-          )
-        ]),
+        _vm.card.points
+          ? _c("div", { staticClass: "points selected" }, [
+              _c("span", [_vm._v(_vm._s(_vm.card.points))])
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c(
           "div",
@@ -73348,7 +73335,6 @@ var render = function() {
             ])
           })
         )
->>>>>>> Better modal style
       ]),
       _vm._v(" "),
       _vm.showModal
@@ -73363,7 +73349,7 @@ var render = function() {
                   return _c(
                     "div",
                     {
-                      staticClass: "point",
+                      staticClass: "points",
                       class: _vm.isSelectedPoint(point),
                       on: {
                         click: function($event) {
@@ -73414,7 +73400,18 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _c("div", { staticClass: "close" }, [
-        _c("span", { on: { click: _vm.onRemoveClicked } }, [_vm._v("x")])
+        _c(
+          "span",
+          {
+            on: {
+              click: function($event) {
+                $event.stopPropagation()
+                return _vm.onRemoveClicked($event)
+              }
+            }
+          },
+          [_vm._v("x")]
+        )
       ])
     ],
     1

@@ -5,9 +5,8 @@
         {{card.name}}
       </div>
 
-
-    <div class="points">
-      {{card.points}}
+    <div class="points selected" v-if="card.points">
+      <span>{{card.points}}</span>
     </div>
 
       <div class="users">
@@ -21,8 +20,8 @@
       <div slot="header">
         <h1>{{card.name}}</h1>
         <div class="points-list">
-          <div class="point" v-for="point in pointList"
-               @click.stop='selectPoint(point)' 
+          <div class="points" v-for="point in pointList"
+               @click.stop='selectPoint(point)'
                :class='isSelectedPoint(point)'>
             {{point}}
           </div>
@@ -46,12 +45,10 @@
       </div>
     </modal>
 
-
      <div class="close">
       <!-- Change with icon -->
       <span @click.stop='onRemoveClicked'>x</span>
     </div>
-    
   </div>
 </template>
 
@@ -88,7 +85,7 @@ export default {
         ...this.card,
       })
       .then((response) => {
-        //Yeah 
+        //Yeah
       })
     },
     isSelectedPoint(points) {
@@ -137,6 +134,25 @@ export default {
   .content {
     color: $textColor;
   }
+
+  .points {
+    display: block;
+    width: 23px;
+    height: 23px;
+    font-size: 13px;
+    background-color: $lightGrey;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &.selected {
+      background: $primaryColor;
+      color: white;
+    }
+  }
+
   .close {
     position: absolute;
     top: 3px;
@@ -164,20 +180,10 @@ export default {
       h1 {
         font-size: 18px;
       }
-    }
 
-    .points-list {
-      display: flex;
-      
-      .point {
-        text-align: center;
-        flex: 1;
-        border-radius: 50%;
-        background: #D0D0D0;
-
-        &.selected {
-          background: #009999;
-        }
+      .points-list {
+        display: flex;
+        justify-content: space-evenly;
       }
     }
 
@@ -205,6 +211,7 @@ export default {
         }
       }
     }
+
   }
 }
 </style>
