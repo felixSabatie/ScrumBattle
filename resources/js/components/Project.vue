@@ -9,6 +9,7 @@
 <script>
     import Columns from "./Columns";
     import NotFound from './NotFound';
+    import axios from '../axios-wrapper';
 
     export default {
         name: "Project",
