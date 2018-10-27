@@ -1,9 +1,14 @@
+import Projects from '../components/Projects';
 import Project from '../components/Project';
 import Register from '../components/auth/Register';
 import Login from '../components/auth/Login';
 
-
 export default [
+    {
+      path: '/projects',
+      name: 'projects',
+      component: Projects
+    },
     {
         path: "/projects/:slug",
         name: "project",
