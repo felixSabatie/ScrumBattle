@@ -19,7 +19,10 @@
         <input type="password" v-model="user.password" id="password-input"/>
       </div>
 
-      <button type="submit" class="btn">S'inscrire</button>
+      <div class="buttons">
+        <button type="submit" class="btn">S'inscrire</button>
+        <router-link :to="{ name: 'login' }" class="btn link">Se connecter</router-link>
+      </div>
 
     </form>
   </div>
@@ -78,6 +81,16 @@ export default {
         }
         input {
           min-width: 400px;
+        }
+      }
+
+      .buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        .link {
+          background-color: $teal;
         }
       }
 

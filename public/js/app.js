@@ -1910,6 +1910,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -1950,6 +1953,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_axios__);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
+//
+//
+//
 //
 //
 //
@@ -5995,7 +6001,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\nbody {\n  margin: 0;\n}\n.register {\n  height: 100vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #DDD;\n}\n.register .register-form {\n    display: inline-block;\n    margin: auto;\n    padding: 20px 40px;\n    background-color: #FFF;\n    border-radius: 5px;\n}\n.register .register-form .input {\n      margin: 10px 0;\n      display: grid;\n}\n.register .register-form .input input {\n        min-width: 400px;\n}\n", ""]);
+exports.push([module.i, "\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\nbody {\n  margin: 0;\n}\n.register {\n  height: 100vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #DDD;\n}\n.register .register-form {\n    display: inline-block;\n    margin: auto;\n    padding: 20px 40px;\n    background-color: #FFF;\n    border-radius: 5px;\n}\n.register .register-form .input {\n      margin: 10px 0;\n      display: grid;\n}\n.register .register-form .input input {\n        min-width: 400px;\n}\n.register .register-form .buttons {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n}\n.register .register-form .buttons .link {\n        background-color: #4dc0b5;\n}\n", ""]);
 
 // exports
 
@@ -6055,7 +6061,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\nbody {\n  margin: 0;\n}\n.register {\n  height: 100vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #DDD;\n}\n.register .register-form {\n    display: inline-block;\n    margin: auto;\n    padding: 20px 40px;\n    background-color: #FFF;\n    border-radius: 5px;\n}\n.register .register-form .input {\n      margin: 10px 0;\n      display: grid;\n}\n.register .register-form .input input {\n        min-width: 400px;\n}\n", ""]);
+exports.push([module.i, "\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\nbody {\n  margin: 0;\n}\n.register {\n  height: 100vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-color: #DDD;\n}\n.register .register-form {\n    display: inline-block;\n    margin: auto;\n    padding: 20px 40px;\n    background-color: #FFF;\n    border-radius: 5px;\n}\n.register .register-form .input {\n      margin: 10px 0;\n      display: grid;\n}\n.register .register-form .input input {\n        min-width: 400px;\n}\n.register .register-form .buttons {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n}\n.register .register-form .buttons .link {\n        background-color: #4dc0b5;\n}\n", ""]);
 
 // exports
 
@@ -38552,9 +38558,22 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
-          _vm._v("Connexion")
-        ])
+        _c(
+          "div",
+          { staticClass: "buttons" },
+          [
+            _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+              _vm._v("Connexion")
+            ]),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              { staticClass: "btn link", attrs: { to: { name: "register" } } },
+              [_vm._v("S'inscrire")]
+            )
+          ],
+          1
+        )
       ]
     )
   ])
@@ -38783,9 +38802,22 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
-          _vm._v("S'inscrire")
-        ])
+        _c(
+          "div",
+          { staticClass: "buttons" },
+          [
+            _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+              _vm._v("S'inscrire")
+            ]),
+            _vm._v(" "),
+            _c(
+              "router-link",
+              { staticClass: "btn link", attrs: { to: { name: "login" } } },
+              [_vm._v("Se connecter")]
+            )
+          ],
+          1
+        )
       ]
     )
   ])
