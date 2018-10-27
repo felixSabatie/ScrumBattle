@@ -58,7 +58,7 @@ export default {
 .columns {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-start;
   height: 100%;
   padding: 10px;

@@ -1,0 +1,19 @@
+
+.btn {
+  padding: 10px;
+  text-decoration: none;
+  background-color: $primaryColor;
+  border: none;
+  border-radius: $borderRadius;
+  color: $white;
+  cursor: pointer;
+}
+
+input[type=text], input[type=password], input[type=email] {
+  border: 1px solid $lightGrey;
+  padding: 10px;
+
+  border-radius: $borderRadius;
+  outline-width: 0;
+  box-sizing: border-box;
+}
