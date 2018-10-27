@@ -8,7 +8,7 @@
 
         <div class="cards">
             <div v-for="card in column.cards">
-              <card :card="card"/>
+              <card :card="card" v-on:remove-card="removeCard"/>
             </div> 
         </div>
 
@@ -46,10 +46,15 @@ export default {
       //todo add card to backend
 
       this.column.cards.push({
+        id: (this.column.cards[this.column.cards.length-1] || 0) +1 , //todo change id with the one gotten from backend
         name: this.newCardName,
       });
       this.newCardName = '';
     },
+    removeCard(cardToRemove) {
+     this.column.cards = this.column.cards.filter((card) => card.id !== cardToRemove.id);
+     //todo remove card from backend
+    }
   }
 };
 </script>

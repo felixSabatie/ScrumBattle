@@ -50655,9 +50655,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       //todo add card to backend
 
       this.column.cards.push({
+        id: (this.column.cards[this.column.cards.length - 1] || 0) + 1, //todo change id with the one gotten from backend
         name: this.newCardName
       });
       this.newCardName = '';
+    },
+    removeCard: function removeCard(cardToRemove) {
+      this.column.cards = this.column.cards.filter(function (card) {
+        return card.id !== cardToRemove.id;
+      });
+      //todo remove card from backend
     }
   }
 });
@@ -50727,6 +50734,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Card",
@@ -50735,8 +50750,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       type: Object
     }
   },
-  data: function data() {
-    return {};
+  methods: {
+    onRemoveClicked: function onRemoveClicked() {
+      this.$emit('remove-card', this.card);
+    }
   }
 });
 
@@ -50799,7 +50816,16 @@ var render = function() {
       "div",
       { staticClass: "cards" },
       _vm._l(_vm.column.cards, function(card) {
-        return _c("div", [_c("card", { attrs: { card: card } })], 1)
+        return _c(
+          "div",
+          [
+            _c("card", {
+              attrs: { card: card },
+              on: { "remove-card": _vm.removeCard }
+            })
+          ],
+          1
+        )
       })
     ),
     _vm._v(" "),
@@ -50881,7 +50907,7 @@ exports = module.exports = __webpack_require__(34)(false);
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n.card {\n  background: #38c172;\n  border-radius: 5px;\n  color: black;\n  padding: 10px;\n  margin: 10px;\n}\n", ""]);
+exports.push([module.i, "\n.card {\n  background: #38c172;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 3px;\n    color: lightgrey;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -50895,7 +50921,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card" }, [
-    _vm._v("\n    " + _vm._s(_vm.card.name) + "\n")
+    _c("div", { staticClass: "content" }, [
+      _vm._v("\n    " + _vm._s(_vm.card.name) + "\n  ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "close" }, [
+      _c("span", { on: { click: _vm.onRemoveClicked } }, [_vm._v("x")])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -50994,7 +51026,7 @@ exports = module.exports = __webpack_require__(34)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51028,19 +51060,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
   mounted: function mounted() {
-    this.columns = [//TODO : change with backend call
+    this.columns = [
+    //TODO : change with backend call
     {
       name: "First column",
       cards: [{
+        id: 1,
         name: "First Card"
       }, {
+        id: 2,
         name: "Second Card"
       }]
     }, {
       name: "Second column",
       cards: [{
+        id: 3,
         name: "First Card"
       }, {
+        id: 4,
         name: "Second Card"
       }]
     }];

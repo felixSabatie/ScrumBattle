@@ -14,36 +14,41 @@ export default {
     Column
   },
   data() {
-    return { 
-        columns: [],
-    }
+    return {
+      columns: []
+    };
   },
   mounted() {
-      this.columns = [ //TODO : change with backend call
-        {
-          name: "First column",
-          cards: [
-            {
-              name: "First Card"
-            },
-            {
-              name: "Second Card"
-            }
-          ]
-        }, 
-        {
-          name: "Second column",
-          cards: [
-            {
-              name: "First Card"
-            },
-            {
-              name: "Second Card"
-            }
-          ]
-        }
-      ];
-    }
+    this.columns = [
+      //TODO : change with backend call
+      {
+        name: "First column",
+        cards: [
+          {
+            id: 1,
+            name: "First Card"
+          },
+          {
+            id: 2,
+            name: "Second Card"
+          }
+        ]
+      },
+      {
+        name: "Second column",
+        cards: [
+          {
+            id: 3,
+            name: "First Card"
+          },
+          {
+            id: 4,
+            name: "Second Card"
+          }
+        ]
+      }
+    ];
+  }
 };
 </script>
 
