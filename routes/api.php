@@ -13,6 +13,14 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['api']], function() {
+    Route::get('/user', function (Request $request) {
+        return $request->user();
+    });
+
+    Route::namespace('Api')->group(function() {
+        Route::resource('projects', 'ProjectsController')->except(['create', 'update', 'show']);
+        Route::get('projects/{slug}', 'ProjectsController@show');
+        Route::resource('cards', 'CardsController')->only(['store','update', 'destroy']);
+    });
 });
