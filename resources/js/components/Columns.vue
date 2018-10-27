@@ -28,7 +28,9 @@ export default {
             name: "First Card",
             users: [
               {
+                id: 1,
                 name: 'Jonhy boy',
+                avatar: 'https://picsum.photos/20/20'
               }
             ]
           },

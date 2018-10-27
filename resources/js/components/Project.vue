@@ -21,11 +21,13 @@
                 notFound: false
             }
         },
+    
         mounted() {
             axios.get(`/api/projects/${this.$route.params.slug}`).then(response => {
                 this.project = response.data;
+                this.$store.commit('projects/setProject', this.project)
             }).catch(err => {
-                console.err(err);
+                console.error(err);
             });
         }
     }
