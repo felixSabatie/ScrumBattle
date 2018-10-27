@@ -1,21 +1,23 @@
 <template>
   <div class="card" >
-    <div class="content" @click="openModal">
-      {{card.name}}
-    </div>
+    <div class="card-wrapper" @click="openModal">
+      <div class="content" >
+        {{card.name}}
+      </div>
 
 
     <div class="points">
       {{card.points}}
     </div>
 
-    <div class="users">
-      <div class="user" v-for="user in card.users"> 
-        <img class="user-image" :src="user.avatar" :alt="user.name">
+      <div class="users">
+        <div class="user" v-for="user in card.users">
+          <img class="user-image" :src="user.avatar" :alt="user.name">
+        </div>
       </div>
     </div>
 
-    <modal v-if="showModal" @close="closeModal">
+    <modal v-if="showModal" @close="closeModal" class="modal">
       <div slot="header">
         <h1>{{card.name}}</h1>
         <div class="points-list">
@@ -28,22 +30,26 @@
       </div>
 
       <div slot="body">
-        <div v-for="user in users" class="modal-users">
-          <div class="modal-users-info">
-            {{user.name}}
+        <div class="users">
+          <div v-for="user in users" class="modal-user">
+            <div class="modal-user-image">
+              <img :src="user.avatar" alt="user avatar">
+            </div>
+            <div class="modal-user-info">
+              {{user.name}}
+            </div>
+            <div class="modal-user-check">
+              <input type="checkbox" :checked="isInCard(user)" :value="user.id" @click="handleCheck">
+            </div>
           </div>
-          <div class="modal-users-check">
-            <input type="checkbox" :checked="isInCard(user)" :value="user.id" @click="handleCheck">
-          </div>
-         
         </div>
-      </div>  
+      </div>
     </modal>
 
 
      <div class="close">
       <!-- Change with icon -->
-      <span @click='onRemoveClicked'>x</span>
+      <span @click.stop='onRemoveClicked'>x</span>
     </div>
     
   </div>
@@ -90,7 +96,7 @@ export default {
     },
     onRemoveClicked() {
       this.$emit("remove-card", this.card);
-      
+
     },
     openModal() {
       this.showModal = true;
@@ -102,14 +108,14 @@ export default {
       const checkbox = event.toElement;
       const userId = checkbox.value;
       const user = this.users.find(user => user.id == userId);
-    
+
       const checked = checkbox.checked;
       if(checked) {
         this.$emit('add-user', this.card, user);
       } else {
         this.$emit('remove-user', this.card, user);
       }
-      
+
     },
     isInCard(user) {
       return this.card.users.filter(usr => user.id === usr.id)
@@ -143,6 +149,8 @@ export default {
 
   .users {
     .user {
+      display:inline-block;
+      padding: 5px;
       .user-image {
         border-radius: 50%;
         height: 20px;
@@ -151,9 +159,11 @@ export default {
     }
   }
 
-  .modal-header {
-    h1 {
-      font-size: 18px;
+  .modal {
+    .modal-header {
+      h1 {
+        font-size: 18px;
+      }
     }
 
     .points-list {
@@ -167,6 +177,31 @@ export default {
 
         &.selected {
           background: #009999;
+        }
+      }
+    }
+
+    .users {
+
+      .modal-user {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px 0;
+
+        .modal-user-image {
+          img {
+            max-height: 40px;
+            width: auto;
+            border-radius: 50%;
+          }
+        }
+
+        .modal-user-info {
+          flex: 1;
+        }
+        .modal-user-check {
+          transform: scale(1.3);
         }
       }
     }

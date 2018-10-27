@@ -1,5 +1,9 @@
 {
+<<<<<<< develop
     "/js/app.js": "/js/app.js?id=6d4a4de5d7570a5192df",
+=======
+    "/js/app.js": "/js/app.js?id=0b78bfecac0c496ef52b",
+>>>>>>> Better modal style
     "/css/app.css": "/css/app.css?id=92778653fb2880c6f496",
     "/js/bootstrap.js": "/js/bootstrap.js?id=6c87c1fbcd0e8ab53ff2"
 }

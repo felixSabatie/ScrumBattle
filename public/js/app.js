@@ -1797,8 +1797,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+<<<<<<< develop
 //
 
+=======
+>>>>>>> Better modal style
 
 
 
@@ -6468,9 +6471,14 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           context._activeTrigger[event.type === 'focusout' ? Trigger.FOCUS : Trigger.HOVER] = false;
         }
 
+<<<<<<< develop
         if (context._isWithActiveTrigger()) {
           return;
         }
+=======
+// module
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: table;\n  -webkit-transition: opacity 0.3s ease;\n  transition: opacity 0.3s ease;\n}\n.modal-mask .modal-wrapper {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-mask .modal-wrapper .modal-container {\n      width: 300px;\n      margin: 0px auto;\n      padding: 20px 30px;\n      background-color: #fff;\n      border-radius: 2px;\n      -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n      -webkit-transition: all 0.3s ease;\n      transition: all 0.3s ease;\n      font-family: Helvetica, Arial, sans-serif;\n}\n.modal-mask .modal-wrapper .modal-container .modal-footer {\n        padding-top: 10px;\n}\n\n/*\n * The following styles are auto-applied to elements with\n * transition=\"modal\" when their visibility is toggled\n * by Vue.js.\n *\n * You can easily play with the modal transition by editing\n * these styles.\n */\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
+>>>>>>> Better modal style
 
         clearTimeout(context._timeout);
         context._hoverState = HoverState.OUT;
@@ -6528,9 +6536,18 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
           var _config = _objectSpread({}, Default, $$$1(this).data());
 
+<<<<<<< develop
           if (typeof config === 'object') {
             _config = _objectSpread({}, _config, config);
           }
+=======
+// module
+<<<<<<< develop
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user .user-image {\n    border-radius: 50%;\n    height: 20px;\n    width: 20px;\n}\n.card .modal-header h1 {\n    font-size: 18px;\n}\n.card .modal-header .points-list {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n}\n.card .modal-header .points-list .point {\n      text-align: center;\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n      border-radius: 50%;\n      background: #D0D0D0;\n}\n.card .modal-header .points-list .point.selected {\n        background: #009999;\n}\n", ""]);
+=======
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user {\n    display: inline-block;\n    padding: 5px;\n}\n.card .users .user .user-image {\n      border-radius: 50%;\n      height: 20px;\n      width: 20px;\n}\n.card .modal .modal-header h1 {\n    font-size: 18px;\n}\n.card .modal .users .modal-user {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    padding: 10px 0;\n}\n.card .modal .users .modal-user .modal-user-image img {\n      max-height: 40px;\n      width: auto;\n      border-radius: 50%;\n}\n.card .modal .users .modal-user .modal-user-info {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n}\n.card .modal .users .modal-user .modal-user-check {\n      -webkit-transform: scale(1.3);\n              transform: scale(1.3);\n}\n", ""]);
+>>>>>>> Better modal style
+>>>>>>> Better modal style
 
           var action = typeof config === 'string' ? config : _config.slide;
 
@@ -73291,29 +73308,51 @@ var render = function() {
     "div",
     { staticClass: "card" },
     [
+<<<<<<< develop
       _c("div", { staticClass: "content", on: { click: _vm.openModal } }, [
         _vm._v("\n    " + _vm._s(_vm.card.name) + "\n  ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "points" }, [
         _vm._v("\n    " + _vm._s(_vm.card.points) + "\n  ")
+=======
+      _c("div", { staticClass: "card-wrapper", on: { click: _vm.openModal } }, [
+        _c("div", { staticClass: "content" }, [
+          _vm._v("\n      " + _vm._s(_vm.card.name) + "\n    ")
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "close" }, [
+          _c(
+            "span",
+            {
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                  return _vm.onRemoveClicked($event)
+                }
+              }
+            },
+            [_vm._v("x")]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "users" },
+          _vm._l(_vm.card.users, function(user) {
+            return _c("div", { staticClass: "user" }, [
+              _c("img", {
+                staticClass: "user-image",
+                attrs: { src: user.avatar, alt: user.name }
+              })
+            ])
+          })
+        )
+>>>>>>> Better modal style
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "users" },
-        _vm._l(_vm.card.users, function(user) {
-          return _c("div", { staticClass: "user" }, [
-            _c("img", {
-              staticClass: "user-image",
-              attrs: { src: user.avatar, alt: user.name }
-            })
-          ])
-        })
-      ),
-      _vm._v(" "),
       _vm.showModal
-        ? _c("modal", { on: { close: _vm.closeModal } }, [
+        ? _c("modal", { staticClass: "modal", on: { close: _vm.closeModal } }, [
             _c("div", { attrs: { slot: "header" }, slot: "header" }, [
               _c("h1", [_vm._v(_vm._s(_vm.card.name))]),
               _vm._v(" "),
@@ -73339,25 +73378,38 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { attrs: { slot: "body" }, slot: "body" },
-              _vm._l(_vm.users, function(user) {
-                return _c("div", { staticClass: "modal-users" }, [
-                  _c("div", { staticClass: "modal-users-info" }, [
-                    _vm._v("\n          " + _vm._s(user.name) + "\n        ")
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "modal-users-check" }, [
-                    _c("input", {
-                      attrs: { type: "checkbox" },
-                      domProps: { checked: _vm.isInCard(user), value: user.id },
-                      on: { click: _vm.handleCheck }
-                    })
+            _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+              _c(
+                "div",
+                { staticClass: "users" },
+                _vm._l(_vm.users, function(user) {
+                  return _c("div", { staticClass: "modal-user" }, [
+                    _c("div", { staticClass: "modal-user-image" }, [
+                      _c("img", {
+                        attrs: { src: user.avatar, alt: "user avatar" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-user-info" }, [
+                      _vm._v(
+                        "\n            " + _vm._s(user.name) + "\n          "
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-user-check" }, [
+                      _c("input", {
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: _vm.isInCard(user),
+                          value: user.id
+                        },
+                        on: { click: _vm.handleCheck }
+                      })
+                    ])
                   ])
-                ])
-              })
-            )
+                })
+              )
+            ])
           ])
         : _vm._e(),
       _vm._v(" "),
