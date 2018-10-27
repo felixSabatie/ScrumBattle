@@ -42623,8 +42623,362 @@ module.exports = function listToStyles (parentId, list) {
 
 
 /***/ }),
+<<<<<<< refs/remotes/origin/develop
 
 /***/ "./node_modules/vue/dist/vue.common.js":
+=======
+/* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "App"
+});
+
+/***/ }),
+/* 45 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "app" } }, [_c("router-view")], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-332fccf4", module.exports)
+  }
+}
+
+/***/ }),
+/* 46 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(69)
+}
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(49)
+/* template */
+<<<<<<< refs/remotes/origin/develop
+var __vue_template__ = __webpack_require__(71)
+=======
+var __vue_template__ = __webpack_require__(60)
+>>>>>>> Init Game view with Mobs
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-f2b6376c"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Home.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f2b6376c", Component.options)
+  } else {
+    hotAPI.reload("data-v-f2b6376c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+<<<<<<< refs/remotes/origin/develop
+/* 47 */,
+/* 48 */,
+=======
+/* 47 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(48);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("cf83e5ec", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f2b6376c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Home.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-f2b6376c\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Home.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 48 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(11)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+>>>>>>> Init Game view with Mobs
+/* 49 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+<<<<<<< refs/remotes/origin/develop
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Columns__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Columns___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Columns__);
+=======
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Game__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Game___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Game__);
+>>>>>>> Init Game view with Mobs
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Home",
+  components: {
+<<<<<<< refs/remotes/origin/develop
+    Columns: __WEBPACK_IMPORTED_MODULE_0__Columns___default.a
+=======
+    Game: __WEBPACK_IMPORTED_MODULE_0__Game___default.a
+>>>>>>> Init Game view with Mobs
+  },
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+<<<<<<< refs/remotes/origin/develop
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+=======
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(51)
+}
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(53)
+/* template */
+var __vue_template__ = __webpack_require__(59)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-3a2c79dd"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/Game.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3a2c79dd", Component.options)
+  } else {
+    hotAPI.reload("data-v-3a2c79dd", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(52);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("11cff68c", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3a2c79dd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Game.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-3a2c79dd\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Game.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(11)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 53 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Mob__ = __webpack_require__(69);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Mob___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Mob__);
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "Game",
+    components: {
+        Mob: __WEBPACK_IMPORTED_MODULE_0__Mob___default.a
+    },
+    props: {
+        column: {
+            type: Object
+        }
+    }
+});
+
+/***/ }),
+>>>>>>> Init Game view with Mobs
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+<<<<<<< refs/remotes/origin/develop
+/* 59 */,
+/* 60 */,
+=======
+/* 59 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "game" }, [_c("div", [_c("mob")], 1)])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3a2c79dd", module.exports)
+  }
+}
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "home" }, [_c("Game")], 1)
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-f2b6376c", module.exports)
+  }
+}
+
+/***/ }),
+>>>>>>> Init Game view with Mobs
+/* 61 */
+>>>>>>> Init Game view with Mobs
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -55007,6 +55361,16 @@ module.exports = function(module) {
 
 
 /***/ }),
+<<<<<<< refs/remotes/origin/develop
+=======
+/* 65 */,
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */
+<<<<<<< refs/remotes/origin/develop
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Init Game view with Mobs
 
 /***/ "./resources/js/app.js":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -55437,18 +55801,51 @@ module.exports = Component.exports
 /***/ }),
 
 /***/ "./resources/js/components/Project.vue":
+<<<<<<< refs/remotes/origin/develop
+=======
+=======
+/***/ }),
+/* 80 */
+<<<<<<< develop
+>>>>>>> Basics components interraction
+=======
+=======
+>>>>>>> Init Game view with Mobs
+>>>>>>> Init Game view with Mobs
+>>>>>>> Init Game view with Mobs
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
+<<<<<<< refs/remotes/origin/develop
   __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c10f8004\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Project.vue")
+=======
+<<<<<<< develop
+<<<<<<< develop
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c10f8004\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Project.vue")
+=======
+=======
+<<<<<<< refs/remotes/origin/develop
+>>>>>>> Init Game view with Mobs
+  __webpack_require__(81)
+>>>>>>> Basics components interraction
+>>>>>>> Init Game view with Mobs
 }
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */
 var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Project.vue")
 /* template */
 var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-c10f8004\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Project.vue")
+<<<<<<< refs/remotes/origin/develop
+=======
+=======
+var __vue_script__ = __webpack_require__(83)
+/* template */
+var __vue_template__ = __webpack_require__(84)
+<<<<<<< develop
+>>>>>>> Basics components interraction
+>>>>>>> Init Game view with Mobs
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -55553,12 +55950,34 @@ var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/comp
 var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/auth/Login.vue")
 /* template */
 var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-4221c3ad\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/auth/Login.vue")
+=======
+=======
+  __webpack_require__(70)
+}
+var normalizeComponent = __webpack_require__(13)
+/* script */
+var __vue_script__ = __webpack_require__(72)
+/* template */
+var __vue_template__ = __webpack_require__(73)
+>>>>>>> Init Game view with Mobs
+>>>>>>> Init Game view with Mobs
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
+<<<<<<< refs/remotes/origin/develop
 var __vue_scopeId__ = null
+<<<<<<< refs/remotes/origin/develop
+=======
+=======
+<<<<<<< develop
+>>>>>>> Basics components interraction
+=======
+var __vue_scopeId__ = "data-v-5eb8bee5"
+>>>>>>> Init Game view with Mobs
+>>>>>>> Init Game view with Mobs
+>>>>>>> Init Game view with Mobs
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -55569,7 +55988,19 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
+<<<<<<< refs/remotes/origin/develop
 Component.options.__file = "resources/js/components/auth/Login.vue"
+=======
+<<<<<<< develop
+<<<<<<< develop
+Component.options.__file = "resources/js/components/auth/Login.vue"
+=======
+Component.options.__file = "resources/js/components/Card.vue"
+>>>>>>> Basics components interraction
+=======
+Component.options.__file = "resources/js/components/Mob.vue"
+>>>>>>> Init Game view with Mobs
+>>>>>>> Init Game view with Mobs
 
 /* hot reload */
 if (false) {(function () {
@@ -55578,9 +56009,27 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
+<<<<<<< refs/remotes/origin/develop
     hotAPI.createRecord("data-v-4221c3ad", Component.options)
   } else {
     hotAPI.reload("data-v-4221c3ad", Component.options)
+=======
+<<<<<<< develop
+<<<<<<< develop
+    hotAPI.createRecord("data-v-4221c3ad", Component.options)
+  } else {
+    hotAPI.reload("data-v-4221c3ad", Component.options)
+=======
+    hotAPI.createRecord("data-v-b9bc2c0a", Component.options)
+  } else {
+    hotAPI.reload("data-v-b9bc2c0a", Component.options)
+>>>>>>> Basics components interraction
+=======
+    hotAPI.createRecord("data-v-5eb8bee5", Component.options)
+  } else {
+    hotAPI.reload("data-v-5eb8bee5", Component.options)
+>>>>>>> Init Game view with Mobs
+>>>>>>> Init Game view with Mobs
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -55591,6 +56040,15 @@ module.exports = Component.exports
 
 
 /***/ }),
+<<<<<<< refs/remotes/origin/develop
+=======
+<<<<<<< refs/remotes/origin/develop
+/* 81 */
+=======
+/* 70 */
+>>>>>>> Init Game view with Mobs
+/***/ (function(module, exports, __webpack_require__) {
+>>>>>>> Init Game view with Mobs
 
 /***/ "./resources/js/components/auth/Register.vue":
 /***/ (function(module, exports, __webpack_require__) {
@@ -55795,10 +56253,163 @@ var mutations = {
 
 /***/ "./resources/sass/app.scss":
 /***/ (function(module, exports) {
+<<<<<<< refs/remotes/origin/develop
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
+=======
+=======
+// style-loader: Adds some css to the DOM by adding a <style> tag
+>>>>>>> Basics components interraction
+
+// load the styles
+<<<<<<< refs/remotes/origin/develop
+var content = __webpack_require__(82);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("87796520", content, false, {});
+=======
+var content = __webpack_require__(71);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(12)("0f050a58", content, false, {});
+>>>>>>> Init Game view with Mobs
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+<<<<<<< refs/remotes/origin/develop
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b9bc2c0a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Card.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-b9bc2c0a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Card.vue");
+=======
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5eb8bee5\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Mob.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5eb8bee5\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Mob.vue");
+>>>>>>> Init Game view with Mobs
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+<<<<<<< refs/remotes/origin/develop
+/* 82 */
+=======
+/* 71 */
+>>>>>>> Init Game view with Mobs
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(11)(false);
+// imports
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
+
+// module
+<<<<<<< refs/remotes/origin/develop
+exports.push([module.i, "\n.card {\n  background: #38c172;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 3px;\n    color: lightgrey;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n", ""]);
+=======
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+>>>>>>> Init Game view with Mobs
+
+// exports
+
+
+/***/ }),
+<<<<<<< refs/remotes/origin/develop
+/* 83 */
+=======
+/* 72 */
+>>>>>>> Init Game view with Mobs
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: "Mob",
+    props: {
+        mob: {
+            type: Object
+        }
+    },
+    data: function data() {
+        return {
+            mob: {}
+        };
+    },
+    mounted: function mounted() {
+        // TODO: Axios call (axios.get)
+        this.mob = {
+            name: "Mob"
+        };
+    }
+<<<<<<< refs/remotes/origin/develop
+  },
+  methods: {
+    onRemoveClicked: function onRemoveClicked() {
+      this.$emit('remove-card', this.card);
+    }
+  }
+});
+
+/***/ }),
+/* 84 */
+=======
+});
+
+/***/ }),
+/* 73 */
+>>>>>>> Init Game view with Mobs
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+<<<<<<< refs/remotes/origin/develop
+  return _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "content" }, [
+      _vm._v("\n    " + _vm._s(_vm.card.name) + "\n  ")
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "close" }, [
+      _c("span", { on: { click: _vm.onRemoveClicked } }, [_vm._v("x")])
+    ])
+=======
+  return _c("div", { staticClass: "mob" }, [
+    _vm._v("\n    " + _vm._s(_vm.mob.name) + "\n")
+>>>>>>> Init Game view with Mobs
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+<<<<<<< refs/remotes/origin/develop
+    require("vue-hot-reload-api")      .rerender("data-v-b9bc2c0a", module.exports)
+  }
+}
+>>>>>>> Init Game view with Mobs
 
 /***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
@@ -55806,6 +56417,33 @@ var mutations = {
 __webpack_require__("./resources/js/app.js");
 module.exports = __webpack_require__("./resources/sass/app.scss");
 
+<<<<<<< refs/remotes/origin/develop
+=======
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "columns" },
+    _vm._l(_vm.columns, function(column) {
+      return _c("div", [_c("column", { attrs: { column: column } })], 1)
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-b270ea7c", module.exports)
+=======
+    require("vue-hot-reload-api")      .rerender("data-v-5eb8bee5", module.exports)
+>>>>>>> Init Game view with Mobs
+  }
+}
+>>>>>>> Init Game view with Mobs
 
 /***/ })
 
