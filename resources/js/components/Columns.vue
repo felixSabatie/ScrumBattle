@@ -5,7 +5,10 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import axios from '../axios-wrapper';
 import Column from "./Column";
+
 export default {
   name: "Columns",
   components: {
@@ -17,45 +20,11 @@ export default {
       columns: []
     };
   },
+   computed: mapState({
+    projectColumns: state => state.projects.currentProject.columns,
+  }),
   mounted() {
-    this.columns = [{
-        id: 1,
-        name: "First column",
-        group: "test",
-        cards: [
-          {
-            id: 1,
-            name: "First Card",
-            users: [
-              {
-                id: 1,
-                name: 'Jonhy boy',
-                avatar: 'https://picsum.photos/20/20'
-              }
-            ]
-          },
-          {
-            id: 2,
-            name: "Second Card"
-          }
-        ]
-      },
-      {
-        id: 2,
-        name: "Second column",
-        group: "test",
-        cards: [
-          {
-            id: 3,
-            name: "First Card"
-          },
-          {
-            id: 4,
-            name: "Second Card"
-          }
-        ]
-      }
-    ];
+    this.columns = JSON.parse(JSON.stringify(this.projectColumns))
   }
 };
 </script>

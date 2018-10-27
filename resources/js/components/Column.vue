@@ -36,6 +36,7 @@
 <script>
 import Card from "./Card";
 import draggable from "vuedraggable";
+import axios from '../axios-wrapper';
 export default {
   name: "Column",
   components: {
@@ -57,18 +58,23 @@ export default {
       this.newCardName = "";
     },
     addNewCard() {
-      //todo add card to backend
-      this.column.cards.push({
-        id: (this.column.cards[this.column.cards.length - 1].id || 0) + 1, //todo change id with the one gotten from backend
-        name: this.newCardName
-      });
+      const card = {
+        column_id: this.column.id,
+        name: this.newCardName,
+        users: [],
+      };
+      this.column.cards.push(card);
       this.newCardName = "";
+      axios.post('/api/cards/', card).then((response) => {
+        const id = response.data.id;
+        card.id = id;
+      });
     },
     removeCard(cardToRemove) {
       this.column.cards = this.column.cards.filter(
         card => card.id !== cardToRemove.id
       );
-      //todo remove card from backend
+      axios.delete(`/api/cards/${cardToRemove.id}`);
     },
     removeUserFromCard(card, user) {
       card.users = card.users.filter(usr => usr.id !== user.id);
@@ -81,8 +87,10 @@ export default {
       const fromColumnId = this.trim(event.from.id); //Not useful right now but if we ever need it, this is how you access it
       const toColumnId = this.trim(event.to.id);
 
-      //todo put changes to server
-      //axios.put(url + '/cards/cardId', {column_id: toColumnId}) ...
+      axios.put(`/api/cards/${cardId}`, {column_id: toColumnId})
+      .then(response => {
+        //Maybe do something if needed
+      })
     },
     trim(divId) {
       return divId.split("-")[1];

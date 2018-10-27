@@ -1811,6 +1811,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Card__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuedraggable__ = __webpack_require__("./node_modules/vuedraggable/dist/vuedraggable.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuedraggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuedraggable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
 //
 //
 //
@@ -1846,6 +1847,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -1871,18 +1873,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.newCardName = "";
     },
     addNewCard: function addNewCard() {
-      //todo add card to backend
-      this.column.cards.push({
-        id: (this.column.cards[this.column.cards.length - 1].id || 0) + 1, //todo change id with the one gotten from backend
-        name: this.newCardName
-      });
+      var card = {
+        column_id: this.column.id,
+        name: this.newCardName,
+        users: []
+      };
+      this.column.cards.push(card);
       this.newCardName = "";
+      __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post('/api/cards/', card).then(function (response) {
+        var id = response.data.id;
+        card.id = id;
+      });
     },
     removeCard: function removeCard(cardToRemove) {
       this.column.cards = this.column.cards.filter(function (card) {
         return card.id !== cardToRemove.id;
       });
-      //todo remove card from backend
+      __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].delete("/api/cards/" + cardToRemove.id);
     },
     removeUserFromCard: function removeUserFromCard(card, user) {
       card.users = card.users.filter(function (usr) {
@@ -1897,8 +1904,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var fromColumnId = this.trim(event.from.id); //Not useful right now but if we ever need it, this is how you access it
       var toColumnId = this.trim(event.to.id);
 
-      //todo put changes to server
-      //axios.put(url + '/cards/cardId', {column_id: toColumnId}) ...
+      __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].put("/api/cards/" + cardId, { column_id: toColumnId }).then(function (response) {
+        //Maybe do something if needed
+      });
     },
     trim: function trim(divId) {
       return divId.split("-")[1];
@@ -1913,20 +1921,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Column__ = __webpack_require__("./resources/js/components/Column.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Column___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Column__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Column__ = __webpack_require__("./resources/js/components/Column.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Column___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Column__);
 //
 //
 //
 //
 //
 //
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Columns",
   components: {
-    Column: __WEBPACK_IMPORTED_MODULE_0__Column___default.a
+    Column: __WEBPACK_IMPORTED_MODULE_2__Column___default.a
   },
   // props: ['columns'],
   data: function data() {
@@ -1934,35 +1947,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       columns: []
     };
   },
+
+  computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+    projectColumns: function projectColumns(state) {
+      return state.projects.currentProject.columns;
+    }
+  }),
   mounted: function mounted() {
-    this.columns = [{
-      id: 1,
-      name: "First column",
-      group: "test",
-      cards: [{
-        id: 1,
-        name: "First Card",
-        users: [{
-          id: 1,
-          name: 'Jonhy boy',
-          avatar: 'https://picsum.photos/20/20'
-        }]
-      }, {
-        id: 2,
-        name: "Second Card"
-      }]
-    }, {
-      id: 2,
-      name: "Second column",
-      group: "test",
-      cards: [{
-        id: 3,
-        name: "First Card"
-      }, {
-        id: 4,
-        name: "Second Card"
-      }]
-    }];
+    this.columns = JSON.parse(JSON.stringify(this.projectColumns));
   }
 });
 
@@ -38947,24 +38939,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("transition", { attrs: { name: "modal" } }, [
-    _c(
-      "div",
-      {
-        staticClass: "modal-mask",
-        on: {
-          keypress: function($event) {
-            if (
-              !("button" in $event) &&
-              _vm._k($event.keyCode, "esc", 27, $event.key, "Escape")
-            ) {
-              return null
-            }
-            return _vm.close($event)
+  return _c(
+    "transition",
+    {
+      attrs: { name: "modal" },
+      on: {
+        keydown: function($event) {
+          if (
+            !("button" in $event) &&
+            _vm._k($event.keyCode, "esc", 27, $event.key, "Escape")
+          ) {
+            return null
           }
+          return _vm.close($event)
         }
-      },
-      [
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-mask" }, [
         _c("div", { staticClass: "modal-wrapper" }, [
           _c("div", { staticClass: "modal-container" }, [
             _c(
@@ -39014,9 +39006,9 @@ var render = function() {
             )
           ])
         ])
-      ]
-    )
-  ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39066,9 +39058,9 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "card", on: { click: _vm.openModal } },
+    { staticClass: "card" },
     [
-      _c("div", { staticClass: "content" }, [
+      _c("div", { staticClass: "content", on: { click: _vm.openModal } }, [
         _vm._v("\n    " + _vm._s(_vm.card.name) + "\n  ")
       ]),
       _vm._v(" "),

@@ -1,6 +1,6 @@
 <template>
-  <div class="card" @click="openModal">
-    <div class="content">
+  <div class="card" >
+    <div class="content" @click="openModal">
       {{card.name}}
     </div>
 

@@ -1,6 +1,6 @@
 <template>
-    <transition name="modal">
-    <div class="modal-mask" @keypress.esc="close">
+    <transition name="modal"  @keydown.esc="close">
+    <div class="modal-mask" >
       <div class="modal-wrapper">
         <div class="modal-container">
 
