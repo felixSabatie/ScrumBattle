@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class CardsController extends Controller
 {
 
-    static $variables = ['name','column_id'];
+    static $variables = ['name','column_id', 'points'];
 
     /**
      * Store a newly created resource in storage.
@@ -26,11 +26,13 @@ class CardsController extends Controller
             $request->validate([
                 'name' => 'required|string|max:255',
                 'column_id' => 'required|exists:columns,id',
-                'column_id.exists' => 'No an existing ID'
+                'column_id.exists' => 'No an existing ID',
+                'points' => 'integer'
             ]);
             $card = Card::Create([
                 'name' => $request->name,
-                'column_id' => $request->column_id
+                'column_id' => $request->column_id,
+                'points' => $request->points,
             ]);
 
             return response()->json($card);
@@ -60,7 +62,8 @@ class CardsController extends Controller
             $request->validate([
                 'name' => 'string|max:255',
                 'column_id' => 'required|exists:columns,id',
-                'column_id.exists' => 'No an existing ID'
+                'column_id.exists' => 'No an existing ID',
+                'points' => 'integer'
             ]);
 
             Card::where('id', $card->id)
