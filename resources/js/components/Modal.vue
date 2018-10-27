@@ -1,12 +1,11 @@
 <template>
     <transition name="modal"  @keydown.esc="close">
-    <div class="modal-mask" >
+    <div class="modal-mask" @click="close">
       <div class="modal-wrapper">
-        <div class="modal-container">
+        <div class="modal-container" @click.stop="">
 
           <div class="modal-header">
             <slot name="header">
-              default header
             </slot>
           </div>
 
@@ -18,8 +17,7 @@
 
           <div class="modal-footer">
             <slot name="footer">
-              default footer
-              <button class="modal-default-button" @click.stop="close">
+              <button class="btn" @click.stop="close">
                 OK
               </button>
             </slot>

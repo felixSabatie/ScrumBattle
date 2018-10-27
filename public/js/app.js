@@ -2397,8 +2397,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Modal",
@@ -73103,55 +73101,56 @@ var render = function() {
       }
     },
     [
-      _c("div", { staticClass: "modal-mask" }, [
+      _c("div", { staticClass: "modal-mask", on: { click: _vm.close } }, [
         _c("div", { staticClass: "modal-wrapper" }, [
-          _c("div", { staticClass: "modal-container" }, [
-            _c(
-              "div",
-              { staticClass: "modal-header" },
-              [
-                _vm._t("header", [
-                  _vm._v("\n            default header\n          ")
-                ])
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "modal-body" },
-              [
-                _vm._t("body", [
-                  _vm._v("\n            default body\n          ")
-                ])
-              ],
-              2
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "modal-footer" },
-              [
-                _vm._t("footer", [
-                  _vm._v("\n            default footer\n            "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "modal-default-button",
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          return _vm.close($event)
+          _c(
+            "div",
+            {
+              staticClass: "modal-container",
+              on: {
+                click: function($event) {
+                  $event.stopPropagation()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "modal-header" }, [_vm._t("header")], 2),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-body" },
+                [
+                  _vm._t("body", [
+                    _vm._v("\n            default body\n          ")
+                  ])
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-footer" },
+                [
+                  _vm._t("footer", [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn",
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            return _vm.close($event)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("\n              OK\n            ")]
-                  )
-                ])
-              ],
-              2
-            )
-          ])
+                      },
+                      [_vm._v("\n              OK\n            ")]
+                    )
+                  ])
+                ],
+                2
+              )
+            ]
+          )
         ])
       ])
     ]
