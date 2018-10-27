@@ -25,6 +25,9 @@
           <div class="modal-users-info">
             {{user.name}}
           </div>
+          <div class="modal-users-check">
+            <input type="checkbox" :checked="isInCard(user)" :value="user.id" @click="handleCheck">
+          </div>
          
         </div>
       </div>  
@@ -54,17 +57,35 @@ export default {
     }
   },
   computed: mapState({
-    users: state => state.projects.project.users
+    users: state => state.projects.currentProject.users
   }),
   methods: {
     onRemoveClicked() {
       this.$emit("remove-card", this.card);
+      
     },
     openModal() {
       this.showModal = true;
     },
     closeModal() {
       this.showModal = false;
+    },
+    handleCheck(event) {
+      const checkbox = event.toElement;
+      const userId = checkbox.value;
+      const user = this.users.find(user => user.id == userId);
+    
+      const checked = checkbox.checked;
+      if(checked) {
+        this.$emit('add-user', this.card, user);
+      } else {
+        this.$emit('remove-user', this.card, user);
+      }
+      
+    },
+    isInCard(user) {
+      return this.card.users.filter(usr => user.id === usr.id)
+                            .length > 0;
     }
   }
 };

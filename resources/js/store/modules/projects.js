@@ -1,6 +1,6 @@
 
 const state = {
-    project: {}
+    currentProject: {}
   }
   
   // getters
@@ -14,7 +14,7 @@ const state = {
   // mutations
   const mutations = {
     setProject(state, project) {
-      state.project = project
+      state.currentProject = project
     }
   }
   

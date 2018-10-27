@@ -14,7 +14,10 @@
                  class="cards-container"
                  >
         <div v-for="card in column.cards" :id="`card-${card.id}`">
-          <card :card="card" @remove-card="removeCard"/>
+          <card :card="card" @remove-card="removeCard"
+                @remove-user="removeUserFromCard" 
+                @add-user="addUserToCard"
+          />
         </div>
       </draggable>
     </div>
@@ -66,6 +69,12 @@ export default {
         card => card.id !== cardToRemove.id
       );
       //todo remove card from backend
+    },
+    removeUserFromCard(card, user) {
+      card.users = card.users.filter(usr => usr.id !== user.id);
+    },
+    addUserToCard(card, user) {
+      card.users.push(user);
     },
     onDragEnd(event) {
       const cardId = this.trim(event.clone.id);

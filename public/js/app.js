@@ -1694,6 +1694,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 
 
@@ -1717,7 +1720,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
   computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
     users: function users(state) {
-      return state.projects.project.users;
+      return state.projects.currentProject.users;
     }
   }),
   methods: {
@@ -1729,6 +1732,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     closeModal: function closeModal() {
       this.showModal = false;
+    },
+    handleCheck: function handleCheck(event) {
+      var checkbox = event.toElement;
+      var userId = checkbox.value;
+      var user = this.users.find(function (user) {
+        return user.id == userId;
+      });
+
+      var checked = checkbox.checked;
+      if (checked) {
+        this.$emit('add-user', this.card, user);
+      } else {
+        this.$emit('remove-user', this.card, user);
+      }
+    },
+    isInCard: function isInCard(user) {
+      return this.card.users.filter(function (usr) {
+        return user.id === usr.id;
+      }).length > 0;
     }
   }
 });
@@ -1744,6 +1766,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Card___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Card__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuedraggable__ = __webpack_require__("./node_modules/vuedraggable/dist/vuedraggable.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuedraggable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vuedraggable__);
+//
+//
+//
 //
 //
 //
@@ -1813,6 +1838,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return card.id !== cardToRemove.id;
       });
       //todo remove card from backend
+    },
+    removeUserFromCard: function removeUserFromCard(card, user) {
+      card.users = card.users.filter(function (usr) {
+        return usr.id !== user.id;
+      });
+    },
+    addUserToCard: function addUserToCard(card, user) {
+      card.users.push(user);
     },
     onDragEnd: function onDragEnd(event) {
       var cardId = this.trim(event.clone.id);
@@ -38318,7 +38351,11 @@ var render = function() {
               [
                 _c("card", {
                   attrs: { card: card },
-                  on: { "remove-card": _vm.removeCard }
+                  on: {
+                    "remove-card": _vm.removeCard,
+                    "remove-user": _vm.removeUserFromCard,
+                    "add-user": _vm.addUserToCard
+                  }
                 })
               ],
               1
@@ -38604,6 +38641,14 @@ var render = function() {
                 return _c("div", { staticClass: "modal-users" }, [
                   _c("div", { staticClass: "modal-users-info" }, [
                     _vm._v("\n          " + _vm._s(user.name) + "\n        ")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "modal-users-check" }, [
+                    _c("input", {
+                      attrs: { type: "checkbox" },
+                      domProps: { checked: _vm.isInCard(user), value: user.id },
+                      on: { click: _vm.handleCheck }
+                    })
                   ])
                 ])
               })
@@ -54595,7 +54640,7 @@ var debug = "development" !== 'production';
 "use strict";
 
 var state = {
-  project: {}
+  currentProject: {}
 
   // getters
 };var getters = {};
@@ -54606,7 +54651,7 @@ var actions = {};
 // mutations
 var mutations = {
   setProject: function setProject(state, project) {
-    state.project = project;
+    state.currentProject = project;
   }
 };
 
