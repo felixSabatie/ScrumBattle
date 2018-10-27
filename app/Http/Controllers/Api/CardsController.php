@@ -8,70 +8,43 @@ use App\Http\Controllers\Controller;
 
 class CardsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $cards = Card::with(['columns', 'columns.cards', 'users', 'mob'])->get();
-        return response()->json($cards);
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @param Request $request
-     * @return void
-     */
-    public function create(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|max:255',
-            'column_id' => 'required|exists:column,id',
-            'column_id.exists' => 'No an existing ID'
-            ]);
-
-        $card = Card::Create([
-            'name' => $request->name,
-            'column_id' => $request->column_id
-        ]);
-        return $card;
-    }
+    static $variables = ['name','column_id'];
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+
+
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'column_id' => 'required|exists:columns,id',
+                'column_id.exists' => 'No an existing ID'
+            ]);
+            $card = Card::Create([
+                'name' => $request->name,
+                'column_id' => $request->column_id
+            ]);
+
+            return response()->json($card);
+        } catch (\Throwable $exception) {
+            $r = [
+                "ex" => $exception->getMessage(),
+                'data' => [
+                    "name" => $request->name,
+                    "column" => $request->column_id
+                ]
+            ];
+            return response()->json($r);
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Card  $card
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Card $card)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Card  $card
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Card $card)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -82,17 +55,36 @@ class CardsController extends Controller
      */
     public function update(Request $request, Card $card)
     {
-        //
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'column_id' => 'required|exists:columns,id',
+                'column_id.exists' => 'No an existing ID'
+            ]);
+
+            Card::where('id', $card->id)
+                ->firstOrFail()
+                ->update($request->only(CardsController::$variables));
+            $updateCard = $card->fresh();
+            return response()->json($updateCard);
+        } catch (\Throwable $exception) {
+            return response()->json($exception->getMessage());
+        }
+
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Card  $card
+     * return true if deleted
+     * @param  \App\Models\Card $card
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Card $card)
     {
-        //
+        $card->users()->detach();
+
+        $deleted = $card->delete();
+        return response()->json($deleted);
     }
 }

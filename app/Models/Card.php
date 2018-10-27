@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Card extends Model
 {
+
+    protected $fillable = [
+        'name', 'column_id',
+    ];
+
     public function column()
     {
         return $this->belongsTo('App\Models\Column');
