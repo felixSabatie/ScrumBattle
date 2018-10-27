@@ -1,11 +1,13 @@
 <template>
     <div class="game">
+        <players></players>
         <mob></mob>
     </div>
 </template>
 
 <script>
     import Mob from "./Mob";
+    import Players from "./Players";
     export default {
         name: "Game",
         props: {
@@ -14,6 +16,7 @@
             }
         },
         components: {
+            Players,
             Mob
         },
         getBackground() {

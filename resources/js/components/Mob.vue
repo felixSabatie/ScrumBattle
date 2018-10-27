@@ -1,18 +1,12 @@
 <template>
     <div class="mob">
-        {{mob.name}}
-        <img class="mob" :src="mob.image">
+        <img class="mob-image" :src="mob.image">
     </div>
 </template>
 
 <script>
   export default {
     name: "Mob",
-      props: {
-          mob: {
-              type: Object,
-          }
-      },
       data() {
           return {
             mob : {},
@@ -32,8 +26,12 @@
 <style lang="scss">
     @import "../../sass/app";
     .mob {
-        height: 30%;
-        width: 30%;
+        height: 100px;
         position: absolute;
+        bottom: 10%;
+        right: 10%;
+    }
+    .mob-image {
+        height: 100%;
     }
 </style>
