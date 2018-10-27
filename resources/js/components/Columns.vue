@@ -25,7 +25,6 @@ export default {
   }),
   mounted() {
     this.columns = JSON.parse(JSON.stringify(this.projectColumns))
-    console.log(this.columns);
   }
 };
 </script>

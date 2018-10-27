@@ -1904,8 +1904,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var fromColumnId = this.trim(event.from.id); //Not useful right now but if we ever need it, this is how you access it
       var toColumnId = this.trim(event.to.id);
 
-      //todo put changes to server
-      //axios.put(url + '/cards/cardId', {column_id: toColumnId}) ...
+      __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].put("/api/cards/" + cardId, { column_id: toColumnId }).then(function (response) {
+        //Maybe do something if needed
+      });
     },
     trim: function trim(divId) {
       return divId.split("-")[1];
@@ -1954,7 +1955,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   }),
   mounted: function mounted() {
     this.columns = JSON.parse(JSON.stringify(this.projectColumns));
-    console.log(this.columns);
   }
 });
 

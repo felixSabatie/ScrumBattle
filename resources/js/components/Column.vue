@@ -87,8 +87,10 @@ export default {
       const fromColumnId = this.trim(event.from.id); //Not useful right now but if we ever need it, this is how you access it
       const toColumnId = this.trim(event.to.id);
 
-      //todo put changes to server
-      //axios.put(url + '/cards/cardId', {column_id: toColumnId}) ...
+      axios.put(`/api/cards/${cardId}`, {column_id: toColumnId})
+      .then(response => {
+        //Maybe do something if needed
+      })
     },
     trim(divId) {
       return divId.split("-")[1];
