@@ -18,8 +18,8 @@ export default {
     onTokenReceived(token, fetchUser) {
       this.$cookies.set('user-token', token);
       this.$store.commit('auth/setToken', token);
-      this.$router.push('/projects/my-project');
-      
+      this.$router.push('/projects');
+
       axios.get('/api/user').then(response => {
         const user = response.data;
         this.$store.commit('auth/setUser', user);

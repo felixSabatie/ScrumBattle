@@ -1,3 +1,6 @@
+body {
+  font-family: Sans-Serif;
+}
 
 .btn {
   padding: 10px;
@@ -16,4 +19,24 @@ input[type=text], input[type=password], input[type=email] {
   border-radius: $borderRadius;
   outline-width: 0;
   box-sizing: border-box;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
 }

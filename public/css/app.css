@@ -1,4 +1,8 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);.btn {
+@import url(https://fonts.googleapis.com/css?family=Nunito);body {
+  font-family: Sans-Serif;
+}
+
+.btn {
   padding: 10px;
   text-decoration: none;
   background-color: #3490dc;
@@ -17,6 +21,29 @@ input[type=email] {
   outline-width: 0;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.container {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
 }
 
 body {
