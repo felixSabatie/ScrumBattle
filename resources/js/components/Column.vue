@@ -1,5 +1,5 @@
 <template>
-    <div class="column">
+    <div class="column" >
       <div class="infos">
         <h1>
           {{column.name}}
@@ -7,9 +7,15 @@
       </div>
 
         <div class="cards">
-            <div v-for="card in column.cards">
+          <draggable :list=column.cards 
+                     :options="{group:'columns'}"
+                     @end="onDragEnd"
+                     :id="`column-${column.id}`"
+                     >
+            <div v-for="card in column.cards" :id="`card-${card.id}`">
               <card :card="card" @remove-card="removeCard"/>
             </div> 
+          </draggable>
         </div>
 
         <div class="new-card">
@@ -17,8 +23,7 @@
                  placeholder="Add a new card..."
                  @keydown.enter="addNewCard"
                  @keydown.esc="clearNewCardName"
-                 v-model="newCardName"
-                 >
+                 v-model="newCardName">
         </div>
     </div>
     
@@ -26,10 +31,12 @@
 
 <script>
 import Card from "./Card";
+import draggable from "vuedraggable";
 export default {
   name: "Column",
   components: {
-    Card
+    Card,
+    draggable
   },
   props: {
     column: {
@@ -38,26 +45,38 @@ export default {
   },
   data() {
     return {
-      newCardName: ''
-    }
-   
+      newCardName: ""
+    };
   },
   methods: {
     clearNewCardName() {
-      this.newCardName = '';
+      this.newCardName = "";
     },
     addNewCard() {
       //todo add card to backend
 
       this.column.cards.push({
-        id: (this.column.cards[this.column.cards.length-1] || 0) +1 , //todo change id with the one gotten from backend
-        name: this.newCardName,
+        id: (this.column.cards[this.column.cards.length - 1] || 0) + 1, //todo change id with the one gotten from backend
+        name: this.newCardName
       });
-      this.newCardName = '';
+      this.newCardName = "";
     },
     removeCard(cardToRemove) {
-     this.column.cards = this.column.cards.filter((card) => card.id !== cardToRemove.id);
-     //todo remove card from backend
+      this.column.cards = this.column.cards.filter(
+        card => card.id !== cardToRemove.id
+      );
+      //todo remove card from backend
+    },
+    onDragEnd(event) {
+      const cardId = this.trim(event.clone.id);
+      const fromColumnId = this.trim(event.from.id); //Not useful right now but if we ever need it, this is how you access it
+      const toColumnId = this.trim(event.to.id);
+
+      //todo put changes to server
+      //axios.put(url + '/cards/cardId', {column_id: toColumnId}) ...
+    },
+    trim(divId) {
+      return divId.split("-")[1];
     }
   }
 };
@@ -92,13 +111,22 @@ export default {
       border-style: none;
       padding: 5px;
 
-      border-radius: 7px;
+      border-radius: $borderRadius;
       outline-width: 0;
 
       &:focus {
         box-shadow: 0 0 1px 1px $accentColor;
       }
     }
+  }
+
+  .sortable-ghost {
+    opacity: 0.6;
+  }
+
+  .sortable-chosen {
+    color: red;
+    border-radius: $borderRadius;
   }
 }
 </style>

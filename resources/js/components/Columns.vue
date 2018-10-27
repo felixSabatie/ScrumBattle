@@ -22,10 +22,12 @@ export default {
     this.columns = [
       //TODO : change with backend call
       {
+        id: 1,
         name: "First column",
+        group: "test",
         cards: [
           {
-            id: 1,
+            id: '1',
             name: "First Card"
           },
           {
@@ -35,7 +37,9 @@ export default {
         ]
       },
       {
+        id: 2,
         name: "Second column",
+        group: "test",
         cards: [
           {
             id: 3,
