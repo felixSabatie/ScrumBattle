@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 
 class ProjectsController extends Controller
 {
+    private static $inclusions = ['columns', 'columns.cards', 'users', 'mob'];
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +17,7 @@ class ProjectsController extends Controller
      */
     public function index()
     {
-        $projects = Project::with(['columns', 'columns.cards', 'users', 'mob'])->get();
+        $projects = Project::with(ProjectsController::$inclusions)->get();
         return response()->json($projects);
     }
 
@@ -33,12 +35,13 @@ class ProjectsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  String slug
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
+    public function show($slug)
     {
-        //
+        $projects = Project::where('slug', $slug)->firstOrFail()->with(ProjectsController::$inclusions)->get();
+        return response()->json($projects);
     }
 
     /**
