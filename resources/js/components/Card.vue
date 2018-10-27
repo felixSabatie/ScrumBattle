@@ -21,7 +21,7 @@
       </div>
 
       <div slot="body">
-        <div v-for="user in card.users" class="modal-users">
+        <div v-for="user in users" class="modal-users">
           <div class="modal-users-info">
             {{user.name}}
           </div>
@@ -34,7 +34,9 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Modal from "./Modal";
+
 export default {
   name: "Card",
   components: {
@@ -51,6 +53,9 @@ export default {
       toRemove: [],
     }
   },
+  computed: mapState({
+    users: state => state.projects.project.users
+  }),
   methods: {
     onRemoveClicked() {
       this.$emit("remove-card", this.card);
