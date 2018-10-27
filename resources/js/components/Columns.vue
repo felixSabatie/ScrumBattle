@@ -24,7 +24,7 @@ export default {
         group: "test",
         cards: [
           {
-            id: '1',
+            id: 1,
             name: "First Card",
             users: [
               {
