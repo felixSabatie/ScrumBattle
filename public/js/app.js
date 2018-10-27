@@ -1648,13 +1648,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "App",
+  name: 'App',
   mounted: function mounted() {
-    if (this.$cookies.isKey("user-token")) {
-      var token = this.$cookies.get("user-token");
+    if (this.$cookies.isKey('user-token')) {
+      var token = this.$cookies.get('user-token');
       this.storeTokenAndUser(token, true);
     } else {
-      this.redirect("/login");
+      this.redirect('/login');
     }
   },
 
@@ -1664,26 +1664,29 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.redirect('/projects/my-project');
     },
     storeTokenAndUser: function storeTokenAndUser(token, hasUser) {
-      var _this = this;
-
-      this.$cookies.set("user-token", token);
-      this.$store.commit("auth/setToken", token);
+      this.$cookies.set('user-token', token);
+      this.$store.commit('auth/setToken', token);
 
       if (hasUser) {
-        var user = this.$cookies.get("user");
-        this.storeUser(user);
+        var _user = this.$cookies.get('user');
+        this.storeUser(_user);
       } else {
-        __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get("/api/user").then(function (response) {
-          var user = response.data;
-          _this.storeUser(user);
-        }).catch(function (error) {
-          console.error(error);
-        });
+        this.fetchAndStoreUser(user);
       }
     },
     storeUser: function storeUser(user) {
-      this.$store.commit("auth/setUser", user);
-      this.$cookies.set("user", user);
+      this.$store.commit('auth/setUser', user);
+      this.$cookies.set('user', user);
+    },
+    fetchAndStoreUser: function fetchAndStoreUser() {
+      var _this = this;
+
+      __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get('/api/user').then(function (response) {
+        var user = response.data;
+        _this.storeUser(user);
+      }).catch(function (error) {
+        console.error(error);
+      });
     },
     redirect: function redirect(path) {
       this.$router.push(path);
@@ -6180,7 +6183,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
