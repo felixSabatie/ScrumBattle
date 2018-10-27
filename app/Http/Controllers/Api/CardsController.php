@@ -57,7 +57,7 @@ class CardsController extends Controller
     {
         try {
             $request->validate([
-                'name' => 'required|string|max:255',
+                'name' => 'string|max:255',
                 'column_id' => 'required|exists:columns,id',
                 'column_id.exists' => 'No an existing ID'
             ]);
