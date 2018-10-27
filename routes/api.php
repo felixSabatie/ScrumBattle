@@ -20,7 +20,7 @@ Route::group(['middleware' => ['api']], function() {
 
     Route::namespace('Api')->group(function() {
         Route::resource('projects', 'ProjectsController')->except(['create', 'update', 'show']);
-        Route::get('projects/{slug}', 'ProjectsController@show');
+        Route::get('projects/{slug}', 'ProjectsController@show')->middleware('auth:api');
         Route::resource('cards', 'CardsController')->only(['store','update', 'destroy']);
     });
 });
