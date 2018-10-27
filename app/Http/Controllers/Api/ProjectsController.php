@@ -24,7 +24,7 @@ class ProjectsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -34,7 +34,10 @@ class ProjectsController extends Controller
                 'name' => 'required|string|max:255',
                 'mob_id' => 'required|integer|exists:mobs,id'
             ]);
-
+        } catch (\Throwable $e) {
+            return response()->json('The data is unprocessable', 422);
+        }
+        try {
             // TODO handle users
 
             $project = new Project();
@@ -52,7 +55,7 @@ class ProjectsController extends Controller
 
             return response()->json($project);
         } catch (\Throwable $e) {
-            return response()->json('The data is unprocessable', 422);
+            return response()->json('Name already taken', 422);
         }
     }
 
@@ -71,23 +74,23 @@ class ProjectsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
+     * @param  \Illuminate\Http\Request $request
+     * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project)
     {
-        //
+        // TODO
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Project  $project
+     * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
      */
     public function destroy(Project $project)
     {
-        //
+        // TODO
     }
 }
