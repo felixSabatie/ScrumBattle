@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+
+    protected $fillable = [
+        'name', 'mob_id',
+    ];
+
     public function columns()
     {
         return $this->hasMany('App\Models\Column');

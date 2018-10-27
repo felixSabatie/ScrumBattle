@@ -29,7 +29,31 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'mob_id' => 'required|integer|exists:mobs,id'
+            ]);
+
+            // TODO handle users
+
+            $project = new Project();
+            $project->name = $request->name;
+            $project->slug = str_slug($request->name);
+            $project->mob_id = $request->mob_id;
+
+            $project->saveOrFail();
+
+            $project->columns()->createMany([
+                ['name' => 'todo'],
+                ['name' => 'doing'],
+                ['name' => 'done']
+            ]);
+
+            return response()->json($project);
+        } catch (\Throwable $e) {
+            return response()->json('The data is unprocessable', 422);
+        }
     }
 
     /**
