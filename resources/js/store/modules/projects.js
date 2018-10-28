@@ -25,43 +25,20 @@ const actions = {};
 const mutations = {
     setProject(state, project) {
         state.currentProject = project;
+
+        //todo tmp until backend is plugged
         project.donePoints = 0;
         project.totalPoints = 0;
     },
-    newCard(state, card) {
-      
-      state.currentProject.columns.filter(column => column.id == card.column_id)
-      .forEach(column => {
-        column.cards.push(JSON.parse(JSON.stringify(card)));
-      })
-    },
-    newCardPoints(state, card) {
-      let sum = 0;
-      state.currentProject.columns.flatMap(col => col.cards)
-      .forEach(crd => {
-        if(crd.id === card.id) {
-          crd.points = card.points;
-         
-        }
 
-        sum += crd.points;
-      })
+    addRemove(state, payload) {
+      state.currentProject.totalPoints += (payload.new - payload.old);
 
-     state.currentProject.totalPoints = sum;
+      if(payload.column == 3) {
+        state.currentProject.donePoints += (payload.new - payload.old);
+      }
     },
-
-    addUserToCard(state, payload) {
-      state.currentProject.columns.flatMap(col => col.cards)
-      .forEach(card => {
-        if(card.id === payload.card.id) {
-          console.log('adding user');
-          card.users.push(payload.user);
-        }
-      })
-    },
-    removeCard(state, card) {
-      
-    },
+   
     removeFromTotal(state, amount) {
         state.currentProject.totalPoints -= amount;
     },

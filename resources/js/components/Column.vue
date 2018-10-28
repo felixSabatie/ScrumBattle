@@ -7,12 +7,12 @@
     </div>
 
     <div class="cards">
-      <draggable :list=column.cards
+      <draggable :list=cards
                  :options="{group:'columns'}"
                  @end="onDragEnd"
                  :id="`column-${column.id}`"
                  class="cards-container">
-        <div  v-for="card in column.cards" :id="`card-${card.id}`">
+        <div  v-for="card in cards" :id="`card-${card.id}`">
           <card :card="card" @remove-card="removeCard"
                 @remove-user="removeUserFromCard" 
                 @add-user="addUserToCard"
@@ -52,6 +52,11 @@ export default {
       newCardName: ""
     };
   },
+  computed: {
+    cards() {
+      return this.$store.state.cards.cards.filter(card => card.column_id === this.column.id);
+    }
+  },
   methods: {
     clearNewCardName() {
       this.newCardName = "";
@@ -63,15 +68,15 @@ export default {
           column_id: this.column.id,
           name: this.newCardName,
           users: [],
-          points: 0,
+          points: 0
         };
         this.column.cards.push(card);
-        
+
         this.newCardName = "";
         axios.post("/api/cards/", card).then(response => {
           const cardReceived = response.data;
           card.id = cardReceived.id;
-          this.$store.commit('projects/newCard', card);
+          this.$store.commit("cards/addCard", card);
         });
       }
     },
@@ -80,8 +85,8 @@ export default {
         card => card.id !== cardToRemove.id
       );
       axios.delete(`/api/cards/${cardToRemove.id}`);
-      
-      this.$store.commit('projects/removeCard', card);
+
+      this.$store.commit("cards/removeCard", cardToRemove);
       cardToRemove.users.forEach(user => {
         const storePayload = {
           user: user,
@@ -112,6 +117,11 @@ export default {
         user: user,
         amount: card.points
       };
+
+      this.$store.commit("cards/removeUserFromCard", {
+        card: card,
+        user: user
+      });
       if (card.column_id === 3) {
         this.$store.commit("users/removeFromBoth", storePayload);
       } else {
@@ -119,7 +129,7 @@ export default {
       }
     },
     addUserToCard(card, user) {
-      card.users.push(user);
+      //card.users.push(user);
       axios
         .post(`/api/cards/${card.id}/users`, {
           ...user
@@ -132,8 +142,8 @@ export default {
         user: user,
         amount: card.points
       };
-      
-      this.$store.commit('projects/addUserToCard', {card: card, user: user});
+
+      this.$store.commit("cards/addUserToCard", { card: card, user: user });
 
       if (card.column_id == 3) {
         this.$store.commit("users/addToBoth", storePayload);
@@ -146,19 +156,25 @@ export default {
       const fromColumnId = this.trim(event.from.id);
       const toColumnId = this.trim(event.to.id);
 
-      const card = this.$store.state.projects.currentProject.columns.flatMap(col => col.cards)
-      .find(card => card.id == cardId || card.id === cardId) ; //Todo use getter of store but i don't understand how to access ti
-      console.log(toColumnId);
-      axios.put(`/api/cards/${cardId}`, { column_id: toColumnId }).then(response => {
-        //Maybe do something if needed
+      const card = this.$store.state.cards.cards.find(card => card.id === cardId);
+      this.$store.commit('cards/changeColumn', {
+        card: card,
+        from: fromColumnId,
+        to: toColumnId,
       });
+
+      axios
+        .put(`/api/cards/${cardId}`, { column_id: toColumnId })
+        .then(response => {
+          //Maybe do something if needed
+        });
 
       if (fromColumnId != toColumnId) {
         card.users.forEach(user => {
           const storePayload = {
             user: user,
-            amount: card.points,
-          }
+            amount: card.points
+          };
           if (toColumnId == 3) {
             this.$store.commit("users/addToDone", storePayload);
           } else if (fromColumnId == 3) {
@@ -173,7 +189,7 @@ export default {
       }
     },
     trim(divId) {
-      return divId.split("-")[1];
+      return parseInt(divId.split("-")[1]);
     }
   }
 };

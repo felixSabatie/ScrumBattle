@@ -1794,11 +1794,13 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   }),
   methods: {
     selectPoint: function selectPoint(points) {
-      this.card.points = points;
-      this.$store.commit('projects/newCardPoints', this.card);
-      __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].put('/api/cards/' + this.card.id, _extends({}, this.card)).then(function (response) {
-        //Yeah
-      });
+      if (points !== this.card.points) {
+        this.$store.commit('projects/addRemove', { old: this.card.points, new: points, column: this.card.column_id });
+        this.$store.commit("cards/setPoints", { card: this.card, points: points });
+        __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].put("/api/cards/" + this.card.id, _extends({}, this.card)).then(function (response) {
+          //Yeah
+        });
+      }
     },
     isSelectedPoint: function isSelectedPoint(points) {
       return this.card.points === points ? "selected" : "";
@@ -1821,9 +1823,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
       var checked = checkbox.checked;
       if (checked) {
-        this.$emit('add-user', this.card, user);
+        this.$emit("add-user", this.card, user);
       } else {
-        this.$emit('remove-user', this.card, user);
+        this.$emit("remove-user", this.card, user);
       }
     },
     isInCard: function isInCard(user) {
@@ -1903,51 +1905,60 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
+  computed: {
+    cards: function cards() {
+      var _this = this;
+
+      return this.$store.state.cards.cards.filter(function (card) {
+        return card.column_id === _this.column.id;
+      });
+    }
+  },
   methods: {
     clearNewCardName: function clearNewCardName() {
       this.newCardName = "";
     },
     addNewCard: function addNewCard() {
-      var _this = this;
+      var _this2 = this;
 
       if (this.newCardName !== "") {
-        var _card = {
+        var card = {
           id: 0,
           column_id: this.column.id,
           name: this.newCardName,
           users: [],
           points: 0
         };
-        this.column.cards.push(_card);
+        this.column.cards.push(card);
 
         this.newCardName = "";
-        __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post("/api/cards/", _card).then(function (response) {
+        __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post("/api/cards/", card).then(function (response) {
           var cardReceived = response.data;
-          _card.id = cardReceived.id;
-          _this.$store.commit('projects/newCard', _card);
+          card.id = cardReceived.id;
+          _this2.$store.commit("cards/addCard", card);
         });
       }
     },
     removeCard: function removeCard(cardToRemove) {
-      var _this2 = this;
+      var _this3 = this;
 
       this.column.cards = this.column.cards.filter(function (card) {
         return card.id !== cardToRemove.id;
       });
       __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].delete("/api/cards/" + cardToRemove.id);
 
-      this.$store.commit('projects/removeCard', card);
+      this.$store.commit("cards/removeCard", cardToRemove);
       cardToRemove.users.forEach(function (user) {
         var storePayload = {
           user: user,
           amount: cardToRemove.points
         };
 
-        if (_this2.column.id == 3) {
+        if (_this3.column.id == 3) {
           //todo Change id with something less breakable
-          _this2.$store.commit("users/removeFromBoth", storePayload);
+          _this3.$store.commit("users/removeFromBoth", storePayload);
         } else {
-          _this2.$store.commit("users/removeFromTotal", storePayload);
+          _this3.$store.commit("users/removeFromTotal", storePayload);
         }
       });
 
@@ -1969,6 +1980,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         user: user,
         amount: card.points
       };
+
+      this.$store.commit("cards/removeUserFromCard", {
+        card: card,
+        user: user
+      });
       if (card.column_id === 3) {
         this.$store.commit("users/removeFromBoth", storePayload);
       } else {
@@ -1976,7 +1992,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     },
     addUserToCard: function addUserToCard(card, user) {
-      card.users.push(user);
+      //card.users.push(user);
       __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post("/api/cards/" + card.id + "/users", _extends({}, user)).then(function (response) {
         //Yeah added
       });
@@ -1986,7 +2002,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         amount: card.points
       };
 
-      this.$store.commit('projects/addUserToCard', { card: card, user: user });
+      this.$store.commit("cards/addUserToCard", { card: card, user: user });
 
       if (card.column_id == 3) {
         this.$store.commit("users/addToBoth", storePayload);
@@ -1995,18 +2011,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     },
     onDragEnd: function onDragEnd(event) {
-      var _this3 = this;
+      var _this4 = this;
 
       var cardId = this.trim(event.clone.id);
       var fromColumnId = this.trim(event.from.id);
       var toColumnId = this.trim(event.to.id);
 
-      var card = this.$store.state.projects.currentProject.columns.flatMap(function (col) {
-        return col.cards;
-      }).find(function (card) {
-        return card.id == cardId || card.id === cardId;
-      }); //Todo use getter of store but i don't understand how to access ti
-      console.log(toColumnId);
+      var card = this.$store.state.cards.cards.find(function (card) {
+        return card.id === cardId;
+      });
+      this.$store.commit('cards/changeColumn', {
+        card: card,
+        from: fromColumnId,
+        to: toColumnId
+      });
+
       __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].put("/api/cards/" + cardId, { column_id: toColumnId }).then(function (response) {
         //Maybe do something if needed
       });
@@ -2018,9 +2037,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             amount: card.points
           };
           if (toColumnId == 3) {
-            _this3.$store.commit("users/addToDone", storePayload);
+            _this4.$store.commit("users/addToDone", storePayload);
           } else if (fromColumnId == 3) {
-            _this3.$store.commit("users/removeFromDone", storePayload);
+            _this4.$store.commit("users/removeFromDone", storePayload);
           }
         });
         if (toColumnId == 3) {
@@ -2031,7 +2050,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     },
     trim: function trim(divId) {
-      return divId.split("-")[1];
+      return parseInt(divId.split("-")[1]);
     }
   }
 });
@@ -2469,6 +2488,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.project = response.data;
             _this.$store.commit('projects/setProject', _this.project);
             _this.$store.commit('users/setUsers', _this.project.users);
+            _this.$store.commit('cards/setCards', _this.project.columns.flatMap(function (col) {
+                return col.cards;
+            }));
         }).catch(function (err) {
             _this.notFound = true;
         });
@@ -39355,13 +39377,13 @@ var render = function() {
           {
             staticClass: "cards-container",
             attrs: {
-              list: _vm.column.cards,
+              list: _vm.cards,
               options: { group: "columns" },
               id: "column-" + _vm.column.id
             },
             on: { end: _vm.onDragEnd }
           },
-          _vm._l(_vm.column.cards, function(card) {
+          _vm._l(_vm.cards, function(card) {
             return _c(
               "div",
               { attrs: { id: "card-" + card.id } },
@@ -57147,6 +57169,8 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_projects__ = __webpack_require__("./resources/js/store/modules/projects.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_auth__ = __webpack_require__("./resources/js/store/modules/auth.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_users__ = __webpack_require__("./resources/js/store/modules/users.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_cards__ = __webpack_require__("./resources/js/store/modules/cards.js");
+
 
 
 
@@ -57162,7 +57186,8 @@ var debug = "development" !== 'production';
   modules: {
     projects: __WEBPACK_IMPORTED_MODULE_2__modules_projects__["a" /* default */],
     auth: __WEBPACK_IMPORTED_MODULE_3__modules_auth__["a" /* default */],
-    users: __WEBPACK_IMPORTED_MODULE_4__modules_users__["a" /* default */]
+    users: __WEBPACK_IMPORTED_MODULE_4__modules_users__["a" /* default */],
+    cards: __WEBPACK_IMPORTED_MODULE_5__modules_cards__["a" /* default */]
   },
   strict: debug
 }));
@@ -57191,6 +57216,74 @@ var mutations = {
   },
   setUser: function setUser(state, user) {
     state.user = user;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  namespaced: true,
+  state: state,
+  getters: getters,
+  actions: actions,
+  mutations: mutations
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/cards.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var state = {
+  cards: []
+
+  // getters
+};var getters = {};
+
+// actions
+var actions = {};
+
+// mutations
+var mutations = {
+  setCards: function setCards(state, cards) {
+    state.cards = cards;
+  },
+  addCard: function addCard(state, card) {
+    state.cards.push(card);
+  },
+  removeCard: function removeCard(state, card) {
+    state.cards = state.cards.filter(function (crd) {
+      return crd.id !== card.id;
+    });
+  },
+  addUserToCard: function addUserToCard(state, payload) {
+    state.cards.forEach(function (card) {
+      if (card.id === payload.card.id) {
+        card.users.push(payload.user);
+      }
+    });
+  },
+  removeUsertoCard: function removeUsertoCard(state, payload) {
+    state.cards.forEach(function (card) {
+      if (card.id === payload.card.id) {
+        card.users = card.users.filter(function (user) {
+          return user.id === payload.user.id;
+        });
+      }
+    });
+  },
+  setPoints: function setPoints(state, payload) {
+    state.cards.forEach(function (card) {
+      if (card.id === payload.card.id) {
+        card.points = payload.points;
+      }
+    });
+  },
+  changeColumn: function changeColumn(state, payload) {
+    state.cards.forEach(function (card) {
+      if (card.id === payload.card.id) {
+        card.column_id = payload.to;
+      }
+    });
   }
 };
 
@@ -57235,42 +57328,18 @@ var actions = {};
 var mutations = {
   setProject: function setProject(state, project) {
     state.currentProject = project;
+
+    //todo tmp until backend is plugged
     project.donePoints = 0;
     project.totalPoints = 0;
   },
-  newCard: function newCard(state, card) {
+  addRemove: function addRemove(state, payload) {
+    state.currentProject.totalPoints += payload.new - payload.old;
 
-    state.currentProject.columns.filter(function (column) {
-      return column.id == card.column_id;
-    }).forEach(function (column) {
-      column.cards.push(JSON.parse(JSON.stringify(card)));
-    });
+    if (payload.column == 3) {
+      state.currentProject.donePoints += payload.new - payload.old;
+    }
   },
-  newCardPoints: function newCardPoints(state, card) {
-    var sum = 0;
-    state.currentProject.columns.flatMap(function (col) {
-      return col.cards;
-    }).forEach(function (crd) {
-      if (crd.id === card.id) {
-        crd.points = card.points;
-      }
-
-      sum += crd.points;
-    });
-
-    state.currentProject.totalPoints = sum;
-  },
-  addUserToCard: function addUserToCard(state, payload) {
-    state.currentProject.columns.flatMap(function (col) {
-      return col.cards;
-    }).forEach(function (card) {
-      if (card.id === payload.card.id) {
-        console.log('adding user');
-        card.users.push(payload.user);
-      }
-    });
-  },
-  removeCard: function removeCard(state, card) {},
   removeFromTotal: function removeFromTotal(state, amount) {
     state.currentProject.totalPoints -= amount;
   },

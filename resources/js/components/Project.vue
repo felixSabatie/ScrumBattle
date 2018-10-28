@@ -38,6 +38,7 @@
                 this.project = response.data;
                 this.$store.commit('projects/setProject', this.project)
                 this.$store.commit('users/setUsers', this.project.users);
+                this.$store.commit('cards/setCards', this.project.columns.flatMap(col => col.cards));
             }).catch(err => {
                 this.notFound = true;
             });
