@@ -2,13 +2,13 @@
     <div class="game" :class="'project-' + (project.id % 3 + 1).toString()">
         <players></players>
         <mob :animate="animateMob"></mob>
-        <button @click="animate()"> Hurt </button>
     </div>
 </template>
 
 <script>
     import Mob from "./Mob";
     import Players from "./Players";
+    import { mapState } from "vuex";
 
     export default {
         name: "Game",
@@ -21,6 +21,29 @@
           return{
               animateMob:false,
           }
+        },
+        computed: {
+            ...mapState({
+                users: state => state.users.users
+            }),
+            players() {
+                return JSON.parse(JSON.stringify(this.users));
+            }
+        },
+        watch: {
+            players(newUsers, oldUsers) {
+                let animate = false;
+                for(let user of newUsers) {
+                    let oldUser = oldUsers.find(oldUser => oldUser.id === user.id);
+                    if(oldUser.done_points < user.done_points) {
+                        animate = true;
+                    }
+                }
+
+                if(animate) {
+                    this.animate();
+                }
+            }
         },
         methods: {
             animate() {

@@ -1,12 +1,12 @@
 <template>
-    <div class="players">
-        <player v-for="player in players" :player="player" :animate="getAnimate(player.id)" :key="player.id"/>
-        <button @click="animatePlayers([players[0], players[1]])"> Attack </button>
+    <div class="players" v-if="players">
+        <player v-if="animations.length > 0" v-for="player in players" :player="player" :animate="getAnimate(player.id)" :key="player.id"/>
     </div>
 </template>
 
 <script>
     import Player from "./Player";
+    import { mapState } from "vuex";
 
     export default {
         name: "Players",
@@ -15,50 +15,39 @@
         },
         data() {
             return {
-                players: [],
                 animations: [],
             };
         },
-        mounted() {
-            this.players = [
-                //TODO : change with backend call
-                {
-                    id: 1,
-                    name: "First player",
-                    image: '/assets/players/CaptainFalcon.png',
-                },
-                {
-                    id: 2,
-                    name: "Second player",
-                    image: '/assets/players/Dk.png',
-                },
-                {
-                    id: 3,
-                    name: "Third player",
-                    image: '/assets/players/Mario.png',
-                },
-                {
-                    id: 4,
-                    name: "Fourth player",
-                    image: '/assets/players/Pikachu.png',
-                },
-                {
-                    id: 5,
-                    name: "Fourth player",
-                    image: '/assets/players/MegaMan.png',
-                },
-                {
-                    id: 6,
-                    name: "Fourth player",
-                    image: '/assets/players/Samus.png',
+        computed: {
+          ...mapState({
+            users: state => state.users.users
+          }),
+          players() {
+            return JSON.parse(JSON.stringify(this.users));
+          }
+        },
+        watch: {
+          players(newUsers, oldUsers) {
+              let usersToAnimate = [];
+              newUsers.forEach(user => {
+                let oldUser = oldUsers.find(oldUser => oldUser.id === user.id);
+                if(oldUser.done_points < user.done_points) {
+                  usersToAnimate.push(user);
                 }
-            ];
+              });
+
+              if(usersToAnimate.length > 0) {
+                this.animatePlayers(usersToAnimate);
+              }
+          }
+        },
+        mounted() {
             this.players.forEach(player => {
                 this.animations.push({
                     id: player.id,
                     animate: false,
                 });
-            })
+            });
         },
         methods : {
             animatePlayers(players){

@@ -15,7 +15,10 @@ const getters = {
     }
 
     return cards;
-  }
+  },
+    mob(state) {
+        return state.currentProject.mob;
+    }
 };
 
 // actions

@@ -21,11 +21,13 @@ Route::group(['middleware' => ['api']], function() {
     Route::namespace('Api')->group(function() {
         Route::post('register', 'AuthController@register');
 
-        Route::resource('projects', 'ProjectsController')->except(['update', 'show']);
-        Route::get('projects/{slug}', 'ProjectsController@show')->middleware('auth:api');
-        Route::resource('cards', 'CardsController')->only(['store','update', 'destroy']);
-        Route::get('users', 'UsersController@index');
-        Route::post('cards/{id}/users', 'CardsController@addUser');
-        Route::delete('cards/{cardId}/users/{userId}', 'CardsController@removeUser');
+        Route::group(['middleware' => ['auth:api']], function() {
+            Route::resource('projects', 'ProjectsController')->except(['update', 'show']);
+            Route::get('projects/{slug}', 'ProjectsController@show')->middleware('auth:api');
+            Route::resource('cards', 'CardsController')->only(['store','update', 'destroy']);
+            Route::get('users', 'UsersController@index');
+            Route::post('cards/{id}/users', 'CardsController@addUser');
+            Route::delete('cards/{cardId}/users/{userId}', 'CardsController@removeUser');
+        });
     });
 });
