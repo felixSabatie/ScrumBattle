@@ -2833,36 +2833,39 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      user: {
-        username: '',
-        password: ''
-      }
-    };
-  },
+    data: function data() {
+        return {
+            user: {
+                username: '',
+                password: ''
+            }
+        };
+    },
 
-  methods: {
-    sendForm: function sendForm() {
-      var _this = this;
+    methods: {
+        sendForm: function sendForm() {
+            var _this = this;
 
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/oauth/token', _extends({
-        'client_id': 2,
-        'client_secret': 'bVoOL6EAf0301wQ27sTPuebsXNCysRRnMqGi6vRz',
-        'grant_type': 'password'
-      }, this.user)).then(function (response) {
-        var token = response.data.access_token;
-        _this.$emit('token-received', token);
-      }).catch(function (err) {
-        // TODO handle
-        console.error(err);
-      });
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post('/oauth/token', _extends({
+                'client_id': 2,
+                'client_secret': 'bVoOL6EAf0301wQ27sTPuebsXNCysRRnMqGi6vRz',
+                'grant_type': 'password'
+            }, this.user)).then(function (response) {
+                var token = response.data.access_token;
+                _this.$emit('token-received', token);
+            }).catch(function (err) {
+                // TODO handle
+                console.error(err);
+            });
+        }
     }
-  }
 });
 
 /***/ }),
@@ -2912,46 +2915,47 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      user: {
-        name: "",
-        email: "",
-        password: "",
-        avatar: ""
-      },
-      avatars: ['/assets/players/CaptainFalcon.png', '/assets/players/Dk.png', '/assets/players/Kirby.png', '/assets/players/Link.png', '/assets/players/Mario.png', '/assets/players/MegaMan.png', '/assets/players/Pikachu.png', '/assets/players/Samus.png', '/assets/players/Yoshi.png']
-    };
-  },
-
-  methods: {
-    sendForm: function sendForm() {
-      var _this = this;
-
-      __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/api/register", _extends({}, this.user)).then(function (response) {
-        __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/oauth/token", {
-          client_id: 2,
-          client_secret: "bVoOL6EAf0301wQ27sTPuebsXNCysRRnMqGi6vRz",
-          grant_type: "password",
-          username: _this.user.email,
-          password: _this.user.password
-        }).then(function (response) {
-          var token = response.data.access_token;
-          _this.$emit("token-received", token);
-        });
-      }).catch(function (err) {
-        // TODO handle
-        console.error(err);
-      });
+    data: function data() {
+        return {
+            user: {
+                name: "",
+                email: "",
+                password: "",
+                avatar: ""
+            },
+            avatars: ['/assets/players/CaptainFalcon.png', '/assets/players/Dk.png', '/assets/players/Kirby.png', '/assets/players/Link.png', '/assets/players/Mario.png', '/assets/players/MegaMan.png', '/assets/players/Pikachu.png', '/assets/players/Samus.png', '/assets/players/Yoshi.png']
+        };
     },
-    avatarIsSelected: function avatarIsSelected(avatar) {
-      return this.user.avatar === avatar;
+
+    methods: {
+        sendForm: function sendForm() {
+            var _this = this;
+
+            __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/api/register", _extends({}, this.user)).then(function (response) {
+                __WEBPACK_IMPORTED_MODULE_0_axios___default.a.post("/oauth/token", {
+                    client_id: 2,
+                    client_secret: "bVoOL6EAf0301wQ27sTPuebsXNCysRRnMqGi6vRz",
+                    grant_type: "password",
+                    username: _this.user.email,
+                    password: _this.user.password
+                }).then(function (response) {
+                    var token = response.data.access_token;
+                    _this.$emit("token-received", token);
+                });
+            }).catch(function (err) {
+                // TODO handle
+                console.error(err);
+            });
+        },
+        avatarIsSelected: function avatarIsSelected(avatar) {
+            return this.user.avatar === avatar;
+        }
     }
-  }
 });
 
 /***/ }),
@@ -6990,7 +6994,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n  background-color: #DDD;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.register {\n  height: 100vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-image: url(/assets/background/login.png);\n  background-size: auto 100%;\n}\n.register .register-form {\n    display: inline-block;\n    margin: auto;\n    padding: 20px 40px;\n    background-color: #FFF;\n    border-radius: 5px;\n}\n.register .register-form .input {\n      margin: 10px 0;\n      display: grid;\n}\n.register .register-form .input input {\n        min-width: 400px;\n}\n.register .register-form .buttons {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n}\n.register .register-form .buttons .link {\n        background-color: #4dc0b5;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n  background-color: #DDD;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.register {\n  height: 100vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: space-evenly;\n      -ms-flex-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-image: url(/assets/background/login.png);\n  background-size: auto 100%;\n}\n.register .logo {\n    height: 150px;\n}\n.register .register-form {\n    display: block;\n    padding: 20px 40px;\n    background-color: #FFF;\n    border-radius: 5px;\n}\n.register .register-form .input {\n      margin: 10px 0;\n      display: grid;\n}\n.register .register-form .input input {\n        min-width: 400px;\n}\n.register .register-form .buttons {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n}\n.register .register-form .buttons .link {\n        background-color: #4dc0b5;\n}\n", ""]);
 
 // exports
 
@@ -7125,7 +7129,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n  background-color: #DDD;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.register {\n  height: 100vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-image: url(/assets/background/login.png);\n  background-size: auto 100%;\n}\n.register .register-form {\n    display: inline-block;\n    margin: auto;\n    padding: 20px 40px;\n    background-color: #FFF;\n    border-radius: 5px;\n    max-width: 500px;\n}\n.register .register-form .input {\n      margin: 10px 0;\n      display: grid;\n}\n.register .register-form .input input {\n        min-width: 400px;\n}\n.register .register-form .buttons {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n}\n.register .register-form .buttons .link {\n        background-color: #4dc0b5;\n}\n.register .register-form .avatar-selector .images-container {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap;\n}\n.register .register-form .avatar-selector .images-container .image-container {\n        -ms-flex-preferred-size: 25%;\n            flex-basis: 25%;\n        padding: 10px;\n        text-align: center;\n}\n.register .register-form .avatar-selector .images-container .image-container.selected {\n          border: 2px solid #6cb2eb;\n          border-radius: 5px;\n          padding: 8px;\n}\n.register .register-form .avatar-selector .images-container .image-container img {\n          max-width: 100%;\n          height: auto;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n  background-color: #DDD;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.register {\n  height: 100vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-pack: space-evenly;\n      -ms-flex-pack: space-evenly;\n          justify-content: space-evenly;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  background-image: url(/assets/background/login.png);\n  background-size: auto 100%;\n}\n.register .logo {\n    height: 15vh;\n}\n.register .register-form {\n    display: block;\n    margin: auto;\n    padding: 20px 40px;\n    background-color: #FFF;\n    border-radius: 5px;\n    max-width: 500px;\n    max-height: 70vh;\n    overflow-x: auto;\n}\n.register .register-form .input {\n      margin: 10px 0;\n      display: grid;\n}\n.register .register-form .input input {\n        min-width: 400px;\n}\n.register .register-form .buttons {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n}\n.register .register-form .buttons .link {\n        background-color: #4dc0b5;\n}\n.register .register-form .avatar-selector .images-container {\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-pack: justify;\n          -ms-flex-pack: justify;\n              justify-content: space-between;\n      -webkit-box-orient: horizontal;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: row;\n              flex-direction: row;\n      -ms-flex-wrap: wrap;\n          flex-wrap: wrap;\n}\n.register .register-form .avatar-selector .images-container .image-container {\n        -ms-flex-preferred-size: 25%;\n            flex-basis: 25%;\n        padding: 10px;\n        text-align: center;\n}\n.register .register-form .avatar-selector .images-container .image-container.selected {\n          border: 2px solid #6cb2eb;\n          border-radius: 5px;\n          padding: 8px;\n}\n.register .register-form .avatar-selector .images-container .image-container img {\n          max-width: 100%;\n          height: auto;\n}\n", ""]);
 
 // exports
 
@@ -39793,6 +39797,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "register" }, [
+    _c("img", { staticClass: "logo", attrs: { src: "/assets/logo.png" } }),
+    _vm._v(" "),
     _c(
       "form",
       {
@@ -39866,7 +39872,7 @@ var render = function() {
             _c(
               "router-link",
               { staticClass: "btn link", attrs: { to: { name: "register" } } },
-              [_vm._v("S'inscrire")]
+              [_vm._v("S'inscrire\n                ")]
             ),
             _vm._v(" "),
             _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
@@ -40526,6 +40532,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "register" }, [
+    _c("img", { staticClass: "logo", attrs: { src: "/assets/logo.png" } }),
+    _vm._v(" "),
     _c(
       "form",
       {
