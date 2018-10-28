@@ -35,7 +35,7 @@ export default {
   methods: {
     calculatePerc() {
       this.percent =
-        this.user.total_points !== 0
+        this.user.total_points !== 0 && this.user.total_points!==null
           ? (this.user.done_points / this.user.total_points) * 100
           : 0;
     },

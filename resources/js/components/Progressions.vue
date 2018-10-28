@@ -46,7 +46,8 @@ export default {
   },
   mounted() {
     this.goal_img = "/images/goal_flag.png";
-    this.height = 100 / this.users.length + "%";
+    if(this.users.length !== 0)
+        this.height = 100 / this.users.length + "%";
     this.copyUsers();
   }
 };
