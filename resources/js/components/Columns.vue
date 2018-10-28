@@ -1,6 +1,6 @@
 <template>
   <div class="columns">
-    <column v-for="column in columns" :column="column" :key="column.id"/>
+    <column v-for="column in columns" :column="column" :key="column.id" :doneColumnId="doneColumnId"/>
   </div>
 </template>
 
@@ -20,9 +20,14 @@ export default {
       columns: []
     };
   },
-   computed: mapState({
+ computed: {
+   doneColumnId() {
+     return this.columns.find(column => column.name === 'done').id;
+   },
+   ...mapState({
     projectColumns: state => state.projects.currentProject.columns,
   }),
+ },
   mounted() {
     this.columns = JSON.parse(JSON.stringify(this.projectColumns))
   }

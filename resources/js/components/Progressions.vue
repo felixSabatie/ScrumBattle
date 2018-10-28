@@ -1,7 +1,7 @@
 <template>
     <div class="progressions">
         <progression v-for='user in myUsers' :user='user' :height='height' :key="user.id"/>
-        
+
         <div class="goal_wrapper">
             <img :src="goal_img"/>
         </div>
@@ -30,7 +30,7 @@ export default {
   },
   methods: {
       copyUsers() {
-         //VEEEERY UGLY WORKOROUND BUT FUCK IT IT WORKS 
+         //VEEEERY UGLY WORKOROUND BUT FUCK IT IT WORKS
         this.$nextTick(() => {
           this.myUsers = JSON.parse(JSON.stringify(this.users));
         });
@@ -39,7 +39,6 @@ export default {
   watch: {
     users: {
       handler() {
-          console.log('catched');
           this.copyUsers();
       },
       deep: true

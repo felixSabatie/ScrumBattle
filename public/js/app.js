@@ -1894,11 +1894,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     Card: __WEBPACK_IMPORTED_MODULE_0__Card___default.a,
     draggable: __WEBPACK_IMPORTED_MODULE_1_vuedraggable___default.a
   },
-  props: {
-    column: {
-      type: Object
-    }
-  },
+  props: ['column', 'doneColumnId'],
   data: function data() {
     return {
       newCardName: ""
@@ -1954,7 +1950,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
           amount: cardToRemove.points
         };
 
-        if (_this3.column.id == 3) {
+        if (_this3.column.id == _this3.doneColumnId) {
           //todo Change id with something less breakable
           _this3.$store.commit("users/removeFromBoth", storePayload);
         } else {
@@ -1962,7 +1958,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         }
       });
 
-      if (this.column.id == 3) {
+      if (this.column.id == this.doneColumnId) {
         this.$store.commit("projects/removeFromBoth", cardToRemove.points);
       } else {
         this.$store.commit("projects/removeFromTotal", cardToRemove.points);
@@ -1984,7 +1980,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         user: user
       });
 
-      if (card.column_id === 3) {
+      if (card.column_id === this.doneColumnId) {
         this.$store.commit("users/removeFromBoth", storePayload);
       } else {
         this.$store.commit("users/removeFromTotal", storePayload);
@@ -2003,7 +1999,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
       this.$store.commit("cards/addUserToCard", { card: card, user: user });
 
-      if (card.column_id == 3) {
+      if (card.column_id === this.doneColumnId) {
         this.$store.commit("users/addToBoth", storePayload);
       } else {
         this.$store.commit("users/addToTotal", storePayload);
@@ -2035,15 +2031,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             user: user,
             amount: card.points
           };
-          if (toColumnId == 3) {
+
+          if (toColumnId == _this4.doneColumnId) {
             _this4.$store.commit("users/addToDone", storePayload);
-          } else if (fromColumnId == 3) {
+          } else if (fromColumnId == _this4.doneColumnId) {
             _this4.$store.commit("users/removeFromDone", storePayload);
           }
         });
-        if (toColumnId == 3) {
+        if (toColumnId == this.doneColumnId) {
           this.$store.commit("projects/addToDone", card.points);
-        } else if (fromColumnId == 3) {
+        } else if (fromColumnId == this.doneColumnId) {
           this.$store.commit("projects/removeFromDone", card.points);
         }
       }
@@ -2065,6 +2062,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Column__ = __webpack_require__("./resources/js/components/Column.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Column___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__Column__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -2088,11 +2087,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     };
   },
 
-  computed: Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+  computed: _extends({
+    doneColumnId: function doneColumnId() {
+      return this.columns.find(function (column) {
+        return column.name === 'done';
+      }).id;
+    }
+  }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
     projectColumns: function projectColumns(state) {
       return state.projects.currentProject.columns;
     }
-  }),
+  })),
   mounted: function mounted() {
     this.columns = JSON.parse(JSON.stringify(this.projectColumns));
   }
@@ -2426,7 +2431,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     copyUsers: function copyUsers() {
       var _this = this;
 
-      //VEEEERY UGLY WORKOROUND BUT FUCK IT IT WORKS 
+      //VEEEERY UGLY WORKOROUND BUT FUCK IT IT WORKS
       this.$nextTick(function () {
         _this.myUsers = JSON.parse(JSON.stringify(_this.users));
       });
@@ -2435,7 +2440,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   watch: {
     users: {
       handler: function handler() {
-        console.log('catched');
         this.copyUsers();
       },
 
@@ -40126,7 +40130,10 @@ var render = function() {
     "div",
     { staticClass: "columns" },
     _vm._l(_vm.columns, function(column) {
-      return _c("column", { key: column.id, attrs: { column: column } })
+      return _c("column", {
+        key: column.id,
+        attrs: { column: column, doneColumnId: _vm.doneColumnId }
+      })
     })
   )
 }

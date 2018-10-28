@@ -14,7 +14,7 @@
                  class="cards-container">
         <div  v-for="card in cards" :id="`card-${card.id}`">
           <card :card="card" @remove-card="removeCard"
-                @remove-user="removeUserFromCard" 
+                @remove-user="removeUserFromCard"
                 @add-user="addUserToCard"
           />
         </div>
@@ -42,11 +42,7 @@ export default {
     Card,
     draggable
   },
-  props: {
-    column: {
-      type: Object
-    }
-  },
+  props: ['column', 'doneColumnId'],
   data() {
     return {
       newCardName: ""
@@ -93,7 +89,7 @@ export default {
           amount: cardToRemove.points
         };
 
-        if (this.column.id == 3) {
+        if (this.column.id == this.doneColumnId) {
           //todo Change id with something less breakable
           this.$store.commit("users/removeFromBoth", storePayload);
         } else {
@@ -101,14 +97,14 @@ export default {
         }
       });
 
-      if (this.column.id == 3) {
+      if (this.column.id == this.doneColumnId) {
         this.$store.commit("projects/removeFromBoth", cardToRemove.points);
       } else {
         this.$store.commit("projects/removeFromTotal", cardToRemove.points);
       }
     },
     removeUserFromCard(card, user) {
-  
+
       axios.delete(`/api/cards/${card.id}/users/${user.id}`).then(response => {
         //Yeah deleted
       });
@@ -123,7 +119,7 @@ export default {
         user: user
       });
 
-      if (card.column_id === 3) {
+      if (card.column_id === this.doneColumnId) {
         this.$store.commit("users/removeFromBoth", storePayload);
       } else {
         this.$store.commit("users/removeFromTotal", storePayload);
@@ -146,7 +142,7 @@ export default {
 
       this.$store.commit("cards/addUserToCard", { card: card, user: user });
 
-      if (card.column_id == 3) {
+      if (card.column_id === this.doneColumnId) {
         this.$store.commit("users/addToBoth", storePayload);
       } else {
         this.$store.commit("users/addToTotal", storePayload);
@@ -176,15 +172,16 @@ export default {
             user: user,
             amount: card.points
           };
-          if (toColumnId == 3) {
+
+          if (toColumnId == this.doneColumnId) {
             this.$store.commit("users/addToDone", storePayload);
-          } else if (fromColumnId == 3) {
+          } else if (fromColumnId == this.doneColumnId) {
             this.$store.commit("users/removeFromDone", storePayload);
           }
         });
-        if (toColumnId == 3) {
+        if (toColumnId == this.doneColumnId) {
           this.$store.commit("projects/addToDone", card.points);
-        } else if (fromColumnId == 3) {
+        } else if (fromColumnId == this.doneColumnId) {
           this.$store.commit("projects/removeFromDone", card.points);
         }
       }
