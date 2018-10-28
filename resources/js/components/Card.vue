@@ -1,5 +1,6 @@
 <template>
   <div class="card" >
+    
     <div class="card-wrapper" @click="openModal">
       <div class="content" >
         {{card.name}}
@@ -22,7 +23,9 @@
         <div class="points-list">
           <div class="points" v-for="point in pointList"
                @click.stop='selectPoint(point)'
-               :class='isSelectedPoint(point)'>
+               :class='isSelectedPoint(point)'
+               :key="point"
+               >
             {{point}}
           </div>
         </div>
@@ -37,7 +40,8 @@
             <div class="modal-user-info">
               {{user.name}}
             </div>
-            <div class="modal-user-check">
+            <div class="modal-user-check"> 
+              <!-- Todo checkbox is horrible on macOS -->
               <input type="checkbox" :checked="isInCard(user)" :value="user.id" @click="handleCheck">
             </div>
           </div>
@@ -53,8 +57,8 @@
 </template>
 
 <script>
-import axios from '../axios-wrapper';
-import { mapState } from 'vuex'
+import axios from "../axios-wrapper";
+import { mapState } from "vuex";
 import Modal from "./Modal";
 
 export default {
@@ -70,30 +74,31 @@ export default {
   data() {
     return {
       showModal: false,
-      toRemove: [],
-      pointList: [1,2,3,5,8,13,21],
-      selectedPoint: 0,
-    }
+      pointList: [1, 2, 3, 5, 8, 13, 21]
+    };
   },
   computed: mapState({
-    users: state => state.projects.currentProject.users
+    users: state => state.projects.currentProject.users,
   }),
   methods: {
     selectPoint(points) {
-      this.card.points = points;
-      axios.put(`/api/cards/${this.card.id}`, {
-        ...this.card,
-      })
-      .then((response) => {
-        //Yeah
-      })
+      if (points !== this.card.points) {
+        this.$store.commit('projects/addRemove', {old: this.card.points, new: points, column: this.card.column_id});
+        this.$store.commit("cards/setPoints", {card: this.card, points: points});
+        axios
+          .put(`/api/cards/${this.card.id}`, {
+            ...this.card
+          })
+          .then(response => {
+            //Yeah
+          });
+      }
     },
     isSelectedPoint(points) {
       return this.card.points === points ? "selected" : "";
     },
     onRemoveClicked() {
       this.$emit("remove-card", this.card);
-
     },
     openModal() {
       this.showModal = true;
@@ -107,16 +112,14 @@ export default {
       const user = this.users.find(user => user.id == userId);
 
       const checked = checkbox.checked;
-      if(checked) {
-        this.$emit('add-user', this.card, user);
+      if (checked) {
+        this.$emit("add-user", this.card, user);
       } else {
-        this.$emit('remove-user', this.card, user);
+        this.$emit("remove-user", this.card, user);
       }
-
     },
     isInCard(user) {
-      return this.card.users.filter(usr => user.id === usr.id)
-                            .length > 0;
+      return this.card.users.filter(usr => user.id === usr.id).length > 0;
     }
   }
 };
@@ -165,7 +168,7 @@ export default {
 
   .users {
     .user {
-      display:inline-block;
+      display: inline-block;
       padding: 5px;
       .user-image {
         border-radius: 50%;
@@ -188,7 +191,6 @@ export default {
     }
 
     .users {
-
       .modal-user {
         display: flex;
         flex-direction: row;
@@ -214,7 +216,6 @@ export default {
         }
       }
     }
-
   }
 }
 </style>

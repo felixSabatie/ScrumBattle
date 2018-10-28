@@ -12,6 +12,9 @@ class ProjectsController extends Controller
 {
     private static $inclusions = ['columns', 'columns.cards', 'users', 'mob', 'columns.cards.users'];
 
+    public static $TODO = 'todo';
+    public static $DOING = "doing";
+    public static $DONE = "done";
     /**
      * Display a listing of the resource.
      *
@@ -57,9 +60,9 @@ class ProjectsController extends Controller
             $project->saveOrFail();
 
             $project->columns()->createMany([
-                ['name' => 'todo'],
-                ['name' => 'doing'],
-                ['name' => 'done']
+                ['name' => ProjectsController::$TODO],
+                ['name' => ProjectsController::$DOING],
+                ['name' => ProjectsController::$DONE]
             ]);
 
             $users = User::find(array_map(function($user) {
@@ -105,6 +108,7 @@ class ProjectsController extends Controller
      *
      * @param  \App\Models\Project $project
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Project $project)
     {

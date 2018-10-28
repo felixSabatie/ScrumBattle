@@ -7,13 +7,12 @@
     </div>
 
     <div class="cards">
-      <draggable :list=column.cards
+      <draggable :list=cards
                  :options="{group:'columns'}"
                  @end="onDragEnd"
                  :id="`column-${column.id}`"
-                 class="cards-container"
-                 >
-        <div v-for="card in column.cards" :id="`card-${card.id}`">
+                 class="cards-container">
+        <div  v-for="card in cards" :id="`card-${card.id}`">
           <card :card="card" @remove-card="removeCard"
                 @remove-user="removeUserFromCard" 
                 @add-user="addUserToCard"
@@ -53,6 +52,11 @@ export default {
       newCardName: ""
     };
   },
+  computed: {
+    cards() {
+      return this.$store.state.cards.cards.filter(card => card.column_id === this.column.id);
+    }
+  },
   methods: {
     clearNewCardName() {
       this.newCardName = "";
@@ -60,15 +64,19 @@ export default {
     addNewCard() {
       if (this.newCardName !== "") {
         const card = {
+          id: 0,
           column_id: this.column.id,
           name: this.newCardName,
-          users: []
+          users: [],
+          points: 0
         };
         this.column.cards.push(card);
+
         this.newCardName = "";
         axios.post("/api/cards/", card).then(response => {
-          const id = response.data.id;
-          card.id = id;
+          const cardReceived = response.data;
+          card.id = cardReceived.id;
+          this.$store.commit("cards/addCard", card);
         });
       }
     },
@@ -77,15 +85,52 @@ export default {
         card => card.id !== cardToRemove.id
       );
       axios.delete(`/api/cards/${cardToRemove.id}`);
+
+      this.$store.commit("cards/removeCard", cardToRemove);
+      cardToRemove.users.forEach(user => {
+        const storePayload = {
+          user: user,
+          amount: cardToRemove.points
+        };
+
+        if (this.column.id == 3) {
+          //todo Change id with something less breakable
+          this.$store.commit("users/removeFromBoth", storePayload);
+        } else {
+          this.$store.commit("users/removeFromTotal", storePayload);
+        }
+      });
+
+      if (this.column.id == 3) {
+        this.$store.commit("projects/removeFromBoth", cardToRemove.points);
+      } else {
+        this.$store.commit("projects/removeFromTotal", cardToRemove.points);
+      }
     },
     removeUserFromCard(card, user) {
-      card.users = card.users.filter(usr => usr.id !== user.id);
+  
       axios.delete(`/api/cards/${card.id}/users/${user.id}`).then(response => {
         //Yeah deleted
       });
+
+      const storePayload = {
+        user: user,
+        amount: card.points
+      };
+
+      this.$store.commit("cards/removeUserFromCard", {
+        card: card,
+        user: user
+      });
+
+      if (card.column_id === 3) {
+        this.$store.commit("users/removeFromBoth", storePayload);
+      } else {
+        this.$store.commit("users/removeFromTotal", storePayload);
+      }
     },
     addUserToCard(card, user) {
-      card.users.push(user);
+      //card.users.push(user);
       axios
         .post(`/api/cards/${card.id}/users`, {
           ...user
@@ -93,20 +138,59 @@ export default {
         .then(response => {
           //Yeah added
         });
+
+      const storePayload = {
+        user: user,
+        amount: card.points
+      };
+
+      this.$store.commit("cards/addUserToCard", { card: card, user: user });
+
+      if (card.column_id == 3) {
+        this.$store.commit("users/addToBoth", storePayload);
+      } else {
+        this.$store.commit("users/addToTotal", storePayload);
+      }
     },
     onDragEnd(event) {
       const cardId = this.trim(event.clone.id);
-      const fromColumnId = this.trim(event.from.id); //Not useful right now but if we ever need it, this is how you access it
+      const fromColumnId = this.trim(event.from.id);
       const toColumnId = this.trim(event.to.id);
+
+      const card = this.$store.state.cards.cards.find(card => card.id === cardId);
+      this.$store.commit('cards/changeColumn', {
+        card: card,
+        from: fromColumnId,
+        to: toColumnId,
+      });
 
       axios
         .put(`/api/cards/${cardId}`, { column_id: toColumnId })
         .then(response => {
           //Maybe do something if needed
         });
+
+      if (fromColumnId != toColumnId) {
+        card.users.forEach(user => {
+          const storePayload = {
+            user: user,
+            amount: card.points
+          };
+          if (toColumnId == 3) {
+            this.$store.commit("users/addToDone", storePayload);
+          } else if (fromColumnId == 3) {
+            this.$store.commit("users/removeFromDone", storePayload);
+          }
+        });
+        if (toColumnId == 3) {
+          this.$store.commit("projects/addToDone", card.points);
+        } else if (fromColumnId == 3) {
+          this.$store.commit("projects/removeFromDone", card.points);
+        }
+      }
     },
     trim(divId) {
-      return divId.split("-")[1];
+      return parseInt(divId.split("-")[1]);
     }
   }
 };

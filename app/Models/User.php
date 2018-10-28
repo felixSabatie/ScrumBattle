@@ -36,6 +36,7 @@ class User extends Authenticatable
 
     public function projects()
     {
-        return $this->belongsToMany('App\Models\Project');
+        return $this->belongsToMany('App\Models\Project')
+            ->withPivot('total_points', 'done_points');
     }
 }
