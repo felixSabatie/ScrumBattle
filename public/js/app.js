@@ -2565,6 +2565,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -7053,7 +7054,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.project {\n  height: 100vh;\n  width: 100vw;\n  overflow: hidden;\n}\n.project .project-content {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    height: 100%;\n}\n.project .project-content .columns-container {\n      -webkit-box-flex: 1;\n          -ms-flex-positive: 1;\n              flex-grow: 1;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: column;\n              flex-direction: column;\n      position: relative;\n}\n.project .project-content .permissions-container {\n      height: 100px;\n}\n", ""]);
+exports.push([module.i, "\n.project {\n  height: 100vh;\n  width: 100vw;\n  overflow: hidden;\n}\n.project .return-button {\n    position: absolute;\n    top: 20px;\n    left: 20px;\n    z-index: 10;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.project .project-content {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    height: 100%;\n}\n.project .project-content .columns-container {\n      -webkit-box-flex: 1;\n          -ms-flex-positive: 1;\n              flex-grow: 1;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: column;\n              flex-direction: column;\n      position: relative;\n}\n.project .project-content .permissions-container {\n      height: 100px;\n}\n", ""]);
 
 // exports
 
@@ -40370,6 +40371,20 @@ var render = function() {
               "div",
               { staticClass: "project-content" },
               [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "btn return-button",
+                    attrs: { to: { name: "projects" } }
+                  },
+                  [
+                    _c("i", { staticClass: "material-icons" }, [
+                      _vm._v("arrow_back")
+                    ]),
+                    _vm._v("Projets")
+                  ]
+                ),
+                _vm._v(" "),
                 _c("Game", { attrs: { project: _vm.project } }),
                 _vm._v(" "),
                 _c(

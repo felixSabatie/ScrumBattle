@@ -2,6 +2,7 @@
     <div class="project">
         <NotFound v-if="notFound" />
         <div class="project-content" v-else-if="project !== undefined">
+          <router-link :to="{ name: 'projects' }" class="btn return-button"><i class="material-icons">arrow_back</i>Projets</router-link>
           <Game :project="project" />
           <div class="columns-container">
             <Columns :columns="project.columns" />
@@ -61,6 +62,15 @@ export default {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+
+  .return-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+  }
 
   .project-content {
     display: flex;

@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <title>ScrumBattle</title>
     <link href=" {{ mix('css/app.css') }}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <div id="app">
