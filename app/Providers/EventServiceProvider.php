@@ -20,11 +20,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\PointsUpdated' => [
             'App\Listeners\UpdateProjectPoints',
-            'App\Listeners\UpdateProjectUserPoints',
         ],
-        'App\Events\CardDelete' => [
+        'App\Events\CardDeleted' => [
             'App\Listeners\DeleteProjectPoints',
-            'App\Listeners\DeleteProjectUserPoints',
         ]
     ];
 
