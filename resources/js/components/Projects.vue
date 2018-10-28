@@ -40,7 +40,7 @@
       </div>
 
       <div slot="footer">
-        <button class="btn">Valider</button>
+        <button class="btn" @click="sendProject">Valider</button>
       </div>
     </modal>
   </div>
@@ -106,6 +106,13 @@ export default {
         this.projects.users.filter(user => user.id !== userId)
       }
 
+    },
+    sendProject() {
+      axios.post('/api/projects', this.project).then(response => {
+        this.$router.push({name: 'project', params: {slug: response.data.slug}});
+      }).catch(err => {
+        console.error(err);
+      });
     }
   }
 }
@@ -176,6 +183,7 @@ export default {
           &.selected {
             border: 2px solid $cyan;
             border-radius: $borderRadius;
+            padding: 8px;
           }
 
           img {
