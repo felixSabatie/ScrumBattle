@@ -2287,19 +2287,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         {
             id: 1,
             name: "First player",
-            image: '/assets/player.png'
+            image: '/assets/players/CaptainFalcon.png'
         }, {
             id: 2,
             name: "Second player",
-            image: '/assets/imp.png'
+            image: '/assets/players/Dk.png'
         }, {
             id: 3,
             name: "Third player",
-            image: '/assets/knight.png'
+            image: '/assets/players/Mario.png'
         }, {
             id: 4,
             name: "Fourth player",
-            image: '/assets/player.png'
+            image: '/assets/players/Pikachu.png'
+        }, {
+            id: 5,
+            name: "Fourth player",
+            image: '/assets/players/MegaMan.png'
+        }, {
+            id: 6,
+            name: "Fourth player",
+            image: '/assets/players/Samus.png'
         }];
         this.players.forEach(function (player) {
             _this.animations.push({
@@ -2326,7 +2334,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             return el.id === player.id;
                         }).animate = false;
                     });
-                }, 2000);
+                }, 1500);
             });
         },
         getAnimate: function getAnimate(playerId) {
@@ -6828,7 +6836,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.player {\n  position: absolute;\n}\n.back-and-forth {\n  -webkit-animation: backAndForth linear 1.3s;\n          animation: backAndForth linear 1.3s;\n  -webkit-animation-iteration-count: 1;\n          animation-iteration-count: 1;\n}\n.player:nth-of-type(1) {\n  left: 10%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(2) {\n  left: 15%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player:nth-of-type(3) {\n  left: 20%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(4) {\n  left: 25%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player-image {\n  height: 100%;\n  width: 100%;\n}\n@-webkit-keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n17% {\n    -webkit-transform: translate(40vw, -25%) scaleX(1);\n            transform: translate(40vw, -25%) scaleX(1);\n}\n21% {\n    -webkit-transform: translate(50vw, -30%) scaleX(1);\n            transform: translate(50vw, -30%) scaleX(1);\n}\n25% {\n    -webkit-transform: translate(60vw, -25%) scaleX(1);\n            transform: translate(60vw, -25%) scaleX(1);\n}\n35% {\n    -webkit-transform: translate(90vw, 0%) scaleX(1);\n            transform: translate(90vw, 0%) scaleX(1);\n}\n45% {\n    -webkit-transform: translate(85vw, 0%) scaleX(1);\n            transform: translate(85vw, 0%) scaleX(1);\n}\n65% {\n    -webkit-transform: translate(85vw, 0%) scaleX(-1);\n            transform: translate(85vw, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n@keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n17% {\n    -webkit-transform: translate(40vw, -25%) scaleX(1);\n            transform: translate(40vw, -25%) scaleX(1);\n}\n21% {\n    -webkit-transform: translate(50vw, -30%) scaleX(1);\n            transform: translate(50vw, -30%) scaleX(1);\n}\n25% {\n    -webkit-transform: translate(60vw, -25%) scaleX(1);\n            transform: translate(60vw, -25%) scaleX(1);\n}\n35% {\n    -webkit-transform: translate(90vw, 0%) scaleX(1);\n            transform: translate(90vw, 0%) scaleX(1);\n}\n45% {\n    -webkit-transform: translate(85vw, 0%) scaleX(1);\n            transform: translate(85vw, 0%) scaleX(1);\n}\n65% {\n    -webkit-transform: translate(85vw, 0%) scaleX(-1);\n            transform: translate(85vw, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.player {\n  position: absolute;\n}\n.back-and-forth {\n  -webkit-animation: backAndForth linear 1.3s;\n          animation: backAndForth linear 1.3s;\n  -webkit-animation-iteration-count: 1;\n          animation-iteration-count: 1;\n}\n.player:nth-of-type(1) {\n  left: 10%;\n  bottom: 10%;\n  z-index: 5;\n}\n.player:nth-of-type(2) {\n  left: 13%;\n  bottom: 12%;\n  z-index: 3;\n}\n.player:nth-of-type(3) {\n  left: 16%;\n  bottom: 14%;\n  z-index: 2;\n}\n.player:nth-of-type(4) {\n  left: 19%;\n  bottom: 16%;\n  z-index: 1;\n}\n.player:nth-of-type(5) {\n  left: 19%;\n  bottom: 14%;\n  z-index: 2;\n}\n.player:nth-of-type(6) {\n  left: 19%;\n  bottom: 12%;\n  z-index: 3;\n}\n.player:nth-of-type(7) {\n  left: 19%;\n  bottom: 10%;\n  z-index: 5;\n}\n.player:nth-of-type(8) {\n  left: 19%;\n  bottom: 11%;\n  z-index: 4;\n}\n.player-image {\n  height: 70%;\n  width: 70%;\n}\n@-webkit-keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n17% {\n    -webkit-transform: translate(15vw, -25%) scaleX(1);\n            transform: translate(15vw, -25%) scaleX(1);\n}\n21% {\n    -webkit-transform: translate(25vw, -30%) scaleX(1);\n            transform: translate(25vw, -30%) scaleX(1);\n}\n25% {\n    -webkit-transform: translate(35vw, -25%) scaleX(1);\n            transform: translate(35vw, -25%) scaleX(1);\n}\n35% {\n    -webkit-transform: translate(60vw, 0%) scaleX(1);\n            transform: translate(60vw, 0%) scaleX(1);\n}\n45% {\n    -webkit-transform: translate(65vw, 0%) scaleX(1);\n            transform: translate(65vw, 0%) scaleX(1);\n}\n65% {\n    -webkit-transform: translate(65vw, 0%) scaleX(-1);\n            transform: translate(65vw, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n@keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n17% {\n    -webkit-transform: translate(15vw, -25%) scaleX(1);\n            transform: translate(15vw, -25%) scaleX(1);\n}\n21% {\n    -webkit-transform: translate(25vw, -30%) scaleX(1);\n            transform: translate(25vw, -30%) scaleX(1);\n}\n25% {\n    -webkit-transform: translate(35vw, -25%) scaleX(1);\n            transform: translate(35vw, -25%) scaleX(1);\n}\n35% {\n    -webkit-transform: translate(60vw, 0%) scaleX(1);\n            transform: translate(60vw, 0%) scaleX(1);\n}\n45% {\n    -webkit-transform: translate(65vw, 0%) scaleX(1);\n            transform: translate(65vw, 0%) scaleX(1);\n}\n65% {\n    -webkit-transform: translate(65vw, 0%) scaleX(-1);\n            transform: translate(65vw, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n", ""]);
 
 // exports
 

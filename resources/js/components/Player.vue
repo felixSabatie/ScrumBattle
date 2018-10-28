@@ -28,31 +28,55 @@
 
     .player:nth-of-type(1) {
     left: 10%;
-    bottom: 15%;
-    z-index: 2;
+    bottom: 10%;
+    z-index: 5;
     }
 
     .player:nth-of-type(2) {
-    left: 15%;
-    bottom: 20%;
-    z-index: 1;
+    left: 13%;
+    bottom: 12%;
+    z-index: 3;
     }
 
     .player:nth-of-type(3) {
-    left: 20%;
-    bottom: 15%;
+    left: 16%;
+    bottom: 14%;
     z-index: 2;
     }
 
     .player:nth-of-type(4) {
-    left: 25%;
-    bottom: 20%;
+    left: 19%;
+    bottom: 16%;
     z-index: 1;
     }
 
+    .player:nth-of-type(5) {
+        left: 19%;
+        bottom: 14%;
+        z-index: 2;
+    }
+
+    .player:nth-of-type(6) {
+        left: 19%;
+        bottom: 12%;
+        z-index: 3;
+    }
+
+    .player:nth-of-type(7) {
+        left: 19%;
+        bottom: 10%;
+        z-index: 5;
+    }
+
+    .player:nth-of-type(8) {
+        left: 19%;
+        bottom: 11%;
+        z-index: 4;
+    }
+
     .player-image {
-        height: 100%;
-        width: 100%;
+        height: 70%;
+        width: 70%;
     }
 
 
@@ -61,22 +85,22 @@
             transform:  translate(0%,0%)  scaleX(1.00) ;
         }
         17% {
-            transform:  translate(40vw,-25%)  scaleX(1.00) ;
+            transform:  translate(15vw,-25%)  scaleX(1.00) ;
         }
         21% {
-            transform:  translate(50vw,-30%)  scaleX(1.00) ;
+            transform:  translate(25vw,-30%)  scaleX(1.00) ;
         }
         25% {
-            transform:  translate(60vw,-25%)  scaleX(1.00) ;
+            transform:  translate(35vw,-25%)  scaleX(1.00) ;
         }
         35% {
-            transform:  translate(90vw,0%)  scaleX(1.00) ;
+            transform:  translate(60vw,0%)  scaleX(1.00) ;
         }
         45% {
-            transform:  translate(85vw,0%)  scaleX(1.00) ;
+            transform:  translate(65vw,0%)  scaleX(1.00) ;
         }
         65% {
-            transform:  translate(85vw,0%)  scaleX(-1.00) ;
+            transform:  translate(65vw,0%)  scaleX(-1.00) ;
         }
         99% {
             transform:  translate(0%,0%)  scaleX(-1.00) ;

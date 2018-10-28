@@ -25,22 +25,32 @@
                 {
                     id: 1,
                     name: "First player",
-                    image: '/assets/player.png',
+                    image: '/assets/players/CaptainFalcon.png',
                 },
                 {
                     id: 2,
                     name: "Second player",
-                    image: '/assets/imp.png',
+                    image: '/assets/players/Dk.png',
                 },
                 {
                     id: 3,
                     name: "Third player",
-                    image: '/assets/knight.png',
+                    image: '/assets/players/Mario.png',
                 },
                 {
                     id: 4,
                     name: "Fourth player",
-                    image: '/assets/player.png',
+                    image: '/assets/players/Pikachu.png',
+                },
+                {
+                    id: 5,
+                    name: "Fourth player",
+                    image: '/assets/players/MegaMan.png',
+                },
+                {
+                    id: 6,
+                    name: "Fourth player",
+                    image: '/assets/players/Samus.png',
                 }
             ];
             this.players.forEach(player => {
@@ -61,7 +71,7 @@
                         players.forEach(player =>{
                             that.animations.find(el => el.id === player.id).animate = false;
                         });
-                    }, 2000);
+                    }, 1500);
                 });
             },
             getAnimate(playerId) {
