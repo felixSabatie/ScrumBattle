@@ -56,7 +56,7 @@ export default {
   right: 0;
 
   &.project-container-1 {
-    background-color: #3A3A26;
+    background-color: #222922;
   }
   &.project-container-2 {
     background-color: #F1C87E;
