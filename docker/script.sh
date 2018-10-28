@@ -1,7 +1,10 @@
 #!/bin/sh
-echo "ma bite"
+#generate the key
 php artisan key:generate
-echo "ma bite est"
+#generate the key
 php artisan migrate
-echo "ma bite est magique"
-exec "$@"
+# generate the authentification key
+php artisan db:seed
+php artisan passport:install
+# run server
+php artisan serve --host 0.0.0.0
