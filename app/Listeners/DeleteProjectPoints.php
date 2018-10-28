@@ -36,7 +36,6 @@ class DeleteProjectPoints
             $project_user->total_points -= $card->points;
             if (strcmp($card->column->name, ProjectsController::$DONE) == 0) {
                 $project_user->done_points -= $card->points;
-                $project->done_points -= $card->points;
             }
             $project_user->save();
         }
