@@ -37,6 +37,7 @@
             axios.get(`/api/projects/${this.$route.params.slug}`).then(response => {
                 this.project = response.data;
                 this.$store.commit('projects/setProject', this.project)
+                this.$store.commit('users/setUsers', this.project.users);
             }).catch(err => {
                 this.notFound = true;
             });

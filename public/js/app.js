@@ -1761,6 +1761,9 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
@@ -1780,8 +1783,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     return {
       showModal: false,
       toRemove: [],
-      pointList: [1, 2, 3, 5, 8, 13, 21],
-      selectedPoint: 0
+      pointList: [1, 2, 3, 5, 8, 13, 21]
     };
   },
 
@@ -1793,6 +1795,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   methods: {
     selectPoint: function selectPoint(points) {
       this.card.points = points;
+      this.$store.commit('projects/newCardPoints', this.card);
       __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].put('/api/cards/' + this.card.id, _extends({}, this.card)).then(function (response) {
         //Yeah
       });
@@ -1879,7 +1882,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
-//
 
 
 
@@ -1906,25 +1908,54 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       this.newCardName = "";
     },
     addNewCard: function addNewCard() {
+      var _this = this;
+
       if (this.newCardName !== "") {
-        var card = {
+        var _card = {
+          id: 0,
           column_id: this.column.id,
           name: this.newCardName,
-          users: []
+          users: [],
+          points: 0
         };
-        this.column.cards.push(card);
+        this.column.cards.push(_card);
+
         this.newCardName = "";
-        __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post("/api/cards/", card).then(function (response) {
-          var id = response.data.id;
-          card.id = id;
+        __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post("/api/cards/", _card).then(function (response) {
+          var cardReceived = response.data;
+          _card.id = cardReceived.id;
+          _this.$store.commit('projects/newCard', _card);
         });
       }
     },
     removeCard: function removeCard(cardToRemove) {
+      var _this2 = this;
+
       this.column.cards = this.column.cards.filter(function (card) {
         return card.id !== cardToRemove.id;
       });
       __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].delete("/api/cards/" + cardToRemove.id);
+
+      this.$store.commit('projects/removeCard', card);
+      cardToRemove.users.forEach(function (user) {
+        var storePayload = {
+          user: user,
+          amount: cardToRemove.points
+        };
+
+        if (_this2.column.id == 3) {
+          //todo Change id with something less breakable
+          _this2.$store.commit("users/removeFromBoth", storePayload);
+        } else {
+          _this2.$store.commit("users/removeFromTotal", storePayload);
+        }
+      });
+
+      if (this.column.id == 3) {
+        this.$store.commit("projects/removeFromBoth", cardToRemove.points);
+      } else {
+        this.$store.commit("projects/removeFromTotal", cardToRemove.points);
+      }
     },
     removeUserFromCard: function removeUserFromCard(card, user) {
       card.users = card.users.filter(function (usr) {
@@ -1933,21 +1964,71 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].delete("/api/cards/" + card.id + "/users/" + user.id).then(function (response) {
         //Yeah deleted
       });
+
+      var storePayload = {
+        user: user,
+        amount: card.points
+      };
+      if (card.column_id === 3) {
+        this.$store.commit("users/removeFromBoth", storePayload);
+      } else {
+        this.$store.commit("users/removeFromTotal", storePayload);
+      }
     },
     addUserToCard: function addUserToCard(card, user) {
       card.users.push(user);
       __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].post("/api/cards/" + card.id + "/users", _extends({}, user)).then(function (response) {
         //Yeah added
       });
+
+      var storePayload = {
+        user: user,
+        amount: card.points
+      };
+
+      this.$store.commit('projects/addUserToCard', { card: card, user: user });
+
+      if (card.column_id == 3) {
+        this.$store.commit("users/addToBoth", storePayload);
+      } else {
+        this.$store.commit("users/addToTotal", storePayload);
+      }
     },
     onDragEnd: function onDragEnd(event) {
+      var _this3 = this;
+
       var cardId = this.trim(event.clone.id);
-      var fromColumnId = this.trim(event.from.id); //Not useful right now but if we ever need it, this is how you access it
+      var fromColumnId = this.trim(event.from.id);
       var toColumnId = this.trim(event.to.id);
 
+      var card = this.$store.state.projects.currentProject.columns.flatMap(function (col) {
+        return col.cards;
+      }).find(function (card) {
+        return card.id == cardId || card.id === cardId;
+      }); //Todo use getter of store but i don't understand how to access ti
+      console.log(toColumnId);
       __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].put("/api/cards/" + cardId, { column_id: toColumnId }).then(function (response) {
         //Maybe do something if needed
       });
+
+      if (fromColumnId != toColumnId) {
+        card.users.forEach(function (user) {
+          var storePayload = {
+            user: user,
+            amount: card.points
+          };
+          if (toColumnId == 3) {
+            _this3.$store.commit("users/addToDone", storePayload);
+          } else if (fromColumnId == 3) {
+            _this3.$store.commit("users/removeFromDone", storePayload);
+          }
+        });
+        if (toColumnId == 3) {
+          this.$store.commit("projects/addToDone", card.points);
+        } else if (fromColumnId == 3) {
+          this.$store.commit("projects/removeFromDone", card.points);
+        }
+      }
     },
     trim: function trim(divId) {
       return divId.split("-")[1];
@@ -2387,6 +2468,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         __WEBPACK_IMPORTED_MODULE_4__axios_wrapper__["a" /* default */].get('/api/projects/' + this.$route.params.slug).then(function (response) {
             _this.project = response.data;
             _this.$store.commit('projects/setProject', _this.project);
+            _this.$store.commit('users/setUsers', _this.project.users);
         }).catch(function (err) {
             _this.notFound = true;
         });
@@ -40063,6 +40145,7 @@ var render = function() {
                   return _c(
                     "div",
                     {
+                      key: point,
                       staticClass: "points",
                       class: _vm.isSelectedPoint(point),
                       on: {
@@ -57063,6 +57146,8 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_projects__ = __webpack_require__("./resources/js/store/modules/projects.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_auth__ = __webpack_require__("./resources/js/store/modules/auth.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_users__ = __webpack_require__("./resources/js/store/modules/users.js");
+
 
 
 
@@ -57076,7 +57161,8 @@ var debug = "development" !== 'production';
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
   modules: {
     projects: __WEBPACK_IMPORTED_MODULE_2__modules_projects__["a" /* default */],
-    auth: __WEBPACK_IMPORTED_MODULE_3__modules_auth__["a" /* default */]
+    auth: __WEBPACK_IMPORTED_MODULE_3__modules_auth__["a" /* default */],
+    users: __WEBPACK_IMPORTED_MODULE_4__modules_users__["a" /* default */]
   },
   strict: debug
 }));
@@ -57122,12 +57208,25 @@ var mutations = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+//todo extract card logic to cards.js store
 
 var state = {
   currentProject: {}
+};
 
-  // getters
-};var getters = {};
+// getters
+var getters = {
+  cards: function cards(state) {
+    var cards = [];
+    if (state.currentProject.columns) {
+      cards = state.currentProject.columns.flatMap(function (column) {
+        return column.cards;
+      });
+    }
+
+    return cards;
+  }
+};
 
 // actions
 var actions = {};
@@ -57136,6 +57235,61 @@ var actions = {};
 var mutations = {
   setProject: function setProject(state, project) {
     state.currentProject = project;
+    project.donePoints = 0;
+    project.totalPoints = 0;
+  },
+  newCard: function newCard(state, card) {
+
+    state.currentProject.columns.filter(function (column) {
+      return column.id == card.column_id;
+    }).forEach(function (column) {
+      column.cards.push(JSON.parse(JSON.stringify(card)));
+    });
+  },
+  newCardPoints: function newCardPoints(state, card) {
+    var sum = 0;
+    state.currentProject.columns.flatMap(function (col) {
+      return col.cards;
+    }).forEach(function (crd) {
+      if (crd.id === card.id) {
+        crd.points = card.points;
+      }
+
+      sum += crd.points;
+    });
+
+    state.currentProject.totalPoints = sum;
+  },
+  addUserToCard: function addUserToCard(state, payload) {
+    state.currentProject.columns.flatMap(function (col) {
+      return col.cards;
+    }).forEach(function (card) {
+      if (card.id === payload.card.id) {
+        console.log('adding user');
+        card.users.push(payload.user);
+      }
+    });
+  },
+  removeCard: function removeCard(state, card) {},
+  removeFromTotal: function removeFromTotal(state, amount) {
+    state.currentProject.totalPoints -= amount;
+  },
+  removeFromDone: function removeFromDone(state, amount) {
+    state.currentProject.donePoints -= amount;
+  },
+  removeFromBoth: function removeFromBoth(state, amount) {
+    state.currentProject.totalPoints -= amount;
+    state.currentProject.donePoints -= amount;
+  },
+  addToTotal: function addToTotal(state, amount) {
+    state.currentProject.totalPoints += amount;
+  },
+  addToDone: function addToDone(state, amount) {
+    state.currentProject.donePoints += amount;
+  },
+  addToBoth: function addToBoth(state, amount) {
+    state.currentProject.donePoints += amount;
+    state.currentProject.totalPoints += amount;
   }
 };
 
@@ -57145,6 +57299,100 @@ var mutations = {
   getters: getters,
   actions: actions,
   mutations: mutations
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/users.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var state = {
+    users: []
+};
+
+// getters
+var getters = {};
+
+// actions
+var actions = {};
+
+// mutations
+var mutations = {
+    setUsers: function setUsers(state, users) {
+        state.users = users;
+
+        //todo temp
+        state.users.forEach(function (user) {
+            user.totalPoints = 0;
+            user.donePoints = 0;
+        });
+    },
+    removeFromTotal: function removeFromTotal(state, payload) {
+        var user = payload.user;
+        var amount = payload.amount;
+
+        state.users.forEach(function (usr) {
+            if (usr.id == user.id) {
+                usr.totalPoints -= amount;
+            }
+        });
+    },
+    removeFromDone: function removeFromDone(state, payload) {
+        var user = payload.user;
+        var amount = payload.amount;
+        state.users.forEach(function (usr) {
+            if (usr.id == user.id) {
+                usr.donePoints -= amount;
+            }
+        });
+    },
+    removeFromBoth: function removeFromBoth(state, payload) {
+        var user = payload.user;
+        var amount = payload.amount;
+        state.users.forEach(function (usr) {
+            if (usr.id == user.id) {
+                usr.donePoints -= amount;
+                usr.totalPoints -= amount;
+            }
+        });
+    },
+    addToTotal: function addToTotal(state, payload) {
+        var user = payload.user;
+        var amount = payload.amount;
+        state.users.forEach(function (usr) {
+            if (usr.id == user.id) {
+                usr.totalPoints += amount;
+            }
+        });
+    },
+    addToDone: function addToDone(state, payload) {
+        var user = payload.user;
+        var amount = payload.amount;
+        state.users.map(function (usr) {
+            if (usr.id == user.id) {
+                usr.donePoints += amount;
+            }
+        });
+    },
+    addToBoth: function addToBoth(state, paylaod) {
+        var user = payload.user;
+        var amount = payload.amount;
+        state.users.forEach(function (usr) {
+            if (usr.id == user.id) {
+                usr.donePoints += amount;
+                usr.totalPoints += amount;
+            }
+        });
+    }
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    namespaced: true,
+    state: state,
+    getters: getters,
+    actions: actions,
+    mutations: mutations
 });
 
 /***/ }),

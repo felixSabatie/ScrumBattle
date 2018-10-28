@@ -22,7 +22,9 @@
         <div class="points-list">
           <div class="points" v-for="point in pointList"
                @click.stop='selectPoint(point)'
-               :class='isSelectedPoint(point)'>
+               :class='isSelectedPoint(point)'
+               :key="point"
+               >
             {{point}}
           </div>
         </div>
@@ -37,7 +39,8 @@
             <div class="modal-user-info">
               {{user.name}}
             </div>
-            <div class="modal-user-check">
+            <div class="modal-user-check"> 
+              <!-- Todo checkbox is horrible on macOS -->
               <input type="checkbox" :checked="isInCard(user)" :value="user.id" @click="handleCheck">
             </div>
           </div>
@@ -72,7 +75,6 @@ export default {
       showModal: false,
       toRemove: [],
       pointList: [1,2,3,5,8,13,21],
-      selectedPoint: 0,
     }
   },
   computed: mapState({
@@ -81,10 +83,10 @@ export default {
   methods: {
     selectPoint(points) {
       this.card.points = points;
+      this.$store.commit('projects/newCardPoints', this.card);
       axios.put(`/api/cards/${this.card.id}`, {
         ...this.card,
-      })
-      .then((response) => {
+      }).then((response) => {
         //Yeah
       })
     },
