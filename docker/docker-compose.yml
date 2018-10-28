@@ -1,26 +1,22 @@
 version: '3'
 
 services:
-  web_server:
-    image: nginx:latest
-    ports:
-    - "8000:80"
-    depends_on:
-    - php
-    volumes:
-    - ../:/var/www/
-    - ./sites-enabled:/etc/nginx/sites-enabled
-    - ./nginx.conf:/etc/nginx/nginx.conf
 
   php:
-    build: ./php
+    build:
+        context: ../
+        dockerfile: ./docker/php/Dockerfile
     container_name: "php"
+    ports:
+    - "8000:8000"
     depends_on:
     - db
     volumes:
     - ../:/var/www/
     - ./php.ini:/usr/local/etc/php/php.ini
-
+    entrypoint:
+    - /var/www/docker/script.sh
+    hostname: php
   db:
     image: mysql:5.7
     volumes:
