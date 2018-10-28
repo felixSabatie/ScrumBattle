@@ -49,7 +49,7 @@ class UpdateProjectUserPoints
                     $project_user->total_points = $updatedPoints;
                 } else {
                     $project_user->total_points += $updatedPoints - $oldPoints;
-
+                    $project_user->done_points += (strcmp($updatedColumn->name, ProjectsController::$DONE) == 0) ? $updatedPoints - $oldPoints : 0;
                 }
             }
             $project_user->save();

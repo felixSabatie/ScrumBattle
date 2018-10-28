@@ -45,6 +45,8 @@ class UpdateProjectPoints
             } else if (strcmp($oldColumnName, ProjectsController::$DONE) == 0) {
                 $project->done_points -= $updatedPoints;
             }
+        } else if (strcmp($updatedColumn->name, ProjectsController::$DONE) == 0) {
+            $project->done_points += $updatedPoints - $oldPoints;
         }
         if ($updatedPoints !== $oldPoints) {
             $project->total_points += $updatedPoints - $oldPoints;
