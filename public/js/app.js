@@ -2114,6 +2114,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Mob___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Mob__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Players__ = __webpack_require__("./resources/js/components/Players.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Players___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Players__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -2122,6 +2125,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+
 
 
 
@@ -2139,6 +2143,58 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_2_vuex__["c" /* mapState */])({
+        users: function users(state) {
+            return state.users.users;
+        }
+    }), {
+        players: function players() {
+            return JSON.parse(JSON.stringify(this.users));
+        }
+    }),
+    watch: {
+        players: function players(newUsers, oldUsers) {
+            var animate = false;
+
+            var _loop = function _loop(user) {
+                var oldUser = oldUsers.find(function (oldUser) {
+                    return oldUser.id === user.id;
+                });
+                if (oldUser.done_points < user.done_points) {
+                    animate = true;
+                }
+            };
+
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
+
+            try {
+                for (var _iterator = newUsers[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                    var user = _step.value;
+
+                    _loop(user);
+                }
+            } catch (err) {
+                _didIteratorError = true;
+                _iteratorError = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion && _iterator.return) {
+                        _iterator.return();
+                    }
+                } finally {
+                    if (_didIteratorError) {
+                        throw _iteratorError;
+                    }
+                }
+            }
+
+            if (animate) {
+                this.animate();
+            }
+        }
+    },
     methods: {
         animate: function animate() {
             var that = this;
@@ -39661,6 +39717,7 @@ var render = function() {
       _c(
         "button",
         {
+          staticStyle: { "z-index": "100000" },
           on: {
             click: function($event) {
               _vm.animate()
