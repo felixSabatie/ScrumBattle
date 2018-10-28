@@ -1,7 +1,7 @@
 <template>
     <div class="players">
         <player v-for="player in players" :player="player" :animate="getAnimate(player.id)" :key="player.id"/>
-        <button @click="animatePlayers([players[0], players[1]])"> BITE </button>
+        <button @click="animatePlayers([players[0], players[1]])"> Attack </button>
     </div>
 </template>
 
