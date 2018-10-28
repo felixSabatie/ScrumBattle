@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-//         $this->call(MobsSeeder::class);
+         $this->call(MobsSeeder::class);
          $this->call(OAuthClientsSeeder::class);
     }
 }
