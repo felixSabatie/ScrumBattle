@@ -2372,6 +2372,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Modal__ = __webpack_require__("./resources/js/components/Modal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Modal__);
 //
 //
 //
@@ -2384,20 +2386,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      projects: []
+      projects: [],
+      showModal: false,
+      project: {
+        name: "",
+        mob_id: undefined,
+        users: []
+      },
+      users: [],
+      mobs: []
     };
   },
+
+  components: { Modal: __WEBPACK_IMPORTED_MODULE_1__Modal___default.a },
   mounted: function mounted() {
     var _this = this;
 
-    __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get('/api/projects').then(function (response) {
-      _this.projects = response.data;
+    __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get('/api/projects/create').then(function (response) {
+      _this.users = response.data.users;
+      _this.mobs = response.data.mobs;
+      __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get('/api/projects').then(function (response2) {
+        _this.projects = response2.data;
+      }).catch(function (err) {
+        console.error(err);
+      });
     }).catch(function (err) {
       console.error(err);
     });
@@ -2406,6 +2461,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     navigateToProject: function navigateToProject(projectSlug) {
       this.$router.push({ name: 'project', params: { slug: projectSlug } });
+    },
+    openCreateProjectModal: function openCreateProjectModal() {
+      this.showModal = true;
+    },
+    closeModal: function closeModal() {
+      this.showModal = false;
+    },
+    mobIsSelected: function mobIsSelected(mobId) {
+      return this.project.mob_id === mobId;
+    },
+    userIsSelected: function userIsSelected(userId) {
+      return this.project.users.find(function (user) {
+        return user.id === userId;
+      }) !== undefined;
+    },
+    handleCheck: function handleCheck(event) {
+      var checkbox = event.toElement;
+      var userId = parseInt(checkbox.value);
+      var user = this.users.find(function (user) {
+        return user.id == userId;
+      });
+
+      var checked = checkbox.checked;
+      if (checked) {
+        this.project.users.push(user);
+      } else {
+        this.projects.users.filter(function (user) {
+          return user.id !== userId;
+        });
+      }
+    },
+    sendProject: function sendProject() {
+      var _this2 = this;
+
+      __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].post('/api/projects', this.project).then(function (response) {
+        _this2.$router.push({ name: 'project', params: { slug: response.data.slug } });
+      }).catch(function (err) {
+        console.error(err);
+      });
     }
   }
 });
@@ -6605,7 +6699,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.projects .projects-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n}\n.projects .projects-container .project {\n    margin: 10px 5px;\n    -ms-flex-preferred-size: 250px;\n        flex-basis: 250px;\n    height: 110px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    position: relative;\n    cursor: pointer;\n}\n.projects .projects-container .project p {\n      text-align: center;\n      font-weight: bold;\n      color: #FFF;\n      font-size: 23px;\n}\n.projects .projects-container .project img {\n      display: block;\n      position: absolute;\n      z-index: -1;\n      border-radius: 5px;\n      -webkit-filter: brightness(0.7);\n              filter: brightness(0.7);\n      top: 0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      max-width: 100%;\n      height: auto;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.projects .projects-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n}\n.projects .projects-container .project {\n    margin: 10px 5px;\n    -ms-flex-preferred-size: 250px;\n        flex-basis: 250px;\n    height: 110px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    position: relative;\n    cursor: pointer;\n}\n.projects .projects-container .project p {\n      text-align: center;\n      font-weight: bold;\n      color: #FFF;\n      font-size: 23px;\n}\n.projects .projects-container .project img {\n      display: block;\n      position: absolute;\n      z-index: -1;\n      border-radius: 5px;\n      -webkit-filter: brightness(0.7);\n              filter: brightness(0.7);\n      top: 0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      max-width: 100%;\n      height: auto;\n}\n.projects .modal input[type=text] {\n  width: 100%;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.projects .modal .mob-selector .images-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n.projects .modal .mob-selector .images-container .image-container {\n    -ms-flex-preferred-size: 30%;\n        flex-basis: 30%;\n    padding: 10px;\n}\n.projects .modal .mob-selector .images-container .image-container.selected {\n      border: 2px solid #6cb2eb;\n      border-radius: 5px;\n      padding: 8px;\n}\n.projects .modal .mob-selector .images-container .image-container img {\n      max-width: 100%;\n      height: auto;\n}\n.projects .modal .modal-user {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 10px 0;\n}\n.projects .modal .modal-user .modal-user-image img {\n    max-height: 40px;\n    width: auto;\n    border-radius: 50%;\n}\n.projects .modal .modal-user .modal-user-info {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n}\n", ""]);
 
 // exports
 
@@ -6620,7 +6714,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: table;\n  -webkit-transition: opacity 0.3s ease;\n  transition: opacity 0.3s ease;\n}\n.modal-mask .modal-wrapper {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-mask .modal-wrapper .modal-container {\n      width: 300px;\n      margin: 0px auto;\n      padding: 20px 30px;\n      background-color: #fff;\n      border-radius: 2px;\n      -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n      -webkit-transition: all 0.3s ease;\n      transition: all 0.3s ease;\n      font-family: Helvetica, Arial, sans-serif;\n}\n.modal-mask .modal-wrapper .modal-container .modal-footer {\n        padding-top: 10px;\n}\n\n/*\n * The following styles are auto-applied to elements with\n * transition=\"modal\" when their visibility is toggled\n * by Vue.js.\n *\n * You can easily play with the modal transition by editing\n * these styles.\n */\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, 0.5);\n  display: table;\n  -webkit-transition: opacity 0.3s ease;\n  transition: opacity 0.3s ease;\n}\n.modal-mask .modal-wrapper {\n    display: table-cell;\n    vertical-align: middle;\n}\n.modal-mask .modal-wrapper .modal-container {\n      min-width: 300px;\n      max-width: 600px;\n      max-height: 90%;\n      overflow-y: auto;\n      overflow-x: hidden;\n      margin: 0px auto;\n      padding: 20px 30px;\n      background-color: #fff;\n      border-radius: 2px;\n      -webkit-box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);\n      -webkit-transition: all 0.3s ease;\n      transition: all 0.3s ease;\n      font-family: Helvetica, Arial, sans-serif;\n}\n.modal-mask .modal-wrapper .modal-container .modal-footer {\n        padding-top: 10px;\n}\n\n/*\n * The following styles are auto-applied to elements with\n * transition=\"modal\" when their visibility is toggled\n * by Vue.js.\n *\n * You can easily play with the modal transition by editing\n * these styles.\n */\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  -webkit-transform: scale(1.1);\n  transform: scale(1.1);\n}\n", ""]);
 
 // exports
 
@@ -39475,37 +39569,156 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "projects container" }, [
-    _c("h1", [_vm._v("Scrum Battle")]),
-    _vm._v(" "),
-    _vm.projects.length > 0
-      ? _c(
-          "div",
-          { staticClass: "projects-container" },
-          _vm._l(_vm.projects, function(project) {
-            return _c(
-              "div",
-              {
-                key: project.id,
-                staticClass: "project",
-                on: {
-                  click: function($event) {
-                    _vm.navigateToProject(project.slug)
+  return _c(
+    "div",
+    { staticClass: "projects container" },
+    [
+      _c("h1", [_vm._v("Scrum Battle")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn", on: { click: _vm.openCreateProjectModal } },
+        [_vm._v("Créer un nouveau projet")]
+      ),
+      _vm._v(" "),
+      _vm.projects.length > 0
+        ? _c(
+            "div",
+            { staticClass: "projects-container" },
+            _vm._l(_vm.projects, function(project) {
+              return _c(
+                "div",
+                {
+                  key: project.id,
+                  staticClass: "project",
+                  on: {
+                    click: function($event) {
+                      _vm.navigateToProject(project.slug)
+                    }
                   }
-                }
-              },
+                },
+                [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/background/jungle.png",
+                      alt: "background"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(project.name))])
+                ]
+              )
+            })
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showModal
+        ? _c("modal", { staticClass: "modal", on: { close: _vm.closeModal } }, [
+            _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+              _c("h1", [_vm._v("Créer un projet")])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { attrs: { slot: "body" }, slot: "body" },
               [
-                _c("img", {
-                  attrs: { src: project.mob.image, alt: "background" }
+                _c("label", { attrs: { for: "name-input" } }, [
+                  _vm._v("Nom du projet")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.project.name,
+                      expression: "project.name",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  attrs: { type: "text", id: "name-input" },
+                  domProps: { value: _vm.project.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.project, "name", $event.target.value.trim())
+                    },
+                    blur: function($event) {
+                      _vm.$forceUpdate()
+                    }
+                  }
                 }),
                 _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(project.name))])
-              ]
-            )
-          })
-        )
-      : _vm._e()
-  ])
+                _c("div", { staticClass: "mob-selector" }, [
+                  _c("p", [_vm._v("Choisir l'adversaire à affronter")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "images-container" },
+                    _vm._l(_vm.mobs, function(mob) {
+                      return _c(
+                        "div",
+                        {
+                          staticClass: "image-container",
+                          class: { selected: _vm.mobIsSelected(mob.id) },
+                          on: {
+                            click: function($event) {
+                              _vm.project.mob_id = mob.id
+                            }
+                          }
+                        },
+                        [
+                          _c("img", {
+                            attrs: { src: mob.image, alt: "mob-" + mob.id }
+                          })
+                        ]
+                      )
+                    })
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.users, function(user) {
+                  return _c("div", { staticClass: "modal-user" }, [
+                    _c("div", { staticClass: "modal-user-image" }, [
+                      _c("img", {
+                        attrs: { src: user.avatar, alt: "user avatar" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-user-info" }, [
+                      _vm._v("\n          " + _vm._s(user.name) + "\n        ")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-user-check" }, [
+                      _c("input", {
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: _vm.userIsSelected(user.id),
+                          value: user.id
+                        },
+                        on: { click: _vm.handleCheck }
+                      })
+                    ])
+                  ])
+                })
+              ],
+              2
+            ),
+            _vm._v(" "),
+            _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
+              _c(
+                "button",
+                { staticClass: "btn", on: { click: _vm.sendProject } },
+                [_vm._v("Valider")]
+              )
+            ])
+          ])
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

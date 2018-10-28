@@ -21,7 +21,7 @@ Route::group(['middleware' => ['api']], function() {
     Route::namespace('Api')->group(function() {
         Route::post('register', 'AuthController@register');
 
-        Route::resource('projects', 'ProjectsController')->except(['create', 'update', 'show']);
+        Route::resource('projects', 'ProjectsController')->except(['update', 'show']);
         Route::get('projects/{slug}', 'ProjectsController@show')->middleware('auth:api');
         Route::resource('cards', 'CardsController')->only(['store','update', 'destroy']);
         Route::get('users', 'UsersController@index');
