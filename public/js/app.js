@@ -2410,6 +2410,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2455,6 +2467,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     closeModal: function closeModal() {
       this.showModal = false;
+    },
+    mobIsSelected: function mobIsSelected(mobId) {
+      return this.project.mob_id === mobId;
+    },
+    userIsSelected: function userIsSelected(userId) {
+      return this.project.users.find(function (user) {
+        return user.id === userId;
+      }) !== undefined;
+    },
+    handleCheck: function handleCheck(event) {
+      var checkbox = event.toElement;
+      var userId = parseInt(checkbox.value);
+      var user = this.users.find(function (user) {
+        return user.id == userId;
+      });
+
+      var checked = checkbox.checked;
+      if (checked) {
+        this.project.users.push(user);
+      } else {
+        this.projects.users.filter(function (user) {
+          return user.id !== userId;
+        });
+      }
     }
   }
 });
@@ -6654,7 +6690,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.projects .projects-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n}\n.projects .projects-container .project {\n    margin: 10px 5px;\n    -ms-flex-preferred-size: 250px;\n        flex-basis: 250px;\n    height: 110px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    position: relative;\n    cursor: pointer;\n}\n.projects .projects-container .project p {\n      text-align: center;\n      font-weight: bold;\n      color: #FFF;\n      font-size: 23px;\n}\n.projects .projects-container .project img {\n      display: block;\n      position: absolute;\n      z-index: -1;\n      border-radius: 5px;\n      -webkit-filter: brightness(0.7);\n              filter: brightness(0.7);\n      top: 0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      max-width: 100%;\n      height: auto;\n}\n.projects .modal input {\n  width: 100%;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.projects .modal .mob-selector .images-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n.projects .modal .mob-selector .images-container .image-container {\n    -ms-flex-preferred-size: 30%;\n        flex-basis: 30%;\n    padding: 10px;\n}\n.projects .modal .mob-selector .images-container .image-container.selected {\n      border: 2px solid #6cb2eb;\n      border-radius: 5px;\n}\n.projects .modal .mob-selector .images-container .image-container img {\n      max-width: 100%;\n      height: auto;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.projects .projects-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-wrap: wrap;\n      flex-wrap: wrap;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n}\n.projects .projects-container .project {\n    margin: 10px 5px;\n    -ms-flex-preferred-size: 250px;\n        flex-basis: 250px;\n    height: 110px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    position: relative;\n    cursor: pointer;\n}\n.projects .projects-container .project p {\n      text-align: center;\n      font-weight: bold;\n      color: #FFF;\n      font-size: 23px;\n}\n.projects .projects-container .project img {\n      display: block;\n      position: absolute;\n      z-index: -1;\n      border-radius: 5px;\n      -webkit-filter: brightness(0.7);\n              filter: brightness(0.7);\n      top: 0;\n      bottom: 0;\n      left: 0;\n      right: 0;\n      max-width: 100%;\n      height: auto;\n}\n.projects .modal input[type=text] {\n  width: 100%;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.projects .modal .mob-selector .images-container {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-pack: justify;\n      -ms-flex-pack: justify;\n          justify-content: space-between;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n}\n.projects .modal .mob-selector .images-container .image-container {\n    -ms-flex-preferred-size: 30%;\n        flex-basis: 30%;\n    padding: 10px;\n}\n.projects .modal .mob-selector .images-container .image-container.selected {\n      border: 2px solid #6cb2eb;\n      border-radius: 5px;\n}\n.projects .modal .mob-selector .images-container .image-container img {\n      max-width: 100%;\n      height: auto;\n}\n.projects .modal .modal-user {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  padding: 10px 0;\n}\n.projects .modal .modal-user .modal-user-image img {\n    max-height: 40px;\n    width: auto;\n    border-radius: 50%;\n}\n.projects .modal .modal-user .modal-user-info {\n    -webkit-box-flex: 1;\n        -ms-flex: 1;\n            flex: 1;\n}\n", ""]);
 
 // exports
 
@@ -39573,48 +39609,94 @@ var render = function() {
               _c("h1", [_vm._v("Créer un projet")])
             ]),
             _vm._v(" "),
-            _c("div", { attrs: { slot: "body" }, slot: "body" }, [
-              _c("label", { attrs: { for: "name-input" } }, [
-                _vm._v("Nom du projet")
-              ]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.project.name,
-                    expression: "project.name"
-                  }
-                ],
-                attrs: { type: "text", id: "name-input" },
-                domProps: { value: _vm.project.name },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.project, "name", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "mob-selector" }, [
-                _c("p", [_vm._v("Choisir l'adversaire à affronter")]),
+            _c(
+              "div",
+              { attrs: { slot: "body" }, slot: "body" },
+              [
+                _c("label", { attrs: { for: "name-input" } }, [
+                  _vm._v("Nom du projet")
+                ]),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "images-container" },
-                  _vm._l(_vm.mobs, function(mob) {
-                    return _c("div", { staticClass: "image-container" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model.trim",
+                      value: _vm.project.name,
+                      expression: "project.name",
+                      modifiers: { trim: true }
+                    }
+                  ],
+                  attrs: { type: "text", id: "name-input" },
+                  domProps: { value: _vm.project.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.project, "name", $event.target.value.trim())
+                    },
+                    blur: function($event) {
+                      _vm.$forceUpdate()
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c("div", { staticClass: "mob-selector" }, [
+                  _c("p", [_vm._v("Choisir l'adversaire à affronter")]),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    { staticClass: "images-container" },
+                    _vm._l(_vm.mobs, function(mob) {
+                      return _c(
+                        "div",
+                        {
+                          staticClass: "image-container",
+                          class: { selected: _vm.mobIsSelected(mob.id) },
+                          on: {
+                            click: function($event) {
+                              _vm.project.mob_id = mob.id
+                            }
+                          }
+                        },
+                        [
+                          _c("img", {
+                            attrs: { src: mob.image, alt: "mob-" + mob.id }
+                          })
+                        ]
+                      )
+                    })
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.users, function(user) {
+                  return _c("div", { staticClass: "modal-user" }, [
+                    _c("div", { staticClass: "modal-user-image" }, [
                       _c("img", {
-                        attrs: { src: mob.image, alt: "mob-" + mob.id }
+                        attrs: { src: user.avatar, alt: "user avatar" }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-user-info" }, [
+                      _vm._v("\n          " + _vm._s(user.name) + "\n        ")
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "modal-user-check" }, [
+                      _c("input", {
+                        attrs: { type: "checkbox" },
+                        domProps: {
+                          checked: _vm.userIsSelected(user.id),
+                          value: user.id
+                        },
+                        on: { click: _vm.handleCheck }
                       })
                     ])
-                  })
-                )
-              ])
-            ]),
+                  ])
+                })
+              ],
+              2
+            ),
             _vm._v(" "),
             _c("div", { attrs: { slot: "footer" }, slot: "footer" }, [
               _c("button", { staticClass: "btn" }, [_vm._v("Valider")])

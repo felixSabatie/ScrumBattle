@@ -16,13 +16,25 @@
 
       <div slot="body">
         <label for="name-input">Nom du projet</label>
-        <input type="text" id="name-input" v-model="project.name">
+        <input type="text" id="name-input" v-model.trim="project.name">
         <div class="mob-selector">
           <p>Choisir l'adversaire à affronter</p>
           <div class="images-container">
-            <div class="image-container" v-for="mob in mobs">
+            <div class="image-container" :class="{selected: mobIsSelected(mob.id)}" @click="project.mob_id = mob.id" v-for="mob in mobs">
               <img :src="mob.image" :alt="'mob-' + mob.id">
             </div>
+          </div>
+        </div>
+
+        <div v-for="user in users" class="modal-user">
+          <div class="modal-user-image">
+            <img :src="user.avatar" alt="user avatar">
+          </div>
+          <div class="modal-user-info">
+            {{user.name}}
+          </div>
+          <div class="modal-user-check">
+            <input type="checkbox" :checked="userIsSelected(user.id)" :value="user.id" @click="handleCheck">
           </div>
         </div>
       </div>
@@ -75,6 +87,25 @@ export default {
     },
     closeModal() {
       this.showModal = false;
+    },
+    mobIsSelected(mobId) {
+      return this.project.mob_id === mobId;
+    },
+    userIsSelected(userId) {
+      return this.project.users.find(user => user.id === userId) !== undefined;
+    },
+    handleCheck(event) {
+      const checkbox = event.toElement;
+      const userId = parseInt(checkbox.value);
+      const user = this.users.find(user => user.id == userId);
+
+      const checked = checkbox.checked;
+      if(checked) {
+        this.project.users.push(user);
+      } else {
+        this.projects.users.filter(user => user.id !== userId)
+      }
+
     }
   }
 }
@@ -127,7 +158,7 @@ export default {
   }
 
   .modal {
-    input {
+    input[type=text] {
       width: 100%;
       box-sizing: border-box;
     }
@@ -154,6 +185,26 @@ export default {
         }
 
       }
+    }
+
+    .modal-user {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 10px 0;
+
+      .modal-user-image {
+        img {
+          max-height: 40px;
+          width: auto;
+          border-radius: 50%;
+        }
+      }
+
+      .modal-user-info {
+        flex: 1;
+      }
+
     }
   }
 
