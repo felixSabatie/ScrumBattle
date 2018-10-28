@@ -15,9 +15,6 @@
             Players,
             Mob
         },
-        mounted() {
-          document.querySelector('.game').first().s
-        },
         getBackground() {
             return "";
         }
