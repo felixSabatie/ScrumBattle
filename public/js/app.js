@@ -1787,7 +1787,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapState */])({
+  computed: Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
     users: function users(state) {
       return state.projects.currentProject.users;
     }
@@ -2093,7 +2093,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         return column.name === 'done';
       }).id;
     }
-  }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+  }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])({
     projectColumns: function projectColumns(state) {
       return state.projects.currentProject.columns;
     }
@@ -2159,6 +2159,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -2166,21 +2169,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Mob",
     props: ["animate"],
-    data: function data() {
-        return {
-            mob: {}
-        };
-    },
-    mounted: function mounted() {
-        // TODO: Axios call (axios.get)
-        this.mob = {
-            name: "Mob",
-            image: '/assets/boss.png'
-        };
-    }
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        mob: 'projects/mob'
+    }))
 });
 
 /***/ }),
@@ -2282,7 +2278,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         };
     },
 
-    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapState */])({
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapState */])({
         users: function users(state) {
             return state.users.users;
         }
@@ -2451,7 +2447,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     };
   },
 
-  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["c" /* mapState */])({
     users: function users(state) {
       return state.users.users;
     }
@@ -40101,9 +40097,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mob", class: { hurt: _vm.animate } }, [
-    _c("img", { staticClass: "mob-image", attrs: { src: _vm.mob.image } })
-  ])
+  return _vm.mob
+    ? _c("div", { staticClass: "mob", class: { hurt: _vm.animate } }, [
+        _c("img", { staticClass: "mob-image", attrs: { src: _vm.mob.image } })
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -55207,9 +55205,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 "use strict";
 /* unused harmony export Store */
 /* unused harmony export install */
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapState; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return mapState; });
 /* unused harmony export mapMutations */
-/* unused harmony export mapGetters */
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return mapGetters; });
 /* unused harmony export mapActions */
 /* unused harmony export createNamespacedHelpers */
 /**
@@ -57381,6 +57379,9 @@ var getters = {
     }
 
     return cards;
+  },
+  mob: function mob(state) {
+    return state.currentProject.mob;
   }
 };
 

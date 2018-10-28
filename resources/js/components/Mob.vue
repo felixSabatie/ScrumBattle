@@ -1,26 +1,21 @@
 <template>
-    <div class="mob" :class="{'hurt' : animate}">
+    <div v-if="mob" class="mob" :class="{'hurt' : animate}">
         <img class="mob-image" :src="mob.image">
     </div>
 </template>
 
 <script>
+    import { mapGetters } from "vuex";
+
     export default {
         name: "Mob",
         props: [
             "animate"
         ],
-        data() {
-            return {
-                mob: {},
-            }
-        },
-        mounted() {
-            // TODO: Axios call (axios.get)
-            this.mob = {
-                name: "Mob",
-                image: '/assets/boss.png'
-            }
+        computed: {
+            ...mapGetters({
+                mob: 'projects/mob'
+            })
         },
     }
 </script>
