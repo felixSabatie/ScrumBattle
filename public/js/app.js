@@ -2446,7 +2446,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   methods: {
     calculatePerc: function calculatePerc() {
-      this.percent = this.user.total_points !== 0 ? this.user.done_points / this.user.total_points * 100 : 0;
+      this.percent = this.user.total_points !== 0 && this.user.total_points !== null ? this.user.done_points / this.user.total_points * 100 : 0;
     },
     move: function move() {
       var elem = this.$refs.progress;
@@ -2532,7 +2532,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   },
   mounted: function mounted() {
     this.goal_img = "/images/goal_flag.png";
-    this.height = 100 / this.users.length + "%";
+    if (this.users.length !== 0) this.height = 100 / this.users.length + "%";
     this.copyUsers();
   }
 });
