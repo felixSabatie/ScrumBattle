@@ -2532,7 +2532,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       _this.project = response.data;
 
       _this.$store.commit("projects/setProject", _this.project);
-      console.log(_this.project);
       _this.$store.commit("users/setUsers", _this.project.users);
       _this.$store.commit("cards/setCards", _this.project.columns.flatMap(function (col) {
         return col.cards;
