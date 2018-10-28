@@ -2372,6 +2372,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__ = __webpack_require__("./resources/js/axios-wrapper.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Modal__ = __webpack_require__("./resources/js/components/Modal.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Modal__);
 //
 //
 //
@@ -2384,20 +2386,50 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      projects: []
+      projects: [],
+      showModal: false,
+      name: "",
+      mob_id: undefined,
+      users: [],
+      usersFromBack: [],
+      mobsFromBack: []
     };
   },
+
+  components: { Modal: __WEBPACK_IMPORTED_MODULE_1__Modal___default.a },
   mounted: function mounted() {
     var _this = this;
 
-    __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get('/api/projects').then(function (response) {
-      _this.projects = response.data;
+    __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get('/api/projects/create').then(function (response) {
+      _this.usersFromBack = response.data.users;
+      _this.mobsFromBack = response.data.mobs;
+      __WEBPACK_IMPORTED_MODULE_0__axios_wrapper__["a" /* default */].get('/api/projects').then(function (response2) {
+        _this.projects = response2.data;
+      }).catch(function (err) {
+        console.error(err);
+      });
     }).catch(function (err) {
       console.error(err);
     });
@@ -2406,6 +2438,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     navigateToProject: function navigateToProject(projectSlug) {
       this.$router.push({ name: 'project', params: { slug: projectSlug } });
+    },
+    openCreateProjectModal: function openCreateProjectModal() {
+      this.showModal = true;
+    },
+    closeModal: function closeModal() {
+      this.showModal = false;
     }
   }
 });
@@ -39475,37 +39513,65 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "projects container" }, [
-    _c("h1", [_vm._v("Scrum Battle")]),
-    _vm._v(" "),
-    _vm.projects.length > 0
-      ? _c(
-          "div",
-          { staticClass: "projects-container" },
-          _vm._l(_vm.projects, function(project) {
-            return _c(
-              "div",
-              {
-                key: project.id,
-                staticClass: "project",
-                on: {
-                  click: function($event) {
-                    _vm.navigateToProject(project.slug)
+  return _c(
+    "div",
+    { staticClass: "projects container" },
+    [
+      _c("h1", [_vm._v("Scrum Battle")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "btn", on: { click: _vm.openCreateProjectModal } },
+        [_vm._v("Créer un nouveau projet")]
+      ),
+      _vm._v(" "),
+      _vm.projects.length > 0
+        ? _c(
+            "div",
+            { staticClass: "projects-container" },
+            _vm._l(_vm.projects, function(project) {
+              return _c(
+                "div",
+                {
+                  key: project.id,
+                  staticClass: "project",
+                  on: {
+                    click: function($event) {
+                      _vm.navigateToProject(project.slug)
+                    }
                   }
-                }
-              },
-              [
-                _c("img", {
-                  attrs: { src: project.mob.image, alt: "background" }
-                }),
-                _vm._v(" "),
-                _c("p", [_vm._v(_vm._s(project.name))])
-              ]
-            )
-          })
-        )
-      : _vm._e()
-  ])
+                },
+                [
+                  _c("img", {
+                    attrs: {
+                      src: "/assets/background/jungle.png",
+                      alt: "background"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(project.name))])
+                ]
+              )
+            })
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showModal
+        ? _c("modal", { staticClass: "modal", on: { close: _vm.closeModal } }, [
+            _c("div", { attrs: { slot: "header" }, slot: "header" }, [
+              _c("h1", [_vm._v("Créer un projet")])
+            ]),
+            _vm._v(" "),
+            _c("div", { attrs: { slot: "body" }, slot: "body" }, [
+              _vm._v("\n      Coucou\n    ")
+            ]),
+            _vm._v(" "),
+            _c("div", { attrs: { slot: "footer" }, slot: "footer" })
+          ])
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

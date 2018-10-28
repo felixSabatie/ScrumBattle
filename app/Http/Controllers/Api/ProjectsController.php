@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\Mob;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,6 +23,14 @@ class ProjectsController extends Controller
         return response()->json($projects);
     }
 
+    public function create()
+    {
+        $data = collect();
+        $data->put('mobs', Mob::all());
+        $data->put('users', User::all());
+        return response()->json($data);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -40,7 +49,6 @@ class ProjectsController extends Controller
             return response()->json('The data is unprocessable', 422);
         }
         try {
-            // TODO handle users
             $project = new Project();
             $project->name = $request->name;
             $project->slug = str_slug($request->name);

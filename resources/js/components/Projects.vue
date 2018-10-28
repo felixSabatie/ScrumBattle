@@ -1,34 +1,69 @@
 <template lang="html">
   <div class="projects container">
     <h1>Scrum Battle</h1>
+    <button @click="openCreateProjectModal" class="btn">Créer un nouveau projet</button>
     <div class="projects-container" v-if="projects.length > 0">
       <div class="project" v-for="project in projects" :key="project.id" @click="navigateToProject(project.slug)">
-        <img :src="project.mob.image" alt="background">
+        <img src="/assets/background/jungle.png" alt="background">
         <p>{{project.name}}</p>
       </div>
     </div>
+
+    <modal v-if="showModal" @close="closeModal" class="modal">
+      <div slot="header">
+        <h1>Créer un projet</h1>
+      </div>
+
+      <div slot="body">
+        Coucou
+      </div>
+
+      <div slot="footer">
+
+      </div>
+    </modal>
   </div>
 </template>
 
 <script>
 import axios from '../axios-wrapper';
+import Modal from './Modal';
 
 export default {
   data() {
     return {
-      projects: []
+      projects: [],
+      showModal: false,
+      name: "",
+      mob_id: undefined,
+      users: [],
+      usersFromBack: [],
+      mobsFromBack: []
     }
   },
+  components: {Modal},
   mounted() {
-    axios.get('/api/projects').then(response => {
-      this.projects = response.data;
+    axios.get('/api/projects/create').then(response => {
+      this.usersFromBack = response.data.users;
+      this.mobsFromBack = response.data.mobs;
+      axios.get('/api/projects').then(response2 => {
+        this.projects = response2.data;
+      }).catch(err => {
+        console.error(err);
+      });
     }).catch(err => {
-      console.error(err)
-    });
+      console.error(err);
+    })
   },
   methods: {
     navigateToProject(projectSlug) {
       this.$router.push({name: 'project', params: {slug: projectSlug}});
+    },
+    openCreateProjectModal() {
+      this.showModal = true;
+    },
+    closeModal() {
+      this.showModal = false;
     }
   }
 }
