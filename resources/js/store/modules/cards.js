@@ -29,10 +29,10 @@ const state = {
       })
       
     }, 
-    removeUsertoCard(state, payload) {
+    removeUserFromCard(state, payload) {
       state.cards.forEach(card => {
         if(card.id === payload.card.id) {
-          card.users = card.users.filter(user => user.id === payload.user.id);
+          card.users = card.users.filter(user => user.id !== payload.user.id);
         }
       })
     },

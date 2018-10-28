@@ -1,8 +1,9 @@
 <template>
-    <div class="progression" :style="{height: progression.height}">
+    <div class="progression" :style="{height: height}">
         <div class="progress-wrapper">
+            {{user.donePoints}}
             <div class="progress" ref="progress"></div>
-            <img class="user_icon" ref="user_icon" :src="progression.image"/>
+            <img class="user_icon" ref="user_icon" :src="user.avatar"/>
         </div>
     </div>
 </template>
@@ -10,24 +11,26 @@
 <script>
     export default {
         name: "Progression",
-        props: {
-            progression: {
-                type: Object,
-            },
-        },
+        props: [
+            'user',
+            'height'
+        ],
         data() {
             return {
-                percent: this.progression.percent,
+                test: this.user.donePoints,
             }
         },
-        mounted: function () {
-            this.move();
+        mounted() {
+            //this.move();
+        },
+        computed: {
+            percent() {
+                return this.user.donePoints/this.user.totalPoints;
+            }
         },
         watch: {
-            percent: {
-                handler() {
-                    this.move();
-                }
+            user() {
+                console.log('changed in child');
             }
         },
         methods: {
@@ -35,7 +38,6 @@
                 var elem = this.$refs.progress;
                 var icon = this.$refs.user_icon;
                 var width = elem.clientWidth /elem.offsetParent.clientWidth;
-                console.log(this.percent);
                 var id = setInterval(frame, 10, this.percent);
                 function frame(percent) {
                     if (width >= percent) {
@@ -52,7 +54,7 @@
     }
 </script>
 
-<style scoped>
+<style lang=scss>
     .progression{
         width: 80%;
         position: relative;

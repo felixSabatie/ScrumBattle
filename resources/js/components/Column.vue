@@ -108,7 +108,7 @@ export default {
       }
     },
     removeUserFromCard(card, user) {
-      card.users = card.users.filter(usr => usr.id !== user.id);
+  
       axios.delete(`/api/cards/${card.id}/users/${user.id}`).then(response => {
         //Yeah deleted
       });
@@ -122,6 +122,7 @@ export default {
         card: card,
         user: user
       });
+
       if (card.column_id === 3) {
         this.$store.commit("users/removeFromBoth", storePayload);
       } else {

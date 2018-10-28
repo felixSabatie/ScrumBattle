@@ -15,35 +15,46 @@
 </template>
 
 <script>
-    import Columns from "./Columns";
-    import NotFound from './NotFound';
-    import Game from './Game';
-    import Progressions from './Progressions';
-    import axios from '../axios-wrapper';
+import Columns from "./Columns";
+import NotFound from "./NotFound";
+import Game from "./Game";
+import Progressions from "./Progressions";
+import axios from "../axios-wrapper";
 
-    export default {
-        name: "Project",
-        components: {
-            Columns, NotFound, Game, Progressions
-        },
-        data() {
-            return {
-                project: undefined,
-                notFound: false
-            }
-        },
+export default {
+  name: "Project",
+  components: {
+    Columns,
+    NotFound,
+    Game,
+    Progressions
+  },
+  data() {
+    return {
+      project: undefined,
+      notFound: false
+    };
+  },
 
-        mounted() {
-            axios.get(`/api/projects/${this.$route.params.slug}`).then(response => {
-                this.project = response.data;
-                this.$store.commit('projects/setProject', this.project)
-                this.$store.commit('users/setUsers', this.project.users);
-                this.$store.commit('cards/setCards', this.project.columns.flatMap(col => col.cards));
-            }).catch(err => {
-                this.notFound = true;
-            });
-        }
-    }
+  mounted() {
+    axios
+      .get(`/api/projects/${this.$route.params.slug}`)
+      .then(response => {
+        this.project = response.data;
+        this.$store.commit("projects/setProject", this.project);
+        //todo temp
+       
+        this.$store.commit("users/setUsers", this.project.users);
+        this.$store.commit(
+          "cards/setCards",
+          this.project.columns.flatMap(col => col.cards)
+        );
+      })
+      .catch(err => {
+        this.notFound = true;
+      });
+  }
+};
 </script>
 
 <style lang="scss">

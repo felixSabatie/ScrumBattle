@@ -1764,6 +1764,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -1782,7 +1783,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   data: function data() {
     return {
       showModal: false,
-      toRemove: [],
       pointList: [1, 2, 3, 5, 8, 13, 21]
     };
   },
@@ -1969,9 +1969,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       }
     },
     removeUserFromCard: function removeUserFromCard(card, user) {
-      card.users = card.users.filter(function (usr) {
-        return usr.id !== user.id;
-      });
+
       __WEBPACK_IMPORTED_MODULE_2__axios_wrapper__["a" /* default */].delete("/api/cards/" + card.id + "/users/" + user.id).then(function (response) {
         //Yeah deleted
       });
@@ -1985,6 +1983,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         card: card,
         user: user
       });
+
       if (card.column_id === 3) {
         this.$store.commit("users/removeFromBoth", storePayload);
       } else {
@@ -2330,28 +2329,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Progression",
-    props: {
-        progression: {
-            type: Object
-        }
-    },
+    props: ['user', 'height'],
     data: function data() {
         return {
-            percent: this.progression.percent
+            test: this.user.donePoints
         };
     },
-
     mounted: function mounted() {
-        this.move();
+        //this.move();
+    },
+
+    computed: {
+        percent: function percent() {
+            return this.user.donePoints / this.user.totalPoints;
+        }
     },
     watch: {
-        percent: {
-            handler: function handler() {
-                this.move();
-            }
+        user: function user() {
+            console.log('changed in child');
         }
     },
     methods: {
@@ -2359,7 +2358,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var elem = this.$refs.progress;
             var icon = this.$refs.user_icon;
             var width = elem.clientWidth / elem.offsetParent.clientWidth;
-            console.log(this.percent);
             var id = setInterval(frame, 10, this.percent);
             function frame(percent) {
                 if (width >= percent) {
@@ -2382,8 +2380,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Progression__ = __webpack_require__("./resources/js/components/Progression.vue");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Progression___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Progression__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Progression__ = __webpack_require__("./resources/js/components/Progression.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Progression___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__Progression__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
@@ -2393,42 +2394,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "Progressions",
-    components: {
-        Progression: __WEBPACK_IMPORTED_MODULE_0__Progression___default.a
-    },
-    data: function data() {
-        return {
-            progressions: [],
-            goal_img: ""
-        };
-    },
-    mounted: function mounted() {
-        this.goal_img = "/images/goal_flag.png";
-        var nbProgressions = 3;
-        var _height = 100 / nbProgressions + "%";
-        this.progressions = [
-        //@Todo: backend call
-        {
-            id: 1,
-            image: '/images/user1.png',
-            percent: 25,
-            height: _height
-        }, {
-            id: 2,
-            image: '/images/user2.png',
-            percent: 35,
-            height: _height
-        }, {
-            id: 3,
-            image: '/images/user3.png',
-            percent: 45,
-            height: _height
-        }];
+  name: "Progressions",
+  components: {
+    Progression: __WEBPACK_IMPORTED_MODULE_1__Progression___default.a
+  },
+  data: function data() {
+    return {
+      goal_img: "",
+      height: 0
+    };
+  },
+
+  computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapState */])({
+    users: function users(state) {
+      return state.users.users;
     }
+  })),
+  watch: {
+    users: {
+      handler: function handler() {
+        console.log("watch set in parent");
+
+        this.$forceUpdate();
+      },
+
+      deep: true
+    }
+  },
+  mounted: function mounted() {
+    this.goal_img = "/images/goal_flag.png";
+    this.height = 100 / this.users.length + "%";
+  }
 });
 
 /***/ }),
@@ -2471,30 +2472,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "Project",
-    components: {
-        Columns: __WEBPACK_IMPORTED_MODULE_0__Columns___default.a, NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a, Game: __WEBPACK_IMPORTED_MODULE_2__Game___default.a, Progressions: __WEBPACK_IMPORTED_MODULE_3__Progressions___default.a
-    },
-    data: function data() {
-        return {
-            project: undefined,
-            notFound: false
-        };
-    },
-    mounted: function mounted() {
-        var _this = this;
+  name: "Project",
+  components: {
+    Columns: __WEBPACK_IMPORTED_MODULE_0__Columns___default.a,
+    NotFound: __WEBPACK_IMPORTED_MODULE_1__NotFound___default.a,
+    Game: __WEBPACK_IMPORTED_MODULE_2__Game___default.a,
+    Progressions: __WEBPACK_IMPORTED_MODULE_3__Progressions___default.a
+  },
+  data: function data() {
+    return {
+      project: undefined,
+      notFound: false
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
 
-        __WEBPACK_IMPORTED_MODULE_4__axios_wrapper__["a" /* default */].get('/api/projects/' + this.$route.params.slug).then(function (response) {
-            _this.project = response.data;
-            _this.$store.commit('projects/setProject', _this.project);
-            _this.$store.commit('users/setUsers', _this.project.users);
-            _this.$store.commit('cards/setCards', _this.project.columns.flatMap(function (col) {
-                return col.cards;
-            }));
-        }).catch(function (err) {
-            _this.notFound = true;
-        });
-    }
+    __WEBPACK_IMPORTED_MODULE_4__axios_wrapper__["a" /* default */].get("/api/projects/" + this.$route.params.slug).then(function (response) {
+      _this.project = response.data;
+      _this.$store.commit("projects/setProject", _this.project);
+      //todo temp
+
+      _this.$store.commit("users/setUsers", _this.project.users);
+      _this.$store.commit("cards/setCards", _this.project.columns.flatMap(function (col) {
+        return col.cards;
+      }));
+    }).catch(function (err) {
+      _this.notFound = true;
+    });
+  }
 });
 
 /***/ }),
@@ -6872,7 +6878,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.progressions[data-v-56b315fa] {\n    height: 100%;\n    width: 100%;\n    background-color: #a0ebef;\n    position: relative;\n}\n.goal_wrapper[data-v-56b315fa] {\n    position: absolute;\n    width: 20%;\n    height: 100%;\n    right: 0%;\n    top: 0%;\n}\n.goal_wrapper img[data-v-56b315fa] {\n     position: absolute;\n     max-height: 100%;\n     max-width: 100%;\n     display: inline-block;\n     left: 20%;\n}\n\n", ""]);
+exports.push([module.i, "\n.progressions[data-v-56b315fa] {\n  height: 100%;\n  width: 100%;\n  background-color: #a0ebef;\n  position: relative;\n}\n.goal_wrapper[data-v-56b315fa] {\n  position: absolute;\n  width: 20%;\n  height: 100%;\n  right: 0%;\n  top: 0%;\n}\n.goal_wrapper img[data-v-56b315fa] {\n  position: absolute;\n  max-height: 100%;\n  max-width: 100%;\n  display: inline-block;\n  left: 20%;\n}\n", ""]);
 
 // exports
 
@@ -6894,7 +6900,7 @@ exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padd
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue":
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
@@ -6902,7 +6908,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.progression[data-v-87299fc0]{\n    width: 80%;\n    position: relative;\n}\n.progress-wrapper[data-v-87299fc0] {\n    width: 100%;\n    height: 100%;\n    position: absolute;\n}\n.progress[data-v-87299fc0] {\n    width: 1%;\n    height: 100%;\n    background-color: #2abb9b;\n    position: absolute;\n}\n.progress-wrapper img[data-v-87299fc0] {\n    display: block;\n    position: absolute;\n    top: 50%;\n    left: 1%;\n    max-height: 100%;\n    max-width: 100%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n}\n", ""]);
+exports.push([module.i, "\n.progression {\n  width: 80%;\n  position: relative;\n}\n.progress-wrapper {\n  width: 100%;\n  height: 100%;\n  position: absolute;\n}\n.progress {\n  width: 1%;\n  height: 100%;\n  background-color: #2abb9b;\n  position: absolute;\n}\n.progress-wrapper img {\n  display: block;\n  position: absolute;\n  top: 50%;\n  left: 1%;\n  max-height: 100%;\n  max-width: 100%;\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n}\n", ""]);
 
 // exports
 
@@ -40008,10 +40014,10 @@ var render = function() {
     "div",
     { staticClass: "progressions" },
     [
-      _vm._l(_vm.progressions, function(progression) {
+      _vm._l(_vm.users, function(user) {
         return _c("progression", {
-          key: progression.id,
-          attrs: { progression: progression }
+          key: user.id,
+          attrs: { user: user, height: _vm.height }
         })
       }),
       _vm._v(" "),
@@ -40057,7 +40063,7 @@ if (false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-87299fc0\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Progression.vue":
+/***/ "./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-87299fc0\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Progression.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -40066,15 +40072,16 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "progression", style: { height: _vm.progression.height } },
+    { staticClass: "progression", style: { height: _vm.height } },
     [
       _c("div", { staticClass: "progress-wrapper" }, [
+        _vm._v("\n        " + _vm._s(_vm.user.donePoints) + "\n        "),
         _c("div", { ref: "progress", staticClass: "progress" }),
         _vm._v(" "),
         _c("img", {
           ref: "user_icon",
           staticClass: "user_icon",
-          attrs: { src: _vm.progression.image }
+          attrs: { src: _vm.user.avatar }
         })
       ])
     ]
@@ -43359,23 +43366,23 @@ if(false) {
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue":
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue":
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue");
+var content = __webpack_require__("./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("dfae15fa", content, false, {});
+var update = __webpack_require__("./node_modules/vue-style-loader/lib/addStylesClient.js")("2099073e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Progression.vue", function() {
-     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Progression.vue");
+   module.hot.accept("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Progression.vue", function() {
+     var newContent = require("!!../../../node_modules/css-loader/index.js!../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/sass-loader/lib/loader.js!../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./Progression.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -56783,19 +56790,19 @@ module.exports = Component.exports
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":true,\"hasInlineConfig\":true}!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue")
+  __webpack_require__("./node_modules/vue-style-loader/index.js!./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-87299fc0\",\"scoped\":false,\"hasInlineConfig\":true}!./node_modules/sass-loader/lib/loader.js!./node_modules/vue-loader/lib/selector.js?type=styles&index=0!./resources/js/components/Progression.vue")
 }
 var normalizeComponent = __webpack_require__("./node_modules/vue-loader/lib/component-normalizer.js")
 /* script */
 var __vue_script__ = __webpack_require__("./node_modules/babel-loader/lib/index.js?{\"cacheDirectory\":true,\"presets\":[[\"env\",{\"modules\":false,\"targets\":{\"browsers\":[\"> 2%\"],\"uglify\":true}}]],\"plugins\":[\"transform-object-rest-spread\",[\"transform-runtime\",{\"polyfill\":false,\"helpers\":false}]]}!./node_modules/vue-loader/lib/selector.js?type=script&index=0!./resources/js/components/Progression.vue")
 /* template */
-var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-87299fc0\",\"hasScoped\":true,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Progression.vue")
+var __vue_template__ = __webpack_require__("./node_modules/vue-loader/lib/template-compiler/index.js?{\"id\":\"data-v-87299fc0\",\"hasScoped\":false,\"buble\":{\"transforms\":{}}}!./node_modules/vue-loader/lib/selector.js?type=template&index=0!./resources/js/components/Progression.vue")
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = "data-v-87299fc0"
+var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -57262,11 +57269,11 @@ var mutations = {
       }
     });
   },
-  removeUsertoCard: function removeUsertoCard(state, payload) {
+  removeUserFromCard: function removeUserFromCard(state, payload) {
     state.cards.forEach(function (card) {
       if (card.id === payload.card.id) {
         card.users = card.users.filter(function (user) {
-          return user.id === payload.user.id;
+          return user.id !== payload.user.id;
         });
       }
     });
@@ -57332,6 +57339,11 @@ var mutations = {
     //todo tmp until backend is plugged
     project.donePoints = 0;
     project.totalPoints = 0;
+    project.users = project.users.map(function (user) {
+      user.totalPoints = 5;
+      user.donePoints = 0;
+      return user;
+    });
   },
   addRemove: function addRemove(state, payload) {
     state.currentProject.totalPoints += payload.new - payload.old;
@@ -57381,7 +57393,11 @@ var state = {
 };
 
 // getters
-var getters = {};
+var getters = {
+    getUsers: function getUsers(state) {
+        return state.users;
+    }
+};
 
 // actions
 var actions = {};
@@ -57390,68 +57406,70 @@ var actions = {};
 var mutations = {
     setUsers: function setUsers(state, users) {
         state.users = users;
-
-        //todo temp
-        state.users.forEach(function (user) {
-            user.totalPoints = 0;
-            user.donePoints = 0;
-        });
     },
     removeFromTotal: function removeFromTotal(state, payload) {
         var user = payload.user;
         var amount = payload.amount;
 
-        state.users.forEach(function (usr) {
+        state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
                 usr.totalPoints -= amount;
             }
+            return usr;
         });
     },
     removeFromDone: function removeFromDone(state, payload) {
         var user = payload.user;
         var amount = payload.amount;
-        state.users.forEach(function (usr) {
+        state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
                 usr.donePoints -= amount;
             }
+            return usr;
         });
     },
     removeFromBoth: function removeFromBoth(state, payload) {
         var user = payload.user;
         var amount = payload.amount;
-        state.users.forEach(function (usr) {
+        state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
                 usr.donePoints -= amount;
                 usr.totalPoints -= amount;
             }
+
+            return usr;
         });
     },
     addToTotal: function addToTotal(state, payload) {
         var user = payload.user;
         var amount = payload.amount;
-        state.users.forEach(function (usr) {
+        state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
                 usr.totalPoints += amount;
             }
+            return usr;
         });
     },
     addToDone: function addToDone(state, payload) {
         var user = payload.user;
         var amount = payload.amount;
-        state.users.map(function (usr) {
+        state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
                 usr.donePoints += amount;
             }
+
+            return usr;
         });
     },
-    addToBoth: function addToBoth(state, paylaod) {
+    addToBoth: function addToBoth(state, payload) {
         var user = payload.user;
         var amount = payload.amount;
-        state.users.forEach(function (usr) {
+        state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
                 usr.donePoints += amount;
                 usr.totalPoints += amount;
             }
+            return usr;
         });
     }
 };

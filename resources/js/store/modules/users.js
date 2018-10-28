@@ -3,7 +3,11 @@ const state = {
 };
 
 // getters
-const getters = {};
+const getters = {
+    getUsers: (state) => {
+       return state.users
+    }
+};
 
 // actions
 const actions = {};
@@ -13,72 +17,76 @@ const mutations = {
     setUsers(state, users) {
         state.users = users;
 
-        //todo temp
-        state.users.forEach(user => {
-            user.totalPoints = 0;
-            user.donePoints = 0;
-        })
+       
     },
 
     removeFromTotal(state, payload) {
         const user = payload.user;
         const amount = payload.amount;
-
-        state.users.forEach(usr => {
+        
+        state.users = state.users.map(usr => {
             if (usr.id == user.id) {
                 usr.totalPoints -= amount;
             }
+            return usr; 
         });
     },
 
     removeFromDone(state, payload) {
         const user = payload.user;
         const amount = payload.amount;
-        state.users.forEach(usr => {
+        state.users = state.users.map(usr => {
             if (usr.id == user.id) {
                 usr.donePoints -= amount;
             }
+            return usr;
         });
     },
 
     removeFromBoth(state, payload) {
         const user = payload.user;
         const amount = payload.amount;
-        state.users.forEach(usr => {
+        state.users = state.users.map(usr => {
             if (usr.id == user.id) {
                 usr.donePoints -= amount;
                 usr.totalPoints -= amount;
             }
+
+            return usr;
         });
     },
 
     addToTotal(state, payload) {
         const user = payload.user;
         const amount = payload.amount;
-        state.users.forEach(usr => {
+        state.users = state.users.map(usr => {
             if (usr.id == user.id) {
                 usr.totalPoints += amount;
             }
+            return usr;
         });
     },
     addToDone(state, payload) {
         const user = payload.user;
         const amount = payload.amount;
-        state.users.map(usr => {
-            if (usr.id == user.id) {
+        state.users = state.users.map(usr => {
+            if(usr.id == user.id) {
                 usr.donePoints += amount;
             }
-        });
+
+            return usr;
+        })
     },
-    addToBoth(state, paylaod) {
+    addToBoth(state, payload) {
         const user = payload.user;
         const amount = payload.amount;
-        state.users.forEach(usr => {
+        state.users = state.users.map(usr => {
             if (usr.id == user.id) {
                 usr.donePoints += amount;
                 usr.totalPoints += amount;
             }
-        });
+            return usr;
+        }); 
     }
 };
 

@@ -1,5 +1,6 @@
 <template>
   <div class="card" >
+    
     <div class="card-wrapper" @click="openModal">
       <div class="content" >
         {{card.name}}
@@ -73,12 +74,11 @@ export default {
   data() {
     return {
       showModal: false,
-      toRemove: [],
       pointList: [1, 2, 3, 5, 8, 13, 21]
     };
   },
   computed: mapState({
-    users: state => state.projects.currentProject.users
+    users: state => state.projects.currentProject.users,
   }),
   methods: {
     selectPoint(points) {

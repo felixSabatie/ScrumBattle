@@ -28,7 +28,12 @@ const mutations = {
 
         //todo tmp until backend is plugged
         project.donePoints = 0;
-        project.totalPoints = 0;
+        project.totalPoints = 0; 
+        project.users = project.users.map(user => {
+          user.totalPoints = 5;
+          user.donePoints = 0;
+          return user;
+        });
     },
 
     addRemove(state, payload) {
