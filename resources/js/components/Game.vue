@@ -8,7 +8,7 @@
 <script>
     import Mob from "./Mob";
     import Players from "./Players";
-    import { mapState } from "vuex";
+    import {mapState} from "vuex";
 
     export default {
         name: "Game",
@@ -17,10 +17,10 @@
             Players,
             Mob
         },
-        data(){
-          return{
-              animateMob:false,
-          }
+        data() {
+            return {
+                animateMob: false,
+            }
         },
         computed: {
             ...mapState({
@@ -33,14 +33,14 @@
         watch: {
             players(newUsers, oldUsers) {
                 let animate = false;
-                for(let user of newUsers) {
+                for (let user of newUsers) {
                     let oldUser = oldUsers.find(oldUser => oldUser.id === user.id);
-                    if(oldUser.done_points < user.done_points) {
+                    if (oldUser.done_points < user.done_points) {
                         animate = true;
                     }
                 }
 
-                if(animate) {
+                if (animate) {
                     this.animate();
                 }
             }
@@ -48,12 +48,16 @@
         methods: {
             animate() {
                 let that = this;
-                this.animateMob = true;
-                this.$nextTick(() => {
-                    setTimeout(function () {
-                        that.animateMob = false;
-                    }, 2000);
-                });
+                console.log("before");
+                setTimeout(function () {
+                    console.log("in");
+                    that.animateMob = true;
+                    that.$nextTick(() => {
+                        setTimeout(function () {
+                            that.animateMob = false;
+                        }, 2000);
+                    });
+                }, 585);
             },
         }
     };

@@ -25,7 +25,7 @@
     @import "../../sass/app";
 
     .mob {
-        height: 100px;
+        height: 160px;
         position: absolute;
         bottom: 10%;
         right: 10%;

@@ -2197,12 +2197,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     methods: {
         animate: function animate() {
             var that = this;
-            this.animateMob = true;
-            this.$nextTick(function () {
-                setTimeout(function () {
-                    that.animateMob = false;
-                }, 2000);
-            });
+            console.log("before");
+            setTimeout(function () {
+                console.log("in");
+                that.animateMob = true;
+                that.$nextTick(function () {
+                    setTimeout(function () {
+                        that.animateMob = false;
+                    }, 2000);
+                });
+            }, 585);
         }
     }
 });
@@ -6994,7 +6998,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.mob {\n  height: 100px;\n  position: absolute;\n  bottom: 10%;\n  right: 10%;\n}\n.mob-image {\n  height: 100%;\n}\n.hurt {\n  -webkit-animation: hurt linear 0.2s;\n          animation: hurt linear 0.2s;\n  -webkit-animation-iteration-count: 10;\n          animation-iteration-count: 10;\n}\n@-webkit-keyframes hurt {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n50% {\n    -webkit-transform: translate(2%, -2%) scaleX(0.9);\n            transform: translate(2%, -2%) scaleX(0.9);\n    -webkit-filter: opacity(25%);\n            filter: opacity(25%);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n@keyframes hurt {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n50% {\n    -webkit-transform: translate(2%, -2%) scaleX(0.9);\n            transform: translate(2%, -2%) scaleX(0.9);\n    -webkit-filter: opacity(25%);\n            filter: opacity(25%);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.mob {\n  height: 160px;\n  position: absolute;\n  bottom: 10%;\n  right: 10%;\n}\n.mob-image {\n  height: 100%;\n}\n.hurt {\n  -webkit-animation: hurt linear 0.2s;\n          animation: hurt linear 0.2s;\n  -webkit-animation-iteration-count: 10;\n          animation-iteration-count: 10;\n}\n@-webkit-keyframes hurt {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n50% {\n    -webkit-transform: translate(2%, -2%) scaleX(0.9);\n            transform: translate(2%, -2%) scaleX(0.9);\n    -webkit-filter: opacity(25%);\n            filter: opacity(25%);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n@keyframes hurt {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n50% {\n    -webkit-transform: translate(2%, -2%) scaleX(0.9);\n            transform: translate(2%, -2%) scaleX(0.9);\n    -webkit-filter: opacity(25%);\n            filter: opacity(25%);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n", ""]);
 
 // exports
 
