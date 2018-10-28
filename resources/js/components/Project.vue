@@ -41,9 +41,9 @@ export default {
       .get(`/api/projects/${this.$route.params.slug}`)
       .then(response => {
         this.project = response.data;
+        
         this.$store.commit("projects/setProject", this.project);
-        //todo temp
-       
+        console.log(this.project);
         this.$store.commit("users/setUsers", this.project.users);
         this.$store.commit(
           "cards/setCards",

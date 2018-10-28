@@ -2331,48 +2331,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: "Progression",
-    props: ['user', 'height'],
-    data: function data() {
-        return {
-            percent: 0,
-            oldPercent: 0
-        };
-    },
-    mounted: function mounted() {
-        this.move();
-    },
+  name: "Progression",
+  props: ["user", "height"],
+  data: function data() {
+    return {
+      percent: 0,
+      oldPercent: 0
+    };
+  },
+  mounted: function mounted() {
+    this.calculatePerc();
+    this.move();
+  },
 
-    computed: {},
-    watch: {
-        user: function user() {
-            this.percent = this.user.totalPoints !== 0 ? this.user.donePoints / this.user.totalPoints * 100 : 0;
-        },
-        percent: function percent(val, oldVal) {
-            this.oldPercent = oldVal;
-            this.move();
-        }
+
+  computed: {},
+  watch: {
+    user: function user() {
+      this.calculatePerc();
     },
-    methods: {
-        move: function move() {
-            var elem = this.$refs.progress;
-            var icon = this.$refs.user_icon;
-            var width = this.oldPercent;
-
-            var id = setInterval(function (percent, oldPercent) {
-                var stop = oldPercent > percent ? width <= percent : width >= percent;
-
-                if (stop) {
-                    clearInterval(id);
-                } else {
-                    oldPercent > percent ? width-- : width++;
-                    elem.style.width = width + '%';
-                    icon.style.left = width + '%';
-                }
-            }, 10, this.percent, this.oldPercent);
-        }
+    percent: function percent(val, oldVal) {
+      this.oldPercent = oldVal;
+      this.move();
     }
+  },
+  methods: {
+    calculatePerc: function calculatePerc() {
+      this.percent = this.user.total_points !== 0 ? this.user.done_points / this.user.total_points * 100 : 0;
+    },
+    move: function move() {
+      var elem = this.$refs.progress;
+      var icon = this.$refs.user_icon;
+      var width = this.oldPercent;
 
+      var id = setInterval(function (percent, oldPercent) {
+        var stop = oldPercent > percent ? width <= percent : width >= percent;
+
+        if (stop) {
+          clearInterval(id);
+        } else {
+          oldPercent > percent ? width-- : width++;
+          elem.style.width = width + "%";
+          icon.style.left = width + "%";
+        }
+      }, 10, this.percent, this.oldPercent);
+    }
+  }
 });
 
 /***/ }),
@@ -2503,9 +2507,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     __WEBPACK_IMPORTED_MODULE_4__axios_wrapper__["a" /* default */].get("/api/projects/" + this.$route.params.slug).then(function (response) {
       _this.project = response.data;
-      _this.$store.commit("projects/setProject", _this.project);
-      //todo temp
 
+      _this.$store.commit("projects/setProject", _this.project);
+      console.log(_this.project);
       _this.$store.commit("users/setUsers", _this.project.users);
       _this.$store.commit("cards/setCards", _this.project.columns.flatMap(function (col) {
         return col.cards;
@@ -57347,42 +57351,37 @@ var actions = {};
 var mutations = {
   setProject: function setProject(state, project) {
     state.currentProject = project;
-
-    //todo tmp until backend is plugged
-    project.donePoints = 0;
-    project.totalPoints = 0;
-    project.users = project.users.map(function (user) {
-      user.totalPoints = 0;
-      user.donePoints = 0;
-      return user;
+    state.currentProject.users.forEach(function (user) {
+      user.done_points = user.pivot.done_points;
+      user.total_points = user.pivot.total_points;
     });
   },
   addRemove: function addRemove(state, payload) {
-    state.currentProject.totalPoints += payload.new - payload.old;
+    state.currentProject.total_points += payload.new - payload.old;
 
     if (payload.column == 3) {
-      state.currentProject.donePoints += payload.new - payload.old;
+      state.currentProject.done_points += payload.new - payload.old;
     }
   },
   removeFromTotal: function removeFromTotal(state, amount) {
-    state.currentProject.totalPoints -= amount;
+    state.currentProject.total_points -= amount;
   },
   removeFromDone: function removeFromDone(state, amount) {
-    state.currentProject.donePoints -= amount;
+    state.currentProject.done_points -= amount;
   },
   removeFromBoth: function removeFromBoth(state, amount) {
-    state.currentProject.totalPoints -= amount;
-    state.currentProject.donePoints -= amount;
+    state.currentProject.total_points -= amount;
+    state.currentProject.done_points -= amount;
   },
   addToTotal: function addToTotal(state, amount) {
-    state.currentProject.totalPoints += amount;
+    state.currentProject.total_points += amount;
   },
   addToDone: function addToDone(state, amount) {
-    state.currentProject.donePoints += amount;
+    state.currentProject.done_points += amount;
   },
   addToBoth: function addToBoth(state, amount) {
-    state.currentProject.donePoints += amount;
-    state.currentProject.totalPoints += amount;
+    state.currentProject.done_points += amount;
+    state.currentProject.total_points += amount;
   }
 };
 
@@ -57425,7 +57424,7 @@ var mutations = {
 
         state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
-                usr.totalPoints -= amount;
+                usr.total_points -= amount;
             }
             return usr;
         });
@@ -57435,7 +57434,7 @@ var mutations = {
         var amount = payload.amount;
         state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
-                usr.donePoints -= amount;
+                usr.done_points -= amount;
             }
             return usr;
         });
@@ -57445,8 +57444,8 @@ var mutations = {
         var amount = payload.amount;
         state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
-                usr.donePoints -= amount;
-                usr.totalPoints -= amount;
+                usr.done_points -= amount;
+                usr.total_points -= amount;
             }
 
             return usr;
@@ -57457,7 +57456,7 @@ var mutations = {
         var amount = payload.amount;
         state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
-                usr.totalPoints += amount;
+                usr.total_points += amount;
             }
             return usr;
         });
@@ -57467,7 +57466,7 @@ var mutations = {
         var amount = payload.amount;
         state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
-                usr.donePoints += amount;
+                usr.done_points += amount;
             }
 
             return usr;
@@ -57478,8 +57477,8 @@ var mutations = {
         var amount = payload.amount;
         state.users = state.users.map(function (usr) {
             if (usr.id == user.id) {
-                usr.donePoints += amount;
-                usr.totalPoints += amount;
+                usr.done_points += amount;
+                usr.total_points += amount;
             }
             return usr;
         });

@@ -16,8 +16,6 @@ const actions = {};
 const mutations = {
     setUsers(state, users) {
         state.users = users;
-
-       
     },
 
     removeFromTotal(state, payload) {
@@ -26,7 +24,7 @@ const mutations = {
         
         state.users = state.users.map(usr => {
             if (usr.id == user.id) {
-                usr.totalPoints -= amount;
+                usr.total_points -= amount;
             }
             return usr; 
         });
@@ -37,7 +35,7 @@ const mutations = {
         const amount = payload.amount;
         state.users = state.users.map(usr => {
             if (usr.id == user.id) {
-                usr.donePoints -= amount;
+                usr.done_points -= amount;
             }
             return usr;
         });
@@ -48,8 +46,8 @@ const mutations = {
         const amount = payload.amount;
         state.users = state.users.map(usr => {
             if (usr.id == user.id) {
-                usr.donePoints -= amount;
-                usr.totalPoints -= amount;
+                usr.done_points -= amount;
+                usr.total_points -= amount;
             }
 
             return usr;
@@ -61,7 +59,7 @@ const mutations = {
         const amount = payload.amount;
         state.users = state.users.map(usr => {
             if (usr.id == user.id) {
-                usr.totalPoints += amount;
+                usr.total_points += amount;
             }
             return usr;
         });
@@ -71,7 +69,7 @@ const mutations = {
         const amount = payload.amount;
         state.users = state.users.map(usr => {
             if(usr.id == user.id) {
-                usr.donePoints += amount;
+                usr.done_points += amount;
             }
 
             return usr;
@@ -82,8 +80,8 @@ const mutations = {
         const amount = payload.amount;
         state.users = state.users.map(usr => {
             if (usr.id == user.id) {
-                usr.donePoints += amount;
-                usr.totalPoints += amount;
+                usr.done_points += amount;
+                usr.total_points += amount;
             }
             return usr;
         }); 

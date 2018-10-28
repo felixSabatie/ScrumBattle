@@ -25,49 +25,44 @@ const actions = {};
 const mutations = {
     setProject(state, project) {
         state.currentProject = project;
-
-        //todo tmp until backend is plugged
-        project.donePoints = 0;
-        project.totalPoints = 0; 
-        project.users = project.users.map(user => {
-          user.totalPoints = 0;
-          user.donePoints = 0;
-          return user;
-        });
+        state.currentProject.users.forEach(user => {
+          user.done_points = user.pivot.done_points;
+          user.total_points = user.pivot.total_points;
+        })
     },
 
     addRemove(state, payload) {
-      state.currentProject.totalPoints += (payload.new - payload.old);
+      state.currentProject.total_points += (payload.new - payload.old);
 
       if(payload.column == 3) {
-        state.currentProject.donePoints += (payload.new - payload.old);
+        state.currentProject.done_points += (payload.new - payload.old);
       }
     },
    
     removeFromTotal(state, amount) {
-        state.currentProject.totalPoints -= amount;
+        state.currentProject.total_points -= amount;
     },
 
     removeFromDone(state, amount) {
-        state.currentProject.donePoints -= amount;
+        state.currentProject.done_points -= amount;
     },
 
     removeFromBoth(state, amount) {
-      state.currentProject.totalPoints -= amount
-      state.currentProject.donePoints -= amount
+      state.currentProject.total_points -= amount
+      state.currentProject.done_points -= amount
     },
 
     addToTotal(state, amount) {
-      state.currentProject.totalPoints += amount;
+      state.currentProject.total_points += amount;
     },
 
     addToDone(state, amount) {
-      state.currentProject.donePoints += amount;
+      state.currentProject.done_points += amount;
     },
 
     addToBoth(state, amount) {
-      state.currentProject.donePoints += amount;
-      state.currentProject.totalPoints += amount;
+      state.currentProject.done_points += amount;
+      state.currentProject.total_points += amount;
     }
 };
 
