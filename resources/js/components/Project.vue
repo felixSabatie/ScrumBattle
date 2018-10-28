@@ -2,7 +2,7 @@
     <div class="project">
         <NotFound v-if="notFound" />
         <div class="project-content" v-else-if="project !== undefined">
-          <Game />
+          <Game :project="project" />
           <div class="columns-container">
             <Columns :columns="project.columns" />
           </div>

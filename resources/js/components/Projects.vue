@@ -4,7 +4,7 @@
     <button @click="openCreateProjectModal" class="btn">Créer un nouveau projet</button>
     <div class="projects-container" v-if="projects.length > 0">
       <div class="project" v-for="project in projects" :key="project.id" @click="navigateToProject(project.slug)">
-        <img src="/assets/background/jungle.png" alt="background">
+        <img :src="'/assets/background/' + (project.id % 3 + 1) + '.png'" alt="background">
         <p>{{project.name}}</p>
       </div>
     </div>

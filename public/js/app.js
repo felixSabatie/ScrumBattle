@@ -2022,10 +2022,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Game",
-    props: {},
+    props: ['project'],
     components: {
         Players: __WEBPACK_IMPORTED_MODULE_1__Players___default.a,
         Mob: __WEBPACK_IMPORTED_MODULE_0__Mob___default.a
+    },
+    mounted: function mounted() {
+        document.querySelector('.game').first().s;
     },
     getBackground: function getBackground() {
         return "";
@@ -6669,7 +6672,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.game {\n  height: 200px;\n  width: 100%;\n  background-image: url(\"/assets/background/jungle.png\");\n  background-size: auto 100%;\n  background-position: left bottom;\n  position: relative;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.game {\n  height: 200px;\n  width: 100%;\n  background-size: auto 100%;\n  background-position: left bottom;\n  position: relative;\n}\n.game.project-1 {\n    background-image: url(\"/assets/background/1.png\");\n}\n.game.project-2 {\n    background-image: url(\"/assets/background/2.png\");\n}\n.game.project-3 {\n    background-image: url(\"/assets/background/3.png\");\n}\n", ""]);
 
 // exports
 
@@ -39439,7 +39442,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "game" },
+    {
+      staticClass: "game",
+      class: "project-" + ((_vm.project.id % 3) + 1).toString()
+    },
     [_c("players"), _vm._v(" "), _c("mob")],
     1
   )
@@ -39600,7 +39606,8 @@ var render = function() {
                 [
                   _c("img", {
                     attrs: {
-                      src: "/assets/background/jungle.png",
+                      src:
+                        "/assets/background/" + ((project.id % 3) + 1) + ".png",
                       alt: "background"
                     }
                   }),
@@ -40091,7 +40098,7 @@ var render = function() {
               "div",
               { staticClass: "project-content" },
               [
-                _c("Game"),
+                _c("Game", { attrs: { project: _vm.project } }),
                 _vm._v(" "),
                 _c(
                   "div",
