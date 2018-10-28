@@ -1,11 +1,17 @@
 <template lang="html">
   <div class="projects container">
-    <h1>Scrum Battle</h1>
-    <button @click="openCreateProjectModal" class="btn">Créer un nouveau projet</button>
-    <div class="projects-container" v-if="projects.length > 0">
-      <div class="project" v-for="project in projects" :key="project.id" @click="navigateToProject(project.slug)">
-        <img :src="'/assets/background/' + (project.id % 3 + 1) + '.png'" alt="background">
-        <p>{{project.name}}</p>
+    <div class="banner-container">
+      <img src="/assets/banner.png" class="banner">
+    </div>
+    <div class="data-container">
+      <div class="projects-container" v-if="projects.length > 0">
+        <div class="project" v-for="project in projects" :key="project.id" @click="navigateToProject(project.slug)">
+          <img :src="'/assets/background/' + (project.id % 3 + 1) + '.png'" alt="background">
+          <p>{{project.name}}</p>
+        </div>
+      </div>
+      <div class="button-container">
+        <button @click="openCreateProjectModal" class="btn create-project-button">Créer un nouveau projet</button>
       </div>
     </div>
 
@@ -123,43 +129,65 @@ export default {
 
 .projects {
 
+  .banner-container {
+    width: 100%;
+    .banner {
+      width: 100%;
+      display: block;
+    }
+  }
 
-  .projects-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
+  .data-container {
+    background-color: $white;
+    padding: 20px;
 
-    .project {
-      margin: 10px 5px;
-      flex-basis: 250px;
-      height: 110px;
+    .button-container {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      cursor: pointer;
+      justify-content: flex-end;
 
-      p {
-        text-align: center;
-        font-weight: bold;
-        color: $white;
-        font-size: 23px;
+      .create-project-button {
+
       }
+    }
 
-      img {
-        display: block;
-        position: absolute;
-        z-index: -1;
-        border-radius: $borderRadius;
-        filter: brightness(.7);
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        max-width: 100%;
-        height: auto;
+    .projects-container {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: flex-start;
+
+      .project {
+        margin: 10px 5px;
+        flex-basis: 250px;
+        height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        cursor: pointer;
+        z-index: 10;
+
+        p {
+          text-align: center;
+          font-weight: bold;
+          color: $white;
+          font-size: 23px;
+        }
+
+        img {
+          display: block;
+          position: absolute;
+          z-index: -1;
+          border-radius: $borderRadius;
+          filter: brightness(.7);
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          max-width: 100%;
+          height: auto;
+        }
       }
     }
   }
