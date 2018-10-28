@@ -202,8 +202,12 @@ export default {
       padding: 10px 0;
 
       .modal-user-image {
+        width: 40px;
+        height: 40px;
+        text-align: center;
         img {
-          max-height: 40px;
+          max-height: 100%;
+          max-width: 100%;
           width: auto;
           border-radius: 50%;
         }
