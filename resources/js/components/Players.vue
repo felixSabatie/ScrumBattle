@@ -20,8 +20,26 @@
         },
         computed: {
           ...mapState({
-            players: state => state.users.users
-          })
+            users: state => state.users.users
+          }),
+          players() {
+            return JSON.parse(JSON.stringify(this.users));
+          }
+        },
+        watch: {
+          players(newUsers, oldUsers) {
+              let usersToAnimate = [];
+              newUsers.forEach(user => {
+                let oldUser = oldUsers.find(oldUser => oldUser.id === user.id);
+                if(oldUser.done_points < user.done_points) {
+                  usersToAnimate.push(user);
+                }
+              });
+
+              if(usersToAnimate.length > 0) {
+                this.animatePlayers(usersToAnimate);
+              }
+          }
         },
         mounted() {
             this.players.forEach(player => {

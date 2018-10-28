@@ -21,12 +21,12 @@ const mutations = {
     removeFromTotal(state, payload) {
         const user = payload.user;
         const amount = payload.amount;
-        
+
         state.users = state.users.map(usr => {
             if (usr.id == user.id) {
                 usr.total_points -= amount;
             }
-            return usr; 
+            return usr;
         });
     },
 
@@ -84,7 +84,7 @@ const mutations = {
                 usr.total_points += amount;
             }
             return usr;
-        }); 
+        });
     }
 };
 

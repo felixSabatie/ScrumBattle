@@ -2283,10 +2283,31 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapState */])({
-        players: function players(state) {
+        users: function users(state) {
             return state.users.users;
         }
-    })),
+    }), {
+        players: function players() {
+            return JSON.parse(JSON.stringify(this.users));
+        }
+    }),
+    watch: {
+        players: function players(newUsers, oldUsers) {
+            var usersToAnimate = [];
+            newUsers.forEach(function (user) {
+                var oldUser = oldUsers.find(function (oldUser) {
+                    return oldUser.id === user.id;
+                });
+                if (oldUser.done_points < user.done_points) {
+                    usersToAnimate.push(user);
+                }
+            });
+
+            if (usersToAnimate.length > 0) {
+                this.animatePlayers(usersToAnimate);
+            }
+        }
+    },
     mounted: function mounted() {
         var _this = this;
 
