@@ -3,6 +3,11 @@
         <NotFound v-if="notFound" />
         <div class="project-content" v-else-if="project !== undefined">
           <router-link :to="{ name: 'projects' }" class="btn return-button"><i class="material-icons">arrow_back</i>Projets</router-link>
+          <div class="project-name-container">
+            <div class="project-name">
+              {{project.name}}
+            </div>
+          </div>
           <Game :project="project" />
           <div class="columns-container">
             <Columns :columns="project.columns" />
@@ -58,6 +63,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../sass/app";
+
 .project {
   height: 100vh;
   width: 100vw;
@@ -70,6 +77,22 @@ export default {
     z-index: 10;
     display: flex;
     align-items: center;
+  }
+
+  .project-name-container {
+    position: absolute;
+    z-index: 10;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 10px;
+    color: $white;
+    font-size: 20px;
+
+    .project-name {
+      padding: 10px;
+      background-color: rgba(0, 0, 0, .5);
+      border-radius: $borderRadius;
+    }
   }
 
   .project-content {

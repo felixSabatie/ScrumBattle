@@ -2570,6 +2570,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -7055,10 +7060,10 @@ exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padd
 
 exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/css-base.js")(false);
 // imports
-
+exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\n.project {\n  height: 100vh;\n  width: 100vw;\n  overflow: hidden;\n}\n.project .return-button {\n    position: absolute;\n    top: 20px;\n    left: 20px;\n    z-index: 10;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.project .project-content {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    height: 100%;\n}\n.project .project-content .columns-container {\n      -webkit-box-flex: 1;\n          -ms-flex-positive: 1;\n              flex-grow: 1;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: column;\n              flex-direction: column;\n      position: relative;\n}\n.project .project-content .permissions-container {\n      height: 100px;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.project {\n  height: 100vh;\n  width: 100vw;\n  overflow: hidden;\n}\n.project .return-button {\n    position: absolute;\n    top: 20px;\n    left: 20px;\n    z-index: 10;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n}\n.project .project-name-container {\n    position: absolute;\n    z-index: 10;\n    left: 50%;\n    -webkit-transform: translateX(-50%);\n            transform: translateX(-50%);\n    top: 10px;\n    color: #FFF;\n    font-size: 20px;\n}\n.project .project-name-container .project-name {\n      padding: 10px;\n      background-color: rgba(0, 0, 0, 0.5);\n      border-radius: 5px;\n}\n.project .project-content {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    height: 100%;\n}\n.project .project-content .columns-container {\n      -webkit-box-flex: 1;\n          -ms-flex-positive: 1;\n              flex-grow: 1;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: column;\n              flex-direction: column;\n      position: relative;\n}\n.project .project-content .permissions-container {\n      height: 100px;\n}\n", ""]);
 
 // exports
 
@@ -40388,6 +40393,14 @@ var render = function() {
                     _vm._v("Projets")
                   ]
                 ),
+                _vm._v(" "),
+                _c("div", { staticClass: "project-name-container" }, [
+                  _c("div", { staticClass: "project-name" }, [
+                    _vm._v(
+                      "\n          " + _vm._s(_vm.project.name) + "\n        "
+                    )
+                  ])
+                ]),
                 _vm._v(" "),
                 _c("Game", { attrs: { project: _vm.project } }),
                 _vm._v(" "),
