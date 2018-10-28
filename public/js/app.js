@@ -2026,9 +2026,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         Players: __WEBPACK_IMPORTED_MODULE_1__Players___default.a,
         Mob: __WEBPACK_IMPORTED_MODULE_0__Mob___default.a
-    },
-    getBackground: function getBackground() {
-        return "";
     }
 });
 
@@ -2123,15 +2120,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Player",
-    props: {
-        player: {
-            type: Object
-        }
-    }
+    props: ["player", "animate"]
 });
 
 /***/ }),
@@ -2149,6 +2141,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -2159,10 +2152,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            players: []
+            players: [],
+            animations: []
         };
     },
     mounted: function mounted() {
+        var _this = this;
+
         this.players = [
         //TODO : change with backend call
         {
@@ -2182,6 +2178,39 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             name: "Fourth player",
             image: '/assets/player.png'
         }];
+        this.players.forEach(function (player) {
+            _this.animations.push({
+                id: player.id,
+                animate: false
+            });
+        });
+    },
+
+    methods: {
+        animatePlayers: function animatePlayers(players) {
+            var _this2 = this;
+
+            var that = this;
+            players.forEach(function (player) {
+                _this2.animations.find(function (el) {
+                    return el.id === player.id;
+                }).animate = true;
+            });
+            this.$nextTick(function () {
+                setTimeout(function () {
+                    players.forEach(function (player) {
+                        that.animations.find(function (el) {
+                            return el.id === player.id;
+                        }).animate = false;
+                    });
+                }, 2000);
+            });
+        },
+        getAnimate: function getAnimate(playerId) {
+            return this.animations.find(function (el) {
+                return el.id === playerId;
+            }).animate;
+        }
     }
 });
 
@@ -6639,7 +6668,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.player {\n  position: absolute;\n}\n.back-and-forth {\n  -webkit-animation: backAndForth linear 2s;\n          animation: backAndForth linear 2s;\n  -webkit-animation-iteration-count: 1;\n          animation-iteration-count: 1;\n}\n.player:nth-of-type(1) {\n  left: 10%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(2) {\n  left: 15%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player:nth-of-type(3) {\n  left: 20%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(4) {\n  left: 25%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player-image {\n  height: 100%;\n  width: 100%;\n}\n@-webkit-keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n10% {\n    -webkit-transform: translate(200%, -25%) scaleX(1);\n            transform: translate(200%, -25%) scaleX(1);\n}\n12% {\n    -webkit-transform: translate(240%, -30%) scaleX(1);\n            transform: translate(240%, -30%) scaleX(1);\n}\n15% {\n    -webkit-transform: translate(280%, -25%) scaleX(1);\n            transform: translate(280%, -25%) scaleX(1);\n}\n22% {\n    -webkit-transform: translate(500%, 0%) scaleX(1);\n            transform: translate(500%, 0%) scaleX(1);\n}\n31% {\n    -webkit-transform: translate(500%, 0%) scaleX(-1);\n            transform: translate(500%, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n@keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n10% {\n    -webkit-transform: translate(200%, -25%) scaleX(1);\n            transform: translate(200%, -25%) scaleX(1);\n}\n12% {\n    -webkit-transform: translate(240%, -30%) scaleX(1);\n            transform: translate(240%, -30%) scaleX(1);\n}\n15% {\n    -webkit-transform: translate(280%, -25%) scaleX(1);\n            transform: translate(280%, -25%) scaleX(1);\n}\n22% {\n    -webkit-transform: translate(500%, 0%) scaleX(1);\n            transform: translate(500%, 0%) scaleX(1);\n}\n31% {\n    -webkit-transform: translate(500%, 0%) scaleX(-1);\n            transform: translate(500%, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.player {\n  position: absolute;\n}\n.back-and-forth {\n  -webkit-animation: backAndForth linear 1.3s;\n          animation: backAndForth linear 1.3s;\n  -webkit-animation-iteration-count: 1;\n          animation-iteration-count: 1;\n}\n.player:nth-of-type(1) {\n  left: 10%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(2) {\n  left: 15%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player:nth-of-type(3) {\n  left: 20%;\n  bottom: 15%;\n  z-index: 2;\n}\n.player:nth-of-type(4) {\n  left: 25%;\n  bottom: 20%;\n  z-index: 1;\n}\n.player-image {\n  height: 100%;\n  width: 100%;\n}\n@-webkit-keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n17% {\n    -webkit-transform: translate(40vw, -25%) scaleX(1);\n            transform: translate(40vw, -25%) scaleX(1);\n}\n21% {\n    -webkit-transform: translate(50vw, -30%) scaleX(1);\n            transform: translate(50vw, -30%) scaleX(1);\n}\n25% {\n    -webkit-transform: translate(60vw, -25%) scaleX(1);\n            transform: translate(60vw, -25%) scaleX(1);\n}\n35% {\n    -webkit-transform: translate(90vw, 0%) scaleX(1);\n            transform: translate(90vw, 0%) scaleX(1);\n}\n45% {\n    -webkit-transform: translate(85vw, 0%) scaleX(1);\n            transform: translate(85vw, 0%) scaleX(1);\n}\n65% {\n    -webkit-transform: translate(85vw, 0%) scaleX(-1);\n            transform: translate(85vw, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n@keyframes backAndForth {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n17% {\n    -webkit-transform: translate(40vw, -25%) scaleX(1);\n            transform: translate(40vw, -25%) scaleX(1);\n}\n21% {\n    -webkit-transform: translate(50vw, -30%) scaleX(1);\n            transform: translate(50vw, -30%) scaleX(1);\n}\n25% {\n    -webkit-transform: translate(60vw, -25%) scaleX(1);\n            transform: translate(60vw, -25%) scaleX(1);\n}\n35% {\n    -webkit-transform: translate(90vw, 0%) scaleX(1);\n            transform: translate(90vw, 0%) scaleX(1);\n}\n45% {\n    -webkit-transform: translate(85vw, 0%) scaleX(1);\n            transform: translate(85vw, 0%) scaleX(1);\n}\n65% {\n    -webkit-transform: translate(85vw, 0%) scaleX(-1);\n            transform: translate(85vw, 0%) scaleX(-1);\n}\n99% {\n    -webkit-transform: translate(0%, 0%) scaleX(-1);\n            transform: translate(0%, 0%) scaleX(-1);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n", ""]);
 
 // exports
 
@@ -39328,9 +39357,27 @@ var render = function() {
   return _c(
     "div",
     { staticClass: "players" },
-    _vm._l(_vm.players, function(player) {
-      return _c("player", { key: player.id, attrs: { player: player } })
-    })
+    [
+      _vm._l(_vm.players, function(player) {
+        return _c("player", {
+          key: player.id,
+          attrs: { player: player, animate: _vm.getAnimate(player.id) }
+        })
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              _vm.animatePlayers([_vm.players[0], _vm.players[1]])
+            }
+          }
+        },
+        [_vm._v(" BITE ")]
+      )
+    ],
+    2
   )
 }
 var staticRenderFns = []
@@ -39352,9 +39399,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "player back-and-forth" }, [
-    _c("img", { staticClass: "player-image", attrs: { src: _vm.player.image } })
-  ])
+  return _c(
+    "div",
+    { staticClass: "player", class: { "back-and-forth": _vm.animate } },
+    [
+      _c("img", {
+        staticClass: "player-image",
+        attrs: { src: _vm.player.image }
+      })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -56946,6 +57000,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_auth_Register___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_auth_Register__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_auth_Login__ = __webpack_require__("./resources/js/components/auth/Login.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_auth_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_auth_Login__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Game__ = __webpack_require__("./resources/js/components/Game.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Game___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Game__);
+
 
 
 
@@ -56967,6 +57024,10 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     path: "/login",
     name: "login",
     component: __WEBPACK_IMPORTED_MODULE_3__components_auth_Login___default.a
+}, {
+    path: "/game",
+    name: "game",
+    component: __WEBPACK_IMPORTED_MODULE_4__components_Game___default.a
 }]);
 
 /***/ }),
