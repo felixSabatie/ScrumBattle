@@ -2121,6 +2121,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -2130,6 +2132,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     components: {
         Players: __WEBPACK_IMPORTED_MODULE_1__Players___default.a,
         Mob: __WEBPACK_IMPORTED_MODULE_0__Mob___default.a
+    },
+    data: function data() {
+        return {
+            animateMob: false
+        };
+    },
+
+    methods: {
+        animate: function animate() {
+            var that = this;
+            this.animateMob = true;
+            this.$nextTick(function () {
+                setTimeout(function () {
+                    that.animateMob = false;
+                }, 2000);
+            });
+        }
     }
 });
 
@@ -2146,10 +2165,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Mob",
+    props: ["animate"],
     data: function data() {
         return {
             mob: {}
@@ -39515,7 +39534,7 @@ var render = function() {
             }
           }
         },
-        [_vm._v(" BITE ")]
+        [_vm._v(" Attack ")]
       )
     ],
     2
@@ -39640,7 +39659,23 @@ var render = function() {
       staticClass: "game",
       class: "project-" + ((_vm.project.id % 3) + 1).toString()
     },
-    [_c("players"), _vm._v(" "), _c("mob")],
+    [
+      _c("players"),
+      _vm._v(" "),
+      _c("mob", { attrs: { animate: _vm.animateMob } }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function($event) {
+              _vm.animate()
+            }
+          }
+        },
+        [_vm._v(" Hurt ")]
+      )
+    ],
     1
   )
 }
@@ -40068,7 +40103,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mob hurt" }, [
+  return _c("div", { staticClass: "mob", class: { hurt: _vm.animate } }, [
     _c("img", { staticClass: "mob-image", attrs: { src: _vm.mob.image } })
   ])
 }
