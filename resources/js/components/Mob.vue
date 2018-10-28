@@ -52,6 +52,9 @@
                     this.updatePercentage();
                 }
             }
+        },
+        mounted() {
+            this.updatePercentage();
         }
     }
 </script>
