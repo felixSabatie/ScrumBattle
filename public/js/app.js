@@ -1661,7 +1661,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   methods: {
     onTokenReceived: function onTokenReceived(token) {
       this.storeTokenAndUser(token, false);
-      this.redirect('/projects/my-project');
+      this.redirect('/projects');
     },
     storeTokenAndUser: function storeTokenAndUser(token, hasUser) {
       this.$cookies.set('user-token', token);
@@ -2388,7 +2388,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             _this.project = response.data;
             _this.$store.commit('projects/setProject', _this.project);
         }).catch(function (err) {
-            console.error(err);
+            _this.notFound = true;
         });
     }
 });
@@ -39439,24 +39439,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "not-found" }, [
+  return _c(
+    "div",
+    { staticClass: "not-found" },
+    [
       _c("h1", [_vm._v("Oops")]),
       _vm._v(" "),
       _c("p", [
         _vm._v(
           "Il semblerait que la ressource à laquelle vous voulez accéder n'est pas disponible..."
         )
+      ]),
+      _vm._v(" "),
+      _c("router-link", { attrs: { to: "/projects" } }, [
+        _vm._v("Retourner à l'accueil")
       ])
-    ])
-  }
-]
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -57013,6 +57015,9 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_auth_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_auth_Login__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Game__ = __webpack_require__("./resources/js/components/Game.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_Game___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_Game__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_NotFound__ = __webpack_require__("./resources/js/components/NotFound.vue");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_NotFound___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_NotFound__);
+
 
 
 
@@ -57039,6 +57044,12 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     path: "/game",
     name: "game",
     component: __WEBPACK_IMPORTED_MODULE_4__components_Game___default.a
+}, {
+    path: '/',
+    redirect: '/projects'
+}, {
+    path: '*',
+    component: __WEBPACK_IMPORTED_MODULE_5__components_NotFound___default.a
 }]);
 
 /***/ }),

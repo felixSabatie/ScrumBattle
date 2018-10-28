@@ -19,7 +19,7 @@ export default {
   methods: {
     onTokenReceived(token) {
       this.storeTokenAndUser(token, false);
-      this.redirect('/projects/my-project');
+      this.redirect('/projects');
     },
     storeTokenAndUser(token, hasUser) {
       this.$cookies.set('user-token', token);

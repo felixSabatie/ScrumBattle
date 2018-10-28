@@ -38,7 +38,7 @@
                 this.project = response.data;
                 this.$store.commit('projects/setProject', this.project)
             }).catch(err => {
-                console.error(err);
+                this.notFound = true;
             });
         }
     }
