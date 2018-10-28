@@ -3,8 +3,12 @@
         <NotFound v-if="notFound" />
         <div class="project-content" v-else-if="project !== undefined">
           <Game />
-          <Columns :columns="project.columns" />
-          <Progressions />
+          <div class="columns-container">
+            <Columns :columns="project.columns" />
+          </div>
+          <div class="permissions-container">
+            <Progressions />
+          </div>
         </div>
         <p v-else>Chargement...</p>
     </div>
@@ -45,5 +49,23 @@
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+
+  .project-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .columns-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+
+      position: relative;
+    }
+
+    .permissions-container {
+      height: 100px;
+    }
+  }
 }
 </style>

@@ -2330,6 +2330,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -6631,7 +6635,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.progressions[data-v-56b315fa] {\n    height: 20%;\n    width: 100%;\n    position: absolute;\n}\n.goal_wrapper[data-v-56b315fa] {\n    position: absolute;\n    width: 20%;\n    height: 100%;\n    right: 0%;\n    top: 0%;\n}\n.goal_wrapper img[data-v-56b315fa] {\n     position: absolute;\n     max-height: 100%;\n     max-width: 100%;\n     display: inline-block;\n     left: 20%;\n}\n\n", ""]);
+exports.push([module.i, "\n.progressions[data-v-56b315fa] {\n    height: 100%;\n    width: 100%;\n    background-color: #a0ebef;\n    position: relative;\n}\n.goal_wrapper[data-v-56b315fa] {\n    position: absolute;\n    width: 20%;\n    height: 100%;\n    right: 0%;\n    top: 0%;\n}\n.goal_wrapper img[data-v-56b315fa] {\n     position: absolute;\n     max-height: 100%;\n     max-width: 100%;\n     display: inline-block;\n     left: 20%;\n}\n\n", ""]);
 
 // exports
 
@@ -6661,7 +6665,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.progression[data-v-87299fc0]{\n    width: 80%;\n    position: relative;\n}\n.progress-wrapper[data-v-87299fc0] {\n    width: 100%;\n    height: 100%;\n    background-color: #a0ebef;\n    position: absolute;\n}\n.progress[data-v-87299fc0] {\n    width: 1%;\n    height: 100%;\n    background-color: #2abb9b;\n    position: absolute;\n}\n.progress-wrapper img[data-v-87299fc0] {\n    display: block;\n    position: absolute;\n    top: 50%;\n    left: 1%;\n    max-height: 100%;\n    max-width: 100%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n}\n", ""]);
+exports.push([module.i, "\n.progression[data-v-87299fc0]{\n    width: 80%;\n    position: relative;\n}\n.progress-wrapper[data-v-87299fc0] {\n    width: 100%;\n    height: 100%;\n    position: absolute;\n}\n.progress[data-v-87299fc0] {\n    width: 1%;\n    height: 100%;\n    background-color: #2abb9b;\n    position: absolute;\n}\n.progress-wrapper img[data-v-87299fc0] {\n    display: block;\n    position: absolute;\n    top: 50%;\n    left: 1%;\n    max-height: 100%;\n    max-width: 100%;\n    -webkit-transform: translate(-50%, -50%);\n            transform: translate(-50%, -50%);\n}\n", ""]);
 
 // exports
 
@@ -6676,7 +6680,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.columns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  height: 100%;\n  padding: 10px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n", ""]);
+exports.push([module.i, "\n.columns {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: horizontal;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: row;\n          flex-direction: row;\n  -ms-flex-pack: distribute;\n      justify-content: space-around;\n  -webkit-box-align: start;\n      -ms-flex-align: start;\n          align-items: flex-start;\n  padding: 10px;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 0;\n  right: 0;\n}\n", ""]);
 
 // exports
 
@@ -6706,7 +6710,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 
 
 // module
-exports.push([module.i, "\n.project {\n  height: 100vh;\n  width: 100vw;\n  overflow: hidden;\n}\n", ""]);
+exports.push([module.i, "\n.project {\n  height: 100vh;\n  width: 100vw;\n  overflow: hidden;\n}\n.project .project-content {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    height: 100%;\n}\n.project .project-content .columns-container {\n      -webkit-box-flex: 1;\n          -ms-flex-positive: 1;\n              flex-grow: 1;\n      display: -webkit-box;\n      display: -ms-flexbox;\n      display: flex;\n      -webkit-box-orient: vertical;\n      -webkit-box-direction: normal;\n          -ms-flex-direction: column;\n              flex-direction: column;\n      position: relative;\n}\n.project .project-content .permissions-container {\n      height: 100px;\n}\n", ""]);
 
 // exports
 
@@ -39876,9 +39880,19 @@ var render = function() {
               [
                 _c("Game"),
                 _vm._v(" "),
-                _c("Columns", { attrs: { columns: _vm.project.columns } }),
+                _c(
+                  "div",
+                  { staticClass: "columns-container" },
+                  [_c("Columns", { attrs: { columns: _vm.project.columns } })],
+                  1
+                ),
                 _vm._v(" "),
-                _c("Progressions")
+                _c(
+                  "div",
+                  { staticClass: "permissions-container" },
+                  [_c("Progressions")],
+                  1
+                )
               ],
               1
             )

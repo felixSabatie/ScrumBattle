@@ -52,9 +52,10 @@
 
 <style scoped>
 .progressions {
-    height: 20%;
+    height: 100%;
     width: 100%;
-    position: absolute;
+    background-color: #a0ebef;
+    position: relative;
 }
 .goal_wrapper {
     position: absolute;
