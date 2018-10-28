@@ -11,8 +11,14 @@
         <input type="email" id="email-input" v-model="user.email">
       </div>
       <div class="input">
-        <label for="avatar-input">Avatar</label>
-        <input type="text" v-model="user.avatar" id="avatar-input">
+        <div class="avatar-selector">
+          <p>Choisir votre avatar</p>
+          <div class="images-container">
+            <div class="image-container" :class="{selected: avatarIsSelected(avatar)}" @click="user.avatar = avatar" v-for="avatar in avatars">
+              <img :src="avatar" :alt="avatar">
+            </div>
+          </div>
+        </div>
       </div>
       <div class="input">
         <label for="password-input">Mot de passe</label>
@@ -39,7 +45,18 @@ export default {
         email: "",
         password: "",
         avatar: ""
-      }
+      },
+      avatars: [
+        '/assets/players/CaptainFalcon.png',
+        '/assets/players/Dk.png',
+        '/assets/players/Kirby.png',
+        '/assets/players/Link.png',
+        '/assets/players/Mario.png',
+        '/assets/players/MegaMan.png',
+        '/assets/players/Pikachu.png',
+        '/assets/players/Samus.png',
+        '/assets/players/Yoshi.png',
+      ]
     };
   },
   methods: {
@@ -63,6 +80,9 @@ export default {
           // TODO handle
           console.error(err);
         });
+    },
+    avatarIsSelected(avatar) {
+      return this.user.avatar === avatar;
     }
   }
 };
@@ -84,6 +104,7 @@ export default {
     padding: 20px 40px;
     background-color: $white;
     border-radius: $borderRadius;
+    max-width: 500px;
 
     .input {
       margin: 10px 0;
@@ -103,6 +124,33 @@ export default {
 
       .link {
         background-color: $teal;
+      }
+    }
+
+    .avatar-selector {
+      .images-container {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        .image-container {
+          flex-basis: 25%;
+          padding: 10px;
+          text-align: center;
+
+          &.selected {
+            border: 2px solid $cyan;
+            border-radius: $borderRadius;
+            padding: 8px;
+          }
+
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+        }
+
       }
     }
   }
