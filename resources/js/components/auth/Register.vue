@@ -21,13 +21,13 @@
         </div>
       </div>
       <div class="input">
-        <label for="password-input">Mot de passe</label>
         <input type="password" v-model="user.password" id="password-input"/>
+        <label for="password-input">Mot de passe</label>
       </div>
 
       <div class="buttons">
-        <button type="submit" class="btn">S'inscrire</button>
         <router-link :to="{ name: 'login' }" class="btn link">Se connecter</router-link>
+          <button type="submit" class="btn">S'inscrire</button>
       </div>
 
     </form>

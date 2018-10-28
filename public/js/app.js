@@ -39603,15 +39603,15 @@ var render = function() {
           "div",
           { staticClass: "buttons" },
           [
-            _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
-              _vm._v("Connexion")
-            ]),
-            _vm._v(" "),
             _c(
               "router-link",
               { staticClass: "btn link", attrs: { to: { name: "register" } } },
               [_vm._v("S'inscrire")]
-            )
+            ),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+              _vm._v("Connexion")
+            ])
           ],
           1
         )
@@ -40295,10 +40295,6 @@ var render = function() {
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "input" }, [
-          _c("label", { attrs: { for: "password-input" } }, [
-            _vm._v("Mot de passe")
-          ]),
-          _vm._v(" "),
           _c("input", {
             directives: [
               {
@@ -40318,22 +40314,26 @@ var render = function() {
                 _vm.$set(_vm.user, "password", $event.target.value)
               }
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("label", { attrs: { for: "password-input" } }, [
+            _vm._v("Mot de passe")
+          ])
         ]),
         _vm._v(" "),
         _c(
           "div",
           { staticClass: "buttons" },
           [
-            _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
-              _vm._v("S'inscrire")
-            ]),
-            _vm._v(" "),
             _c(
               "router-link",
               { staticClass: "btn link", attrs: { to: { name: "login" } } },
               [_vm._v("Se connecter")]
-            )
+            ),
+            _vm._v(" "),
+            _c("button", { staticClass: "btn", attrs: { type: "submit" } }, [
+              _vm._v("S'inscrire")
+            ])
           ],
           1
         )

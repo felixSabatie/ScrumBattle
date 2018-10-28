@@ -12,8 +12,8 @@
       </div>
 
       <div class="buttons">
-        <button type="submit" class="btn">Connexion</button>
         <router-link :to="{ name: 'register' }" class="btn link">S'inscrire</router-link>
+        <button type="submit" class="btn">Connexion</button>
       </div>
 
     </form>
