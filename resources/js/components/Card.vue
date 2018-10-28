@@ -1,6 +1,6 @@
 <template>
   <div class="card" >
-    
+
     <div class="card-wrapper" @click="openModal">
       <div class="content" >
         {{card.name}}
@@ -21,6 +21,7 @@
       <div slot="header">
         <h1>{{card.name}}</h1>
         <div class="points-list">
+          <span>Nombre de points :</span>
           <div class="points" v-for="point in pointList"
                @click.stop='selectPoint(point)'
                :class='isSelectedPoint(point)'
@@ -40,7 +41,7 @@
             <div class="modal-user-info">
               {{user.name}}
             </div>
-            <div class="modal-user-check"> 
+            <div class="modal-user-check">
               <!-- Todo checkbox is horrible on macOS -->
               <input type="checkbox" :checked="isInCard(user)" :value="user.id" @click="handleCheck">
             </div>
@@ -212,7 +213,6 @@ export default {
           flex: 1;
         }
         .modal-user-check {
-          transform: scale(1.3);
         }
       }
     }

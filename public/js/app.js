@@ -1765,6 +1765,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
 
 
 
@@ -7085,7 +7086,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .points {\n    display: block;\n    width: 23px;\n    height: 23px;\n    font-size: 13px;\n    background-color: #DDD;\n    border-radius: 50%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    cursor: pointer;\n}\n.card .points.selected {\n      background: #3490dc;\n      color: white;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user {\n    display: inline-block;\n    padding: 5px;\n}\n.card .users .user .user-image {\n      border-radius: 50%;\n      height: 20px;\n      width: 20px;\n}\n.card .modal .modal-header h1 {\n    font-size: 18px;\n}\n.card .modal .modal-header .points-list {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n}\n.card .modal .users .modal-user {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    padding: 10px 0;\n}\n.card .modal .users .modal-user .modal-user-image {\n      width: 40px;\n      height: 40px;\n      text-align: center;\n}\n.card .modal .users .modal-user .modal-user-image img {\n        max-height: 100%;\n        max-width: 100%;\n        border-radius: 50%;\n}\n.card .modal .users .modal-user .modal-user-info {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n}\n.card .modal .users .modal-user .modal-user-check {\n      -webkit-transform: scale(1.3);\n              transform: scale(1.3);\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.card {\n  background: #FFF;\n  border-radius: 5px;\n  padding: 10px;\n  margin: 10px 0;\n  position: relative;\n}\n.card .content {\n    color: black;\n}\n.card .points {\n    display: block;\n    width: 23px;\n    height: 23px;\n    font-size: 13px;\n    background-color: #DDD;\n    border-radius: 50%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    cursor: pointer;\n}\n.card .points.selected {\n      background: #3490dc;\n      color: white;\n}\n.card .close {\n    position: absolute;\n    top: 3px;\n    right: 5px;\n    color: #DDD;\n}\n.card .close:hover {\n      cursor: pointer;\n}\n.card .users .user {\n    display: inline-block;\n    padding: 5px;\n}\n.card .users .user .user-image {\n      border-radius: 50%;\n      height: 20px;\n      width: 20px;\n}\n.card .modal .modal-header h1 {\n    font-size: 18px;\n}\n.card .modal .modal-header .points-list {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: space-evenly;\n        -ms-flex-pack: space-evenly;\n            justify-content: space-evenly;\n}\n.card .modal .users .modal-user {\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: row;\n            flex-direction: row;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    padding: 10px 0;\n}\n.card .modal .users .modal-user .modal-user-image {\n      width: 40px;\n      height: 40px;\n      text-align: center;\n}\n.card .modal .users .modal-user .modal-user-image img {\n        max-height: 100%;\n        max-width: 100%;\n        border-radius: 50%;\n}\n.card .modal .users .modal-user .modal-user-info {\n      -webkit-box-flex: 1;\n          -ms-flex: 1;\n              flex: 1;\n}\n", ""]);
 
 // exports
 
@@ -40325,23 +40326,28 @@ var render = function() {
               _c(
                 "div",
                 { staticClass: "points-list" },
-                _vm._l(_vm.pointList, function(point) {
-                  return _c(
-                    "div",
-                    {
-                      key: point,
-                      staticClass: "points",
-                      class: _vm.isSelectedPoint(point),
-                      on: {
-                        click: function($event) {
-                          $event.stopPropagation()
-                          _vm.selectPoint(point)
+                [
+                  _c("span", [_vm._v("Nombre de points :")]),
+                  _vm._v(" "),
+                  _vm._l(_vm.pointList, function(point) {
+                    return _c(
+                      "div",
+                      {
+                        key: point,
+                        staticClass: "points",
+                        class: _vm.isSelectedPoint(point),
+                        on: {
+                          click: function($event) {
+                            $event.stopPropagation()
+                            _vm.selectPoint(point)
+                          }
                         }
-                      }
-                    },
-                    [_vm._v("\n          " + _vm._s(point) + "\n        ")]
-                  )
-                })
+                      },
+                      [_vm._v("\n          " + _vm._s(point) + "\n        ")]
+                    )
+                  })
+                ],
+                2
               )
             ]),
             _vm._v(" "),
