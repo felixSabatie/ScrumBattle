@@ -18,6 +18,9 @@ const getters = {
   },
     mob(state) {
         return state.currentProject.mob;
+    },
+    project(state) {
+      return state.currentProject;
     }
 };
 
