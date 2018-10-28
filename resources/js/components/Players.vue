@@ -1,6 +1,7 @@
 <template>
     <div class="players">
-        <player v-for="player in players" :player="player" :key="player.id"/>
+        <player v-for="player in players" :player="player" :animate="getAnimate(player.id)" :key="player.id"/>
+        <button @click="animatePlayers([players[0], players[1]])"> BITE </button>
     </div>
 </template>
 
@@ -14,7 +15,8 @@
         },
         data() {
             return {
-                players: []
+                players: [],
+                animations: [],
             };
         },
         mounted() {
@@ -40,13 +42,38 @@
                     name: "Fourth player",
                     image: '/assets/player.png',
                 }
-            ]
+            ];
+            this.players.forEach(player => {
+                this.animations.push({
+                    id: player.id,
+                    animate: false,
+                });
+            })
+        },
+        methods : {
+            animatePlayers(players){
+                let that = this;
+                players.forEach(player =>{
+                    this.animations.find(el => el.id === player.id).animate = true;
+                });
+                this.$nextTick(()=>{
+                    setTimeout(function() {
+                        players.forEach(player =>{
+                            that.animations.find(el => el.id === player.id).animate = false;
+                        });
+                    }, 2000);
+                });
+            },
+            getAnimate(playerId) {
+                return this.animations.find(el => el.id === playerId).animate;
+            }
         }
     }
 </script>
 
 <style lang="scss">
     @import "../../sass/app";
+
     .players {
         height: 100%;
     }

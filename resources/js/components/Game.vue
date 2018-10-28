@@ -19,9 +19,6 @@
             Players,
             Mob
         },
-        getBackground() {
-            return "";
-        }
     };
 </script>
 

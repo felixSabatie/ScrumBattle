@@ -1,6 +1,5 @@
 <template>
-    <div class="player back-and-forth">
-        <!--TODO : Insert back-and-forth on action-->
+    <div class="player" :class="{'back-and-forth' : animate}">
         <img class="player-image" :src="player.image" >
     </div>
 </template>
@@ -8,11 +7,10 @@
 <script>
     export default {
         name: "Player",
-        props: {
-            player: {
-                type: Object,
-            }
-        },
+        props: [
+            "player",
+            "animate"
+        ],
     }
 </script>
 
@@ -24,7 +22,7 @@
     }
 
     .back-and-forth{
-        animation: backAndForth linear 2s;
+        animation: backAndForth linear 1.3s;
         animation-iteration-count: 1;
     }
 
@@ -62,20 +60,23 @@
         0% {
             transform:  translate(0%,0%)  scaleX(1.00) ;
         }
-        10% {
-            transform:  translate(200%,-25%)  scaleX(1.00) ;
+        17% {
+            transform:  translate(40vw,-25%)  scaleX(1.00) ;
         }
-        12% {
-            transform:  translate(240%,-30%)  scaleX(1.00) ;
+        21% {
+            transform:  translate(50vw,-30%)  scaleX(1.00) ;
         }
-        15% {
-            transform:  translate(280%,-25%)  scaleX(1.00) ;
+        25% {
+            transform:  translate(60vw,-25%)  scaleX(1.00) ;
         }
-        22% {
-            transform:  translate(500%,0%)  scaleX(1.00) ;
+        35% {
+            transform:  translate(90vw,0%)  scaleX(1.00) ;
         }
-        31% {
-            transform:  translate(500%,0%)  scaleX(-1.00) ;
+        45% {
+            transform:  translate(85vw,0%)  scaleX(1.00) ;
+        }
+        65% {
+            transform:  translate(85vw,0%)  scaleX(-1.00) ;
         }
         99% {
             transform:  translate(0%,0%)  scaleX(-1.00) ;
