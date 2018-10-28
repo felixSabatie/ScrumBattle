@@ -36,32 +36,18 @@ class UpdateProjectPoints
         $oldColumnName = $event->getOldCard()->column->name;
         $project = $updatedColumn->project;
 
-        $updatedPoints= $event->getUpdatedCard()->points;
-        $oldPoints  = $event->getOldCard()->points;
+        $updatedPoints = $event->getUpdatedCard()->points;
+        $oldPoints = $event->getOldCard()->points;
 
-        foreach ($event->getUpdatedCard()->users as $user) {
-            $project_user = $user->projects()->findOrFail($updatedColumn->project_id)->pivot;
-            if ($oldColumnName !== $updatedColumn->name) {
-                if (strcmp($updatedColumn->name, ProjectsController::$DONE) == 0) {
-                    $project_user->done_points += $updatedPoints;
-                    $project->done_points += $updatedPoints;
-                }
-                else if(strcmp($oldColumnName, ProjectsController::$DONE )==0) {
-                    $project_user->done_points -= $updatedPoints;
-                    $project->done_points -= $updatedPoints;
-                }
+        if ($oldColumnName !== $updatedColumn->name) {
+            if (strcmp($updatedColumn->name, ProjectsController::$DONE) == 0) {
+                $project->done_points += $updatedPoints;
+            } else if (strcmp($oldColumnName, ProjectsController::$DONE) == 0) {
+                $project->done_points -= $updatedPoints;
             }
-            if ($updatedPoints !== $oldPoints) {
-                if ($project_user->total_points === null) {
-                    $project_user->total_points = $updatedPoints;
-                    $project->total_points += $updatedPoints - $oldPoints;
-                } else {
-                    $project_user->total_points += $updatedPoints - $oldPoints;
-                    $project->total_points += $updatedPoints - $oldPoints;
-
-                }
-            }
-            $project_user->save();
+        }
+        if ($updatedPoints !== $oldPoints) {
+            $project->total_points += $updatedPoints - $oldPoints;
         }
         $project->save();
     }

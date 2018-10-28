@@ -30,6 +30,7 @@ class DeleteProjectPoints
         $card = $event->getCard();
         $project = $card->column->project;
         $project->total_points -= $card->points;
+        $project->done_points -= strcmp($card->column->name, ProjectsController::$DONE) == 0 ? $card->points : 0;
         foreach ($card->users as $user) {
             $project_user = $user->projects()->findOrFail($card->column->project_id)->pivot;
             $project_user->total_points -= $card->points;

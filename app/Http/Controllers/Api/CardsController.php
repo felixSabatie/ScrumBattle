@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\CardDeleted;
 use App\Events\PointsUpdated;
+use App\Listeners\DeleteProjectPoints;
 use App\Models\Card;
 use App\Models\Project;
 use App\Models\User;
@@ -93,6 +95,7 @@ class CardsController extends Controller
      */
     public function destroy(Card $card)
     {
+        event(new CardDeleted($card));
         $card->users()->detach();
 
         $deleted = $card->delete();
@@ -102,12 +105,16 @@ class CardsController extends Controller
     public function addUser($id, Request $request)
     {
         $card = Card::findOrFail($id);
+
         $request->validate([
             'id' => 'required'
         ]);
         $user = User::findOrFail($request->id);
+        $project_user = $user->projects()->findOrFail($card->column->project_id)->pivot;
         $card->users()->syncWithoutDetaching($user);
-
+        $project_user->total_points += $card->points;
+        $project_user->done_points += strcmp($card->column->name, ProjectsController::$DONE) == 0 ? $card->points : 0;
+        $project_user->save();
         return response()->json('success', 200);
     }
 
@@ -115,6 +122,10 @@ class CardsController extends Controller
     {
         $card = Card::findOrFail($cardId);
         $user = User::findOrFail($userId);
+        $project_user = $user->projects()->findOrFail($card->column->project_id)->pivot;
+        $project_user->total_points -= $card->points;
+        $project_user->done_points -= strcmp($card->column->name, ProjectsController::$DONE) == 0 ? $card->points : 0;
+        $project_user->save();
         $card->users()->detach($user);
 
         return response()->json('success', 200);
