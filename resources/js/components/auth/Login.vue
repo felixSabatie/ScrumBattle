@@ -59,7 +59,8 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: $lightGrey;
+    background-image: url(/assets/background/login.png);
+    background-size: auto 100%;
 
     .register-form {
       display: inline-block;

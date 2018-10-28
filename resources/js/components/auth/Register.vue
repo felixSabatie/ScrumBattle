@@ -21,8 +21,8 @@
         </div>
       </div>
       <div class="input">
-        <input type="password" v-model="user.password" id="password-input"/>
         <label for="password-input">Mot de passe</label>
+        <input type="password" v-model="user.password" id="password-input"/>
       </div>
 
       <div class="buttons">
@@ -96,7 +96,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $lightGrey;
+  background-image: url(/assets/background/login.png);
+  background-size: auto 100%;
 
   .register-form {
     display: inline-block;
