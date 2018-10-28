@@ -10,7 +10,7 @@
           </div>
           <Game :project="project" />
           <div class="columns-container">
-            <Columns :columns="project.columns" />
+            <Columns :columns="project.columns" :project="project" />
           </div>
           <div class="permissions-container">
             <Progressions />
@@ -41,7 +41,6 @@ export default {
       notFound: false
     };
   },
-
   mounted() {
     axios
       .get(`/api/projects/${this.$route.params.slug}`)

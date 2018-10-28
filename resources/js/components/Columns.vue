@@ -1,5 +1,5 @@
 <template>
-  <div class="columns">
+  <div class="columns" :class="containerClass">
     <column v-for="column in columns" :column="column" :key="column.id" :doneColumnId="doneColumnId"/>
   </div>
 </template>
@@ -14,7 +14,7 @@ export default {
   components: {
     Column
   },
-  // props: ['columns'],
+  props: ['project'],
   data() {
     return {
       columns: []
@@ -23,6 +23,11 @@ export default {
  computed: {
    doneColumnId() {
      return this.columns.find(column => column.name === 'done').id;
+   },
+   containerClass() {
+     if(this.project == undefined)
+       return '';
+     else return 'project-container-' + (this.project.id % 3 + 1).toString();
    },
    ...mapState({
     projectColumns: state => state.projects.currentProject.columns,
@@ -49,6 +54,16 @@ export default {
   bottom: 0;
   left: 0;
   right: 0;
+
+  &.project-container-1 {
+    background-color: #3A3A26;
+  }
+  &.project-container-2 {
+    background-color: #F1C87E;
+  }
+  &.project-container-3 {
+    background-color: #D3EFFC;
+  }
 }
 
 </style>
