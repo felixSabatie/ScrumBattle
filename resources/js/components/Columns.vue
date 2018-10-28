@@ -36,9 +36,14 @@ export default {
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-start;
-  height: 100%;
   padding: 10px;
   box-sizing: border-box;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 </style>

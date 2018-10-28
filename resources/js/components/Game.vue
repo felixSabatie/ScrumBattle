@@ -11,9 +11,6 @@
     export default {
         name: "Game",
         props: {
-            column: {
-                type: Object
-            }
         },
         components: {
             Players,

@@ -60,7 +60,6 @@
     .progress-wrapper {
         width: 100%;
         height: 100%;
-        background-color: #a0ebef;
         position: absolute;
     }
 
