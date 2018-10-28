@@ -2227,15 +2227,52 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 //
 //
 //
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Mob",
+    data: function data() {
+        return {
+            percentage: '100%'
+        };
+    },
+
     props: ["animate"],
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
-        mob: 'projects/mob'
-    }))
+        mob: 'projects/mob',
+        currentProject: 'projects/project'
+    }), {
+        project: function project() {
+            return JSON.parse(JSON.stringify(this.currentProject));
+        }
+    }),
+    methods: {
+        updatePercentage: function updatePercentage() {
+            var percentage = void 0;
+            if (this.project.total_points === 0) {
+                percentage = 100;
+            } else {
+                percentage = 100 - this.project.done_points / this.project.total_points * 100;
+            }
+            this.percentage = percentage + "%";
+        }
+    },
+    watch: {
+        animate: function animate(doAnimation) {
+            if (doAnimation) {
+                this.updatePercentage();
+            }
+        },
+        project: function project(newProject, oldProject) {
+            if (newProject.done_points < oldProject.done_points) {
+                this.updatePercentage();
+            }
+        }
+    }
 });
 
 /***/ }),
@@ -7003,7 +7040,7 @@ exports = module.exports = __webpack_require__("./node_modules/css-loader/lib/cs
 exports.push([module.i, "@import url(https://fonts.googleapis.com/css?family=Nunito);", ""]);
 
 // module
-exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.mob {\n  height: 160px;\n  position: absolute;\n  bottom: 10%;\n  right: 10%;\n}\n.mob-image {\n  height: 100%;\n}\n.hurt {\n  -webkit-animation: hurt linear 0.2s;\n          animation: hurt linear 0.2s;\n  -webkit-animation-iteration-count: 10;\n          animation-iteration-count: 10;\n}\n@-webkit-keyframes hurt {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n50% {\n    -webkit-transform: translate(2%, -2%) scaleX(0.9);\n            transform: translate(2%, -2%) scaleX(0.9);\n    -webkit-filter: opacity(25%);\n            filter: opacity(25%);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n@keyframes hurt {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n50% {\n    -webkit-transform: translate(2%, -2%) scaleX(0.9);\n            transform: translate(2%, -2%) scaleX(0.9);\n    -webkit-filter: opacity(25%);\n            filter: opacity(25%);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n", ""]);
+exports.push([module.i, "\nbody {\n  font-family: Sans-Serif;\n}\n.btn {\n  padding: 10px;\n  text-decoration: none;\n  background-color: #3490dc;\n  border: none;\n  border-radius: 5px;\n  color: #FFF;\n  cursor: pointer;\n}\ninput[type=text], input[type=password], input[type=email] {\n  border: 1px solid #DDD;\n  padding: 10px;\n  border-radius: 5px;\n  outline-width: 0;\n  -webkit-box-sizing: border-box;\n          box-sizing: border-box;\n}\n.container {\n  margin-right: auto;\n  margin-left: auto;\n}\n@media (min-width: 768px) {\n.container {\n    width: 750px;\n}\n}\n@media (min-width: 992px) {\n.container {\n    width: 970px;\n}\n}\n@media (min-width: 1200px) {\n.container {\n    width: 1170px;\n}\n}\nbody {\n  margin: 0;\n}\n.mob {\n  height: 160px;\n  position: absolute;\n  bottom: 10%;\n  right: 10%;\n}\n.mob .progression-bar {\n    position: relative;\n    background-color: rgba(0, 0, 0, 0.7);\n    border-radius: 5px;\n    width: 100%;\n    height: 10px;\n}\n.mob .progression-bar .progression {\n      height: 100%;\n      background-color: #e3342f;\n      border-radius: 5px;\n      -webkit-transition: width .5s ease-in-out;\n      transition: width .5s ease-in-out;\n}\n.mob-image {\n  height: 100%;\n}\n.hurt {\n  -webkit-animation: hurt linear 0.2s;\n          animation: hurt linear 0.2s;\n  -webkit-animation-iteration-count: 10;\n          animation-iteration-count: 10;\n}\n@-webkit-keyframes hurt {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n50% {\n    -webkit-transform: translate(2%, -2%) scaleX(0.9);\n            transform: translate(2%, -2%) scaleX(0.9);\n    -webkit-filter: opacity(25%);\n            filter: opacity(25%);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n@keyframes hurt {\n0% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n50% {\n    -webkit-transform: translate(2%, -2%) scaleX(0.9);\n            transform: translate(2%, -2%) scaleX(0.9);\n    -webkit-filter: opacity(25%);\n            filter: opacity(25%);\n}\n100% {\n    -webkit-transform: translate(0%, 0%) scaleX(1);\n            transform: translate(0%, 0%) scaleX(1);\n}\n}\n", ""]);
 
 // exports
 
@@ -40150,9 +40187,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.mob
-    ? _c("div", { staticClass: "mob", class: { hurt: _vm.animate } }, [
-        _c("img", { staticClass: "mob-image", attrs: { src: _vm.mob.image } })
+  return _vm.mob && _vm.project
+    ? _c("div", { staticClass: "mob" }, [
+        _c("img", {
+          staticClass: "mob-image",
+          class: { hurt: _vm.animate },
+          attrs: { src: _vm.mob.image }
+        }),
+        _vm._v(" "),
+        _c("div", { staticClass: "progression-bar" }, [
+          _c("div", {
+            staticClass: "progression",
+            style: { width: _vm.percentage }
+          })
+        ])
       ])
     : _vm._e()
 }
@@ -57457,6 +57505,9 @@ var getters = {
   },
   mob: function mob(state) {
     return state.currentProject.mob;
+  },
+  project: function project(state) {
+    return state.currentProject;
   }
 };
 
