@@ -30,7 +30,7 @@ const mutations = {
         project.donePoints = 0;
         project.totalPoints = 0; 
         project.users = project.users.map(user => {
-          user.totalPoints = 5;
+          user.totalPoints = 0;
           user.donePoints = 0;
           return user;
         });

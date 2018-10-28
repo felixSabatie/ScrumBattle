@@ -1,7 +1,6 @@
 <template>
     <div class="progression" :style="{height: height}">
         <div class="progress-wrapper">
-            {{user.donePoints}}
             <div class="progress" ref="progress"></div>
             <img class="user_icon" ref="user_icon" :src="user.avatar"/>
         </div>
@@ -17,37 +16,43 @@
         ],
         data() {
             return {
-                test: this.user.donePoints,
+                percent: 0,
+                oldPercent: 0,
             }
         },
         mounted() {
-            //this.move();
+            this.move();
         },
         computed: {
-            percent() {
-                return this.user.donePoints/this.user.totalPoints;
-            }
+          
         },
         watch: {
             user() {
-                console.log('changed in child');
+                this.percent = this.user.totalPoints !== 0 ? (this.user.donePoints/this.user.totalPoints)*100 : 0;
+                
+            },
+            percent(val, oldVal) {
+                this.oldPercent = oldVal;
+                this.move();
             }
         },
         methods: {
             move() {
-                var elem = this.$refs.progress;
-                var icon = this.$refs.user_icon;
-                var width = elem.clientWidth /elem.offsetParent.clientWidth;
-                var id = setInterval(frame, 10, this.percent);
-                function frame(percent) {
-                    if (width >= percent) {
+                const elem = this.$refs.progress;
+                const icon = this.$refs.user_icon;
+                let width = this.oldPercent;
+
+                const id = setInterval((percent, oldPercent) => {
+                    let stop = oldPercent > percent ? (width <= percent) : (width >= percent);
+
+                    if (stop) {
                         clearInterval(id);
                     } else {
-                        width++;
+                        oldPercent > percent ? width-- : width++;
                         elem.style.width = width + '%';
                         icon.style.left = width + '%';
                     }
-                }
+                }, 10, this.percent, this.oldPercent);
             }
         }
 

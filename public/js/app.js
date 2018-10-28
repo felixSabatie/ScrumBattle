@@ -2329,45 +2329,47 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "Progression",
     props: ['user', 'height'],
     data: function data() {
         return {
-            test: this.user.donePoints
+            percent: 0,
+            oldPercent: 0
         };
     },
     mounted: function mounted() {
-        //this.move();
+        this.move();
     },
 
-    computed: {
-        percent: function percent() {
-            return this.user.donePoints / this.user.totalPoints;
-        }
-    },
+    computed: {},
     watch: {
         user: function user() {
-            console.log('changed in child');
+            this.percent = this.user.totalPoints !== 0 ? this.user.donePoints / this.user.totalPoints * 100 : 0;
+        },
+        percent: function percent(val, oldVal) {
+            this.oldPercent = oldVal;
+            this.move();
         }
     },
     methods: {
         move: function move() {
             var elem = this.$refs.progress;
             var icon = this.$refs.user_icon;
-            var width = elem.clientWidth / elem.offsetParent.clientWidth;
-            var id = setInterval(frame, 10, this.percent);
-            function frame(percent) {
-                if (width >= percent) {
+            var width = this.oldPercent;
+
+            var id = setInterval(function (percent, oldPercent) {
+                var stop = oldPercent > percent ? width <= percent : width >= percent;
+
+                if (stop) {
                     clearInterval(id);
                 } else {
-                    width++;
+                    oldPercent > percent ? width-- : width++;
                     elem.style.width = width + '%';
                     icon.style.left = width + '%';
                 }
-            }
+            }, 10, this.percent, this.oldPercent);
         }
     }
 
@@ -2406,7 +2408,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   data: function data() {
     return {
       goal_img: "",
-      height: 0
+      height: 0,
+      myUsers: []
     };
   },
 
@@ -2415,12 +2418,21 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
       return state.users.users;
     }
   })),
+  methods: {
+    copyUsers: function copyUsers() {
+      var _this = this;
+
+      //VEEEERY UGLY WORKOROUND BUT FUCK IT IT WORKS 
+      this.$nextTick(function () {
+        _this.myUsers = JSON.parse(JSON.stringify(_this.users));
+      });
+    }
+  },
   watch: {
     users: {
       handler: function handler() {
-        console.log("watch set in parent");
-
-        this.$forceUpdate();
+        console.log('catched');
+        this.copyUsers();
       },
 
       deep: true
@@ -2429,6 +2441,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
   mounted: function mounted() {
     this.goal_img = "/images/goal_flag.png";
     this.height = 100 / this.users.length + "%";
+    this.copyUsers();
   }
 });
 
@@ -40014,7 +40027,7 @@ var render = function() {
     "div",
     { staticClass: "progressions" },
     [
-      _vm._l(_vm.users, function(user) {
+      _vm._l(_vm.myUsers, function(user) {
         return _c("progression", {
           key: user.id,
           attrs: { user: user, height: _vm.height }
@@ -40075,7 +40088,6 @@ var render = function() {
     { staticClass: "progression", style: { height: _vm.height } },
     [
       _c("div", { staticClass: "progress-wrapper" }, [
-        _vm._v("\n        " + _vm._s(_vm.user.donePoints) + "\n        "),
         _c("div", { ref: "progress", staticClass: "progress" }),
         _vm._v(" "),
         _c("img", {
@@ -57340,7 +57352,7 @@ var mutations = {
     project.donePoints = 0;
     project.totalPoints = 0;
     project.users = project.users.map(function (user) {
-      user.totalPoints = 5;
+      user.totalPoints = 0;
       user.donePoints = 0;
       return user;
     });

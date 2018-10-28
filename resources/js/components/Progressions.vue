@@ -1,6 +1,6 @@
 <template>
     <div class="progressions">
-        <progression v-for='user in users' :user='user' :height='height' :key="user.id"/>
+        <progression v-for='user in myUsers' :user='user' :height='height' :key="user.id"/>
         
         <div class="goal_wrapper">
             <img :src="goal_img"/>
@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       goal_img: "",
-      height: 0
+      height: 0,
+      myUsers: []
     };
   },
   computed: {
@@ -27,12 +28,19 @@ export default {
       users: state => state.users.users
     })
   },
+  methods: {
+      copyUsers() {
+         //VEEEERY UGLY WORKOROUND BUT FUCK IT IT WORKS 
+        this.$nextTick(() => {
+          this.myUsers = JSON.parse(JSON.stringify(this.users));
+        });
+      }
+  },
   watch: {
     users: {
       handler() {
-        console.log("watch set in parent");
-       
-        this.$forceUpdate();
+          console.log('catched');
+          this.copyUsers();
       },
       deep: true
     }
@@ -40,6 +48,7 @@ export default {
   mounted() {
     this.goal_img = "/images/goal_flag.png";
     this.height = 100 / this.users.length + "%";
+    this.copyUsers();
   }
 };
 </script>
