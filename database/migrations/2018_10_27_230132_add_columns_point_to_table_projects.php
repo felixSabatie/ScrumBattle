@@ -14,8 +14,8 @@ class AddColumnsPointToTableProjects extends Migration
     public function up()
     {
         Schema::table('projects', function (Blueprint $table) {
-            $table->integer('total_points')->nullable();
-            $table->integer('points_done')->nullable();
+            $table->integer('total_points')->default(0);
+            $table->integer('done_points')->default(0);
         });
     }
 
@@ -28,7 +28,7 @@ class AddColumnsPointToTableProjects extends Migration
     {
         Schema::table('projects', function (Blueprint $table) {
             $table->dropColumn('total_points');
-            $table->dropColumn('points_done');
+            $table->dropColumn('done_points');
         });
     }
 }

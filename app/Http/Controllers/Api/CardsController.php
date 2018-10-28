@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\PointsUpdated;
 use App\Models\Card;
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -18,8 +20,6 @@ class CardsController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-
-
     public function store(Request $request)
     {
         try {
@@ -58,7 +58,10 @@ class CardsController extends Controller
      */
     public function update(Request $request, Card $card)
     {
+        $oldCard = Card::findOrFail($card->id);
+
         try {
+
             $request->validate([
                 'name' => 'string|max:255',
                 'column_id' => 'required|exists:columns,id',
@@ -70,6 +73,10 @@ class CardsController extends Controller
                 ->firstOrFail()
                 ->update($request->only(CardsController::$variables));
             $updateCard = $card->fresh();
+
+            if ($updateCard->points !== $oldCard->points || $updateCard->column->column_id !== $oldCard->column->name) {
+                event(new PointsUpdated($updateCard, $oldCard));
+            }
             return response()->json($updateCard);
         } catch (\Throwable $exception) {
             return response()->json($exception->getMessage());
