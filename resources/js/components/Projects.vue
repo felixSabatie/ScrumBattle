@@ -15,11 +15,20 @@
       </div>
 
       <div slot="body">
-        Coucou
+        <label for="name-input">Nom du projet</label>
+        <input type="text" id="name-input" v-model="project.name">
+        <div class="mob-selector">
+          <p>Choisir l'adversaire à affronter</p>
+          <div class="images-container">
+            <div class="image-container" v-for="mob in mobs">
+              <img :src="mob.image" :alt="'mob-' + mob.id">
+            </div>
+          </div>
+        </div>
       </div>
 
       <div slot="footer">
-
+        <button class="btn">Valider</button>
       </div>
     </modal>
   </div>
@@ -34,18 +43,20 @@ export default {
     return {
       projects: [],
       showModal: false,
-      name: "",
-      mob_id: undefined,
+      project: {
+        name: "",
+        mob_id: undefined,
+        users: []
+      },
       users: [],
-      usersFromBack: [],
-      mobsFromBack: []
+      mobs: []
     }
   },
   components: {Modal},
   mounted() {
     axios.get('/api/projects/create').then(response => {
-      this.usersFromBack = response.data.users;
-      this.mobsFromBack = response.data.mobs;
+      this.users = response.data.users;
+      this.mobs = response.data.mobs;
       axios.get('/api/projects').then(response2 => {
         this.projects = response2.data;
       }).catch(err => {
@@ -111,6 +122,37 @@ export default {
         right: 0;
         max-width: 100%;
         height: auto;
+      }
+    }
+  }
+
+  .modal {
+    input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .mob-selector {
+      .images-container {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+
+        .image-container {
+          flex-basis: 30%;
+          padding: 10px;
+
+          &.selected {
+            border: 2px solid $cyan;
+            border-radius: $borderRadius;
+          }
+
+          img {
+            max-width: 100%;
+            height: auto;
+          }
+        }
+
       }
     }
   }
