@@ -1,6 +1,6 @@
 <template>
     <div class="player" :class="{'back-and-forth' : animate}">
-        <img class="player-image" :src="player.image" >
+        <img class="player-image" :src="player.avatar" >
     </div>
 </template>
 

@@ -1,12 +1,12 @@
 <template>
-    <div class="players">
-        <player v-for="player in players" :player="player" :animate="getAnimate(player.id)" :key="player.id"/>
-        <button @click="animatePlayers([players[0], players[1]])"> Attack </button>
+    <div class="players" v-if="players">
+        <player v-if="animations.length > 0" v-for="player in players" :player="player" :animate="getAnimate(player.id)" :key="player.id"/>
     </div>
 </template>
 
 <script>
     import Player from "./Player";
+    import { mapState } from "vuex";
 
     export default {
         name: "Players",
@@ -15,40 +15,21 @@
         },
         data() {
             return {
-                players: [],
                 animations: [],
             };
         },
+        computed: {
+          ...mapState({
+            players: state => state.users.users
+          })
+        },
         mounted() {
-            this.players = [
-                //TODO : change with backend call
-                {
-                    id: 1,
-                    name: "First player",
-                    image: '/assets/player.png',
-                },
-                {
-                    id: 2,
-                    name: "Second player",
-                    image: '/assets/imp.png',
-                },
-                {
-                    id: 3,
-                    name: "Third player",
-                    image: '/assets/knight.png',
-                },
-                {
-                    id: 4,
-                    name: "Fourth player",
-                    image: '/assets/player.png',
-                }
-            ];
             this.players.forEach(player => {
                 this.animations.push({
                     id: player.id,
                     animate: false,
                 });
-            })
+            });
         },
         methods : {
             animatePlayers(players){

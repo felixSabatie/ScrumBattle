@@ -2258,13 +2258,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Player__ = __webpack_require__("./resources/js/components/Player.vue");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Player___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Player__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__("./node_modules/vuex/dist/vuex.esm.js");
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 //
 //
 //
 //
 //
 //
-//
+
 
 
 
@@ -2275,32 +2278,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     data: function data() {
         return {
-            players: [],
             animations: []
         };
     },
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapState */])({
+        players: function players(state) {
+            return state.users.users;
+        }
+    })),
     mounted: function mounted() {
         var _this = this;
 
-        this.players = [
-        //TODO : change with backend call
-        {
-            id: 1,
-            name: "First player",
-            image: '/assets/player.png'
-        }, {
-            id: 2,
-            name: "Second player",
-            image: '/assets/imp.png'
-        }, {
-            id: 3,
-            name: "Third player",
-            image: '/assets/knight.png'
-        }, {
-            id: 4,
-            name: "Fourth player",
-            image: '/assets/player.png'
-        }];
         this.players.forEach(function (player) {
             _this.animations.push({
                 id: player.id,
@@ -39513,31 +39502,20 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "players" },
-    [
-      _vm._l(_vm.players, function(player) {
-        return _c("player", {
-          key: player.id,
-          attrs: { player: player, animate: _vm.getAnimate(player.id) }
+  return _vm.players
+    ? _c(
+        "div",
+        { staticClass: "players" },
+        _vm._l(_vm.players, function(player) {
+          return _vm.animations.length > 0
+            ? _c("player", {
+                key: player.id,
+                attrs: { player: player, animate: _vm.getAnimate(player.id) }
+              })
+            : _vm._e()
         })
-      }),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          on: {
-            click: function($event) {
-              _vm.animatePlayers([_vm.players[0], _vm.players[1]])
-            }
-          }
-        },
-        [_vm._v(" Attack ")]
       )
-    ],
-    2
-  )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -39564,7 +39542,7 @@ var render = function() {
     [
       _c("img", {
         staticClass: "player-image",
-        attrs: { src: _vm.player.image }
+        attrs: { src: _vm.player.avatar }
       })
     ]
   )
