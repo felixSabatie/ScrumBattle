@@ -92,12 +92,15 @@
         }
         25% {
             transform:  translate(35vw,-25%)  scaleX(1.00) ;
+            filter : saturate(100%);
         }
         35% {
             transform:  translate(60vw,0%)  scaleX(1.00) ;
+            filter : saturate(150%);
         }
         45% {
             transform:  translate(65vw,0%)  scaleX(1.00) ;
+            filter : saturate(200%) drop-shadow(14px 14px 25px white);
         }
         65% {
             transform:  translate(65vw,0%)  scaleX(-1.00) ;

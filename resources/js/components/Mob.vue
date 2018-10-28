@@ -97,6 +97,7 @@
     @keyframes hurt {
         0% {
             transform: translate(0%, 0%) scaleX(1.00);
+            filter: hue-rotate(90deg);
         }
         50% {
             transform: translate(2%, -2%) scaleX(0.9);
